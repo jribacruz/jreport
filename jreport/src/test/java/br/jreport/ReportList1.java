@@ -3,6 +3,7 @@ package br.jreport;
 import java.awt.Color;
 import java.util.List;
 
+import br.jreport.core.DocumentTitle;
 import br.jreport.enums.BorderStyle;
 import br.jreport.enums.ColorJReport;
 import br.jreport.model.ModelTest;
@@ -32,7 +33,17 @@ public class ReportList1 extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addBrasao();
+		addTitle(new DocumentTitle(getDocument()) {
+			
+			@Override
+			protected void body(DocumentTitle title) {
+				title.DT_addBrasao().DT_addTitle("");
+				
+			}
+		});
+		DocumentTitle doc = new DocumentTitle(getDocument());
+		doc .DT_addBrasao()
+			.DT_addTitle(text);
 		addTitle("Tribunal Regional Eleitoral do Pará");
 		addTitle("Relatório de Nome e Sobrenomes");
 	}

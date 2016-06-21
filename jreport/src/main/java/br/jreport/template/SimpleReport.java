@@ -20,6 +20,7 @@ import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.core.DataModelReport;
+import br.jreport.core.DocumentTitle;
 import br.jreport.core.TextStyleClass;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
@@ -38,6 +39,8 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Document document;
+	
+	protected DocumentTitle title;
 
 	protected PdfWriter pdfWriter;
 
@@ -48,11 +51,13 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 	public SimpleReport() {
 		super();
 		this.document = new Document(PageOrientation.PORTRAIT.getValue());
+		this.title = new DocumentTitle(document);
 	}
 
 	public SimpleReport(PageOrientation pageOrientation) {
 		super();
 		this.document = new Document(pageOrientation.getValue());
+		this.title = new DocumentTitle(document);
 	}
 
 	/**
@@ -137,6 +142,11 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	protected <T extends DataModelReport> void addTitle(DocumentTitle tableBody) {
+		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
+	}
+	
 
 	protected void newLine() {
 		DocumentHelper.add(getDocument(), DocumentHelper.newLine());
