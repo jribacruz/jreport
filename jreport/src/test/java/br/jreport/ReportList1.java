@@ -3,8 +3,8 @@ package br.jreport;
 import java.awt.Color;
 import java.util.List;
 
-import br.jreport.core.Detail;
-import br.jreport.core.Detail;
+import br.jreport.core.Component;
+import br.jreport.core.Component;
 import br.jreport.core.Title;
 import br.jreport.core.Title;
 import br.jreport.enums.BorderStyle;
@@ -43,7 +43,7 @@ public class ReportList1 extends SimpleReport {
 	}
 
 	protected void detail() {
-		addDetail(new Detail(getDocument()).D_addText("a"));
+		addComponent(new Component(getDocument()).C_addText("a"));
 		
 		
 		

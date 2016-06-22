@@ -1,6 +1,6 @@
 package br.jreport;
 
-import br.jreport.core.Detail;
+import br.jreport.core.Component;
 import br.jreport.core.Title;
 import br.jreport.template.SimpleReport;
 
@@ -24,7 +24,7 @@ public class ReportTeste extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addDetail(new Detail(getDocument()).D_addText("Testando funcionalidade"));
+		addComponent(new Component(getDocument()).C_addText("Testando funcionalidade"));
 
 	}
 

@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -18,16 +17,14 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.jreport.core.DataModelReport;
-import br.jreport.core.Detail;
+import br.jreport.core.Component;
+import br.jreport.core.DataTable;
 import br.jreport.core.Title;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
-import br.jreport.table.DataTableBody;
-import br.jreport.table.TableBody;
 import br.jreport.table.TableHeader;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
@@ -125,28 +122,12 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 
 	}
 	
-	protected void addDetail(Detail text) {
+	protected void addComponent(Component text) {
 		
 	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, TableHeader[] headers, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
-	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, String[] headers, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
-	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, int numColumns, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, numColumns, tableBody).getPdfPTable());
-	}
-
-	protected void addTable(String[] headers, TableBody tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createTable(headers, tableBody).getPdfPTable());
-	}
-
-	protected void addTable(int numColumns, TableBody tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createTable(numColumns, tableBody).getPdfPTable());
+	
+	protected void addDataTable(DataTable<?> table) {
+		
 	}
 
 	@Override

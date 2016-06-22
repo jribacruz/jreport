@@ -1,10 +1,6 @@
 package br.jreport.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lowagie.text.Document;
-import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
@@ -13,8 +9,6 @@ import br.jreport.style.DefaultTextTitleStyleClass;
 public class Title {
 
 	private Document document;
-
-	protected List<Element> elements = new ArrayList<Element>();
 
 	protected final DefaultTextTitleStyleClass titleStyleClass = new DefaultTextTitleStyleClass();
 
