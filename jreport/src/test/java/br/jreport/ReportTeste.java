@@ -13,8 +13,7 @@ public class ReportTeste extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Teste").T_addTitle("teste2"));
-
+		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Tribunal Regional Eleitoral do Pará").T_addTitle("Relatório de Nome e Sobrenomes"));
 	}
 
 	@Override
