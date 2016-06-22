@@ -21,6 +21,6 @@ public class ReportTextoSimples extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addText("Lista de Nomes");
+		TM_addTitle("Lista de Nomes");
 	}
 }

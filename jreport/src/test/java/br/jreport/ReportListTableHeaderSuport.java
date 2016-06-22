@@ -26,13 +26,13 @@ public class ReportListTableHeaderSuport extends SimpleReport {
 	@Override
 	protected void title() {
 		addBrasao();
-		addText("Tribunal Regional Eleitoral do Pará");
-		addText("Relatório de Nome e Sobrenomes");
+		TM_addTitle("Tribunal Regional Eleitoral do Pará");
+		TM_addTitle("Relatório de Nome e Sobrenomes");
 	}
 
 	@Override
 	protected void detail() {
-		addText("Lista de Nomes");
+		TM_addTitle("Lista de Nomes");
 		addDataTable(modelList, headers, new DataTableBody<ModelTest>() {
 			@Override
 			public void body(ModelTest model) {
@@ -42,6 +42,6 @@ public class ReportListTableHeaderSuport extends SimpleReport {
 				addCell(model.getSobrenome());
 			}
 		});
-		addText("Rodapé");
+		TM_addTitle("Rodapé");
 	}
 }

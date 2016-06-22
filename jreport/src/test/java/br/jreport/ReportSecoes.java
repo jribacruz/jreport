@@ -28,7 +28,7 @@ public class ReportSecoes extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addText("Lista de Nomes");
+		TM_addTitle("Lista de Nomes");
 //		addTable(headers, new TableBody() {
 //			@Override
 //			public void body() {

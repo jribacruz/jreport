@@ -25,7 +25,7 @@ public class Report2 extends SimpleReport {
 	protected void pageHeader() {
 		TextStyleClass style = new TextStyleClass();
 		style.setTextAlign(TextAlign.RIGHT);
-		addText("Aelis 2016 - Page Header", style);
+		TM_addTitle("Aelis 2016 - Page Header", style);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class Report2 extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan augue at interdum luctus."
+		TM_addTitle("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan augue at interdum luctus."
 				+ " Etiam convallis quam a sapien malesuada, id cursus lacus congue. Sed purus sem, bibendum eu tellus a, rhoncus vehicula massa. "
 				+ "Mauris nisi ipsum, pellentesque vel mollis vel, varius sed nisl. Suspendisse feugiat enim non metus aliquam molestie. "
 				+ "Nulla mattis porttitor nisl ut fringilla. Proin sed quam sed ligula gravida porttitor. Nam faucibus est massa, quis sodales dui malesuada nec. "

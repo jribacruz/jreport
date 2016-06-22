@@ -61,7 +61,22 @@ public class ComplexReportListTableHeaderSuport extends ComplexReport<ModelTest>
 				addCell(model.getSobrenome());
 			}
 		});
-		addText("Rodapé");
+		TM_addTitle("Rodapé");
+	}
+	@Override
+	protected void pageHeader() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void pageFooter() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void summary() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
