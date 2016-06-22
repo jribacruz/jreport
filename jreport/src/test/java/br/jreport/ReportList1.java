@@ -3,8 +3,8 @@ package br.jreport;
 import java.awt.Color;
 import java.util.List;
 
-import br.jreport.core.Text;
-import br.jreport.core.Text;
+import br.jreport.core.Detail;
+import br.jreport.core.Detail;
 import br.jreport.core.Title;
 import br.jreport.core.Title;
 import br.jreport.enums.BorderStyle;
@@ -37,14 +37,14 @@ public class ReportList1 extends SimpleReport {
 
 	protected void title() {
 		Title titulo = new Title(getDocument());
-		titulo.TM_addBrasao();
-		titulo.TM_addTitle("teste");
+		titulo.T_addBrasao();
+		titulo.T_addTitle("teste");
 		addTitle(titulo);
 	}
 
 	protected void detail() {
+		addDetail(new Detail(getDocument()).D_addText("a"));
 		
-		addText(new Text(getDocument()).TM_addText("a"));
 		
 		
 		TableHeaderStyleClass td = new TableHeaderStyleClass(1f, 1, ColorJReport.LIGHT_GRAY, ColorJReport.LIGHT_GRAY, 1);
@@ -59,6 +59,7 @@ public class ReportList1 extends SimpleReport {
 
 			@Override
 			public void body(ModelTest model) {
+				
 				TableDataStyleClass a = new TableDataStyleClass();
 				a.setBorderWidth(0);
 				a.setIndentationLeft(50f);

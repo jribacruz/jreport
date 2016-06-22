@@ -21,7 +21,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.core.ComplexDataModelReport;
 import br.jreport.core.DataModelReport;
-import br.jreport.core.Text;
+import br.jreport.core.Detail;
 import br.jreport.enums.PageOrientation;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -44,7 +44,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	}
 
 	public void nomeRelatorio() {
-		addText(new Text(getDocument()).TM_addText(getNomePdf()));
+		addDetail(new Detail(getDocument()).D_addText(getNomePdf()));
 	}
 
 	public ComplexReport(List<List<T>> lista, String nomeRelatorio, Class<? extends ComplexReport<T>> classe) {
@@ -202,7 +202,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.addText(new Text(document).TM_newLine());
+				complexReport.addDetail(new Detail(document).D_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
@@ -228,7 +228,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.addText(new Text(document).TM_newLine());
+				complexReport.addDetail(new Detail(document).D_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
@@ -274,7 +274,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.addText(new Text(document).TM_newLine());
+			complexReport.addDetail(new Detail(document).D_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
@@ -308,7 +308,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.addText(new Text(document).TM_newLine());
+			complexReport.addDetail(new Detail(document).D_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {

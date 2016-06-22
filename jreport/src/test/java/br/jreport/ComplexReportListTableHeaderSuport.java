@@ -44,9 +44,9 @@ public class ComplexReportListTableHeaderSuport extends ComplexReport<ModelTest>
 
 	@Override
 	protected void title() {
-		addBrasao();
-		addTitle("Tribunal Regional Eleitoral do Pará");
-		addTitle("Relatório de Nome e Sobrenomes");
+//		addBrasao();
+//		addTitle("Tribunal Regional Eleitoral do Pará");
+//		addTitle("Relatório de Nome e Sobrenomes");
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ComplexReportListTableHeaderSuport extends ComplexReport<ModelTest>
 				addCell(model.getSobrenome());
 			}
 		});
-		TM_addTitle("Rodapé");
+//		TM_addTitle("Rodapé");
 	}
 	@Override
 	protected void pageHeader() {

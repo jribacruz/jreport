@@ -19,7 +19,7 @@ import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.core.DataModelReport;
-import br.jreport.core.Text;
+import br.jreport.core.Detail;
 import br.jreport.core.Title;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
@@ -125,7 +125,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 
 	}
 	
-	protected void addText(Text text) {
+	protected void addDetail(Detail text) {
 		
 	}
 
