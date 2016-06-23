@@ -2,9 +2,9 @@ package br.jreport;
 
 import java.awt.Color;
 
-import br.jreport.core.TextStyleClass;
-import br.jreport.core.Title;
 import br.jreport.enums.TextAlign;
+import br.jreport.functions.Title;
+import br.jreport.style.TextStyleClass;
 import br.jreport.template.SimpleReport;
 
 public class NovoRelatorioSimpleReport extends SimpleReport {

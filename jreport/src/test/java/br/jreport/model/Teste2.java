@@ -1,8 +1,8 @@
 package br.jreport.model;
 
-import br.jreport.core.Component;
-import br.jreport.core.DataTable;
-import br.jreport.core.Title;
+import br.jreport.functions.Component;
+import br.jreport.functions.DataTable;
+import br.jreport.functions.Title;
 import br.jreport.table.DataTableBody;
 import br.jreport.template.SimpleReport;
 

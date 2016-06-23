@@ -3,12 +3,11 @@ package br.jreport;
 import java.awt.Color;
 import java.util.List;
 
-import br.jreport.core.Component;
-import br.jreport.core.Component;
-import br.jreport.core.Title;
-import br.jreport.core.Title;
 import br.jreport.enums.BorderStyle;
 import br.jreport.enums.ColorJReport;
+import br.jreport.functions.Component;
+import br.jreport.functions.DataTable;
+import br.jreport.functions.Title;
 import br.jreport.model.ModelTest;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
@@ -44,9 +43,7 @@ public class ReportList1 extends SimpleReport {
 
 	protected void detail() {
 		addComponent(new Component(getDocument()).C_addText("a"));
-		
-		
-		
+
 		TableHeaderStyleClass td = new TableHeaderStyleClass(1f, 1, ColorJReport.LIGHT_GRAY, ColorJReport.LIGHT_GRAY, 1);
 		td.setIndentationLeft(20f);
 		TableHeaderStyleClass td2 = new TableHeaderStyleClass(1f, 1, ColorJReport.WHITE, ColorJReport.BLACK, 1);
@@ -55,11 +52,11 @@ public class ReportList1 extends SimpleReport {
 		TableHeader[] headers2 = { th("Nome", td), th("Teste", td2) };
 
 		// for (int i = 0; i < 3; i++) {
-		addDataTable(modelList, headers2, new DataTableBody<ModelTest>() {
+		addDataTable(new DataTable<ModelTest>(getDocument()).addDataTable(modelList, headers2, new DataTableBody<ModelTest>() {
 
 			@Override
 			public void body(ModelTest model) {
-				
+
 				TableDataStyleClass a = new TableDataStyleClass();
 				a.setBorderWidth(0);
 				a.setIndentationLeft(50f);
@@ -85,7 +82,8 @@ public class ReportList1 extends SimpleReport {
 				addCell(model.getNome());
 				addCell(model.getSobrenome());
 			}
-		});
+		}));
+
 		// }
 
 		// addText("Rodapé");

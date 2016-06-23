@@ -1,8 +1,8 @@
 package br.jreport;
 
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.TextAlign;
 import br.jreport.model.ModelTest;
+import br.jreport.style.TextStyleClass;
 import br.jreport.template.SimpleReport;
 
 public class Report2 extends SimpleReport {

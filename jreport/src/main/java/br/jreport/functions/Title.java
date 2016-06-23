@@ -1,4 +1,4 @@
-package br.jreport.core;
+package br.jreport.functions;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Image;

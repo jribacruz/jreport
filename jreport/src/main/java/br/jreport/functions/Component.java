@@ -1,8 +1,9 @@
-package br.jreport.core;
+package br.jreport.functions;
 
 import com.lowagie.text.Document;
 
 import br.jreport.helper.DocumentHelper;
+import br.jreport.style.TextStyleClass;
 
 public class Component {
 

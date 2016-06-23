@@ -2,7 +2,6 @@ package br.jreport.style;
 
 import com.lowagie.text.Element;
 
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.BorderStyle;
 import br.jreport.enums.ColorJReport;
 

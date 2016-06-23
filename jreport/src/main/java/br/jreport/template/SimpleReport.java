@@ -17,11 +17,11 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.jreport.core.Component;
-import br.jreport.core.DataTable;
-import br.jreport.core.Title;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
+import br.jreport.functions.Component;
+import br.jreport.functions.DataTable;
+import br.jreport.functions.Title;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
@@ -85,7 +85,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 			document.open();
 			pdfWriter.setPageEvent(this);
 			this.title();
-			newLine();
+			addNewLine();
 			this.detail();
 			document.close();
 		} catch (DocumentException e) {
@@ -100,7 +100,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 			document.open();
 			pdfWriter.setPageEvent(this);
 			this.title();
-			newLine();
+			addNewLine();
 			this.detail();
 			document.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
@@ -230,7 +230,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
 	}
 
-	private void newLine() {
+	public void addNewLine() {
 		DocumentHelper.add(document, DocumentHelper.newLine());
 	}
 

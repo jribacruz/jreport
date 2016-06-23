@@ -1,9 +1,10 @@
-package br.jreport.core;
+package br.jreport.functions;
 
 import java.util.List;
 
 import com.lowagie.text.Document;
 
+import br.jreport.core.DataModelReport;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.table.DataTableBody;
 import br.jreport.table.TableBody;

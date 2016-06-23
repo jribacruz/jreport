@@ -1,4 +1,4 @@
-package br.jreport.core;
+package br.jreport.style;
 
 import java.awt.Color;
 

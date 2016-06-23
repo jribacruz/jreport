@@ -21,10 +21,10 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.draw.LineSeparator;
 
 import br.jreport.core.DataModelReport;
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.TextDecoration;
 import br.jreport.style.DefaultTextStyleClass;
 import br.jreport.style.TableDataStyleClass;
+import br.jreport.style.TextStyleClass;
 import br.jreport.table.DataTable;
 import br.jreport.table.DataTableBody;
 import br.jreport.table.Table;

@@ -20,9 +20,10 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.core.ComplexDataModelReport;
+import br.jreport.core.ComplexModelFactory;
 import br.jreport.core.DataModelReport;
-import br.jreport.core.Component;
 import br.jreport.enums.PageOrientation;
+import br.jreport.functions.Component;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class ComplexReport<T extends DataModelReport> extends SimpleReport {

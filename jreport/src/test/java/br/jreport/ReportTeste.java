@@ -1,7 +1,7 @@
 package br.jreport;
 
-import br.jreport.core.Component;
-import br.jreport.core.Title;
+import br.jreport.functions.Component;
+import br.jreport.functions.Title;
 import br.jreport.template.SimpleReport;
 
 public class ReportTeste extends SimpleReport {
