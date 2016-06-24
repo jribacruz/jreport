@@ -1,8 +1,8 @@
 package br.jreport.table;
 
-import br.jreport.tablenew.DataTableBodyNew;
+import com.lowagie.text.pdf.PdfPTable;
 
-public abstract class DataTableBody<T> extends DataTableBodyNew {
+public abstract class DataTableMethodBody<T> extends TableBody {
 
 	private int index;
 
@@ -16,11 +16,19 @@ public abstract class DataTableBody<T> extends DataTableBodyNew {
 
 	private boolean odd;
 
-	public DataTableBody() {
+	public DataTableMethodBody() {
 		super();
 	}
 
 	public abstract void body(T model);
+
+	public PdfPTable getPdfPTable() {
+		return pdfPTable;
+	}
+
+	public void setPdfPTable(PdfPTable pdfPTable) {
+		this.pdfPTable = pdfPTable;
+	}
 
 	public int getIndex() {
 		return index;
@@ -68,6 +76,11 @@ public abstract class DataTableBody<T> extends DataTableBodyNew {
 
 	public void setOdd(boolean odd) {
 		this.odd = odd;
+	}
+
+	@Override
+	protected void body() {
+
 	}
 
 }

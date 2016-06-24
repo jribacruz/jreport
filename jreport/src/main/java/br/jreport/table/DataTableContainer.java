@@ -4,17 +4,17 @@ import java.util.List;
 
 import br.jreport.core.DataModelReport;
 
-public class DataTable<T extends DataModelReport> extends Table {
+public class DataTableContainer<T extends DataModelReport> extends Table {
 
-	public DataTable(int numColumns) {
+	public DataTableContainer(int numColumns) {
 		super(numColumns);
 	}
 
-	public DataTable(String[] headers) {
+	public DataTableContainer(String[] headers) {
 		super(headers);
 	}
 	
-	public DataTable(TableHeader[] headers) {
+	public DataTableContainer(TableHeader[] headers) {
 		super(headers);
 	}
 

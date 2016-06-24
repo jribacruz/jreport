@@ -19,8 +19,9 @@ public abstract class TableBody {
 	/*
 	 * CELL
 	 */
-	protected void addCell(PdfPCell cell) {
+	protected PdfPCell addCell(PdfPCell cell) {
 		pdfPTable.addCell(cell);
+		return cell;
 	}
 
 	/*
@@ -123,7 +124,7 @@ public abstract class TableBody {
 		pdfPTable.addCell(cell);
 	}
 
-	protected void addRowSeparator(float height, int colspan) {
+	protected void addLine(float height, int colspan) {
 		TableDataStyleClass v = new TableDataStyleClass();
 		v.setFixedHeight(height);
 		v.setColspan(colspan);

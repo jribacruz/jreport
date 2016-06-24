@@ -25,7 +25,7 @@ import br.jreport.enums.TextDecoration;
 import br.jreport.style.DefaultTextStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
-import br.jreport.table.DataTable;
+import br.jreport.table.DataTableContainer;
 import br.jreport.table.DataTableBody;
 import br.jreport.table.Table;
 import br.jreport.table.TableBody;
@@ -88,6 +88,26 @@ public class DocumentHelper {
 
 		pdfPTable.addCell(cell);
 
+	}
+
+	public static PdfPCell createPdfPCell(Paragraph p, TableDataStyleClass styleClass) {
+		PdfPCell cell = new PdfPCell();
+		// Não funciona com texto;
+		if (styleClass.getFixedHeight() != null) {
+			cell.setFixedHeight(styleClass.getFixedHeight());
+			cell.setColspan(styleClass.getColspan());
+			cell.setBorderWidth(0);
+		} else {
+			cell.addElement(p);
+			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+			cell.setBorder(styleClass.getBorder().getBorder());
+			cell.setBorderWidth(styleClass.getBorderWidth());
+			cell.setBorderColor(styleClass.getBorderColor().getColor());
+			cell.setColspan(styleClass.getColspan());
+			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+		}
+		return cell;
 	}
 
 	/**
@@ -228,23 +248,23 @@ public class DocumentHelper {
 		return linebreak;
 	}
 
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, TableHeader[] headers,
+	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, TableHeader[] headers,
 			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(headers);
+		DataTableContainer<T> table = new DataTableContainer<T>(headers);
 		table.addBody(modelList, dataTableBody);
 		return table;
 	}
 
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, String[] headers,
+	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, String[] headers,
 			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(headers);
+		DataTableContainer<T> table = new DataTableContainer<T>(headers);
 		table.addBody(modelList, dataTableBody);
 		return table;
 	}
 
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, int numColumns,
+	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, int numColumns,
 			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(numColumns);
+		DataTableContainer<T> table = new DataTableContainer<T>(numColumns);
 		table.addBody(modelList, dataTableBody);
 		return table;
 	}

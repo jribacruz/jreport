@@ -20,12 +20,12 @@ import com.lowagie.text.pdf.PdfWriter;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.functions.Component;
-import br.jreport.functions.DataTable;
 import br.jreport.functions.Title;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
 import br.jreport.table.TableHeader;
+import br.jreport.tablenew.DataTableMethods;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
 
@@ -126,8 +126,9 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		
 	}
 	
-	protected void addDataTable(DataTable<?> table) {
-		
+	
+	protected void addDataTableNew(DataTableMethods table) {
+		DocumentHelper.add(document, DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
 	}
 
 	@Override
@@ -230,7 +231,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
 	}
 
-	public void addNewLine() {
+	protected void addNewLine() {
 		DocumentHelper.add(document, DocumentHelper.newLine());
 	}
 
