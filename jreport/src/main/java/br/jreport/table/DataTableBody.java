@@ -1,73 +1,53 @@
 package br.jreport.table;
 
-import br.jreport.tablenew.DataTableBodyNew;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class DataTableBody<T> extends DataTableBodyNew {
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 
-	private int index;
+import br.jreport.helper.DocumentHelper;
+import br.jreport.style.TableDataStyleClass;
 
-	private boolean first;
+public class DataTableBody {
+	
+	protected PdfPTable pdfPTable;
 
-	private boolean middle;
+	private List<PdfPCell> cells = new ArrayList<PdfPCell>();
 
-	private boolean last;
-
-	private boolean even;
-
-	private boolean odd;
-
-	public DataTableBody() {
-		super();
+	/*
+	 * STRING
+	 */
+	protected void addCell(String text) {
+		TableDataStyleClass styleClass = new TableDataStyleClass();
+		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
+		addCellToTable(paragraph, styleClass);
 	}
 
-	public abstract void body(T model);
-
-	public int getIndex() {
-		return index;
+	protected void addCell(String text, TableDataStyleClass styleClass) {
+		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
+		addCellToTable(paragraph, styleClass);
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
+	protected void addLine(float height, int colspan) {
+		TableDataStyleClass v = new TableDataStyleClass();
+		v.setFixedHeight(height);
+		v.setColspan(colspan);
+		Paragraph paragraph = DocumentHelper.createText("", v);
+		addCellToTable(paragraph, v);
 	}
 
-	public boolean isFirst() {
-		return first;
+	private void addCellToTable(Paragraph p, TableDataStyleClass styleClass) {
+		cells.add(DocumentHelper.createPdfPCell(p, styleClass));
 	}
 
-	public void setFirst(boolean first) {
-		this.first = first;
+	public List<PdfPCell> getCells() {
+		return cells;
 	}
 
-	public boolean isMiddle() {
-		return middle;
-	}
-
-	public void setMiddle(boolean middle) {
-		this.middle = middle;
-	}
-
-	public boolean isLast() {
-		return last;
-	}
-
-	public void setLast(boolean last) {
-		this.last = last;
-	}
-
-	public boolean isEven() {
-		return even;
-	}
-
-	public void setEven(boolean even) {
-		this.even = even;
-	}
-
-	public boolean isOdd() {
-		return odd;
-	}
-
-	public void setOdd(boolean odd) {
-		this.odd = odd;
+	public void setCells(List<PdfPCell> cells) {
+		this.cells = cells;
 	}
 
 }

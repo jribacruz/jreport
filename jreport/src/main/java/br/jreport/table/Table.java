@@ -111,11 +111,6 @@ public class Table {
 		}
 	}
 
-	public void addBody(TableBody tableBody) {
-		tableBody.setPdfPTable(getPdfPTable());
-		tableBody.body();
-	}
-
 	public PdfPTable getPdfPTable() {
 		return pdfPTable;
 	}

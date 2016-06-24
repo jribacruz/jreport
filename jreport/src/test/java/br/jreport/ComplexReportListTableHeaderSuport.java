@@ -4,9 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import br.jreport.enums.PageOrientation;
-import br.jreport.functions.DataTable;
 import br.jreport.model.ModelTest;
-import br.jreport.table.DataTableBody;
 import br.jreport.table.TableHeader;
 import br.jreport.template.ComplexReport;
 
@@ -52,15 +50,15 @@ public class ComplexReportListTableHeaderSuport extends ComplexReport<ModelTest>
 	@Override
 	protected void detail() {
 		nomeRelatorio();
-		addDataTable(new DataTable<ModelTest>(document).addDataTable(getModelList(), headers, new DataTableBody<ModelTest>() {
-			@Override
-			public void body(ModelTest model) {
-				addCell(model.getNome());
-				addCell(model.getSobrenome());
-				addCell(model.getNome());
-				addCell(model.getSobrenome());
-			}
-		}));
+//		addDataTable(new DataTable<ModelTest>(document).addDataTable(getModelList(), headers, new DataTableBody<ModelTest>() {
+//			@Override
+//			public void body(ModelTest model) {
+//				addCell(model.getNome());
+//				addCell(model.getSobrenome());
+//				addCell(model.getNome());
+//				addCell(model.getSobrenome());
+//			}
+//		}));
 		// TM_addTitle("Rodapé");
 	}
 

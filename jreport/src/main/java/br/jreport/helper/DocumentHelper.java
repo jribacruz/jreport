@@ -25,10 +25,7 @@ import br.jreport.enums.TextDecoration;
 import br.jreport.style.DefaultTextStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
-import br.jreport.table.DataTableContainer;
-import br.jreport.table.DataTableBody;
-import br.jreport.table.Table;
-import br.jreport.table.TableBody;
+import br.jreport.table.TableConstructor;
 import br.jreport.table.TableHeader;
 
 public class DocumentHelper {
@@ -248,36 +245,15 @@ public class DocumentHelper {
 		return linebreak;
 	}
 
-	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, TableHeader[] headers,
-			DataTableBody<T> dataTableBody) {
-		DataTableContainer<T> table = new DataTableContainer<T>(headers);
-		table.addBody(modelList, dataTableBody);
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
 		return table;
 	}
 
-	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, String[] headers,
-			DataTableBody<T> dataTableBody) {
-		DataTableContainer<T> table = new DataTableContainer<T>(headers);
-		table.addBody(modelList, dataTableBody);
-		return table;
-	}
-
-	public static <T extends DataModelReport> DataTableContainer<T> createDataTable(List<T> modelList, int numColumns,
-			DataTableBody<T> dataTableBody) {
-		DataTableContainer<T> table = new DataTableContainer<T>(numColumns);
-		table.addBody(modelList, dataTableBody);
-		return table;
-	}
-
-	public static Table createTable(String[] headers, TableBody tableBody) {
-		Table table = new Table(headers);
-		table.addBody(tableBody);
-		return table;
-	}
-
-	public static Table createTable(int numColumns, TableBody tableBody) {
-		Table table = new Table(numColumns);
-		table.addBody(tableBody);
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
 		return table;
 	}
 

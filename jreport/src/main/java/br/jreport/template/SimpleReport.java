@@ -20,12 +20,12 @@ import com.lowagie.text.pdf.PdfWriter;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.functions.Component;
+import br.jreport.functions.DataTable;
 import br.jreport.functions.Title;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
 import br.jreport.table.TableHeader;
-import br.jreport.tablenew.DataTableMethods;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
 
@@ -118,17 +118,25 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		DocumentHelper.newPage(document);
 	}
 
+	protected void addNewLine() {
+		DocumentHelper.add(document, DocumentHelper.newLine());
+	}
+
 	protected void addTitle(Title title) {
 
 	}
-	
+
 	protected void addComponent(Component text) {
-		
+
 	}
-	
-	
-	protected void addDataTableNew(DataTableMethods table) {
-		DocumentHelper.add(document, DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
+
+	protected void addDataTable(DataTable table) {
+		if (table.getHeadersObject() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(table.getHeadersObject(), table.getCells()).getPdfPTable());
+		} else if (table.getHeadersString() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(table.getHeadersString(), table.getCells()).getPdfPTable());
+
+		}
 	}
 
 	@Override
@@ -229,10 +237,6 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	protected static TableHeader th(String nome, float width, int colspan, ColorJReport backgroundTableColor,
 			ColorJReport borderTableColor) {
 		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
-	}
-
-	protected void addNewLine() {
-		DocumentHelper.add(document, DocumentHelper.newLine());
 	}
 
 }

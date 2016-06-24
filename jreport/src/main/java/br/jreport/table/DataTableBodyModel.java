@@ -2,7 +2,7 @@ package br.jreport.table;
 
 import com.lowagie.text.pdf.PdfPTable;
 
-public abstract class DataTableMethodBody<T> extends TableBody {
+public abstract class DataTableBodyModel<T> extends DataTableBody {
 
 	private int index;
 
@@ -16,7 +16,7 @@ public abstract class DataTableMethodBody<T> extends TableBody {
 
 	private boolean odd;
 
-	public DataTableMethodBody() {
+	public DataTableBodyModel() {
 		super();
 	}
 
@@ -76,11 +76,6 @@ public abstract class DataTableMethodBody<T> extends TableBody {
 
 	public void setOdd(boolean odd) {
 		this.odd = odd;
-	}
-
-	@Override
-	protected void body() {
-
 	}
 
 }

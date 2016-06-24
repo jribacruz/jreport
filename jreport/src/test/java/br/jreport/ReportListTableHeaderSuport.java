@@ -3,7 +3,7 @@ package br.jreport;
 import java.util.List;
 
 import br.jreport.model.ModelTest;
-import br.jreport.table.DataTableBody;
+import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
 import br.jreport.template.SimpleReport;
 

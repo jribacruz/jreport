@@ -1,9 +1,8 @@
 package br.jreport.model;
 
 import br.jreport.functions.Component;
-import br.jreport.functions.DataTable;
 import br.jreport.functions.Title;
-import br.jreport.table.DataTableBody;
+import br.jreport.table.DataTableBodyModel;
 import br.jreport.template.SimpleReport;
 
 public class Teste2 extends SimpleReport {
@@ -15,22 +14,22 @@ public class Teste2 extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Texto").T_addTitle("teste").T_addTitle("teste2"));
-		addDataTable(new DataTable<ModelTest>(document).addDataTable(null, 0, new DataTableBody<ModelTest>() {
-			
-			@Override
-			public void body(ModelTest model) {
-				
-			}
-		}));
-		addDataTable(new DataTable<ModelTest>(getDocument()).addDataTable(null, 0, new DataTableBody<ModelTest>() {
-
-			@Override
-			public void body(ModelTest model) {
-				// TODO Auto-generated method stub
-				
-			}
-		}));
+//		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Texto").T_addTitle("teste").T_addTitle("teste2"));
+//		addDataTable(new DataTable<ModelTest>(document).addDataTable(null, 0, new DataTableBody<ModelTest>() {
+//			
+//			@Override
+//			public void body(ModelTest model) {
+//				
+//			}
+//		}));
+//		addDataTable(new DataTable<ModelTest>(getDocument()).addDataTable(null, 0, new DataTableBody<ModelTest>() {
+//
+//			@Override
+//			public void body(ModelTest model) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}));
 	}
 
 	@Override
