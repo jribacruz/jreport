@@ -1,9 +1,9 @@
 package br.jreport.model;
 
-import br.jreport.functions.Component;
-import br.jreport.functions.Title;
 import br.jreport.table.DataTableBodyModel;
+import br.jreport.template.Component;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Title;
 
 public class Teste2 extends SimpleReport {
 
@@ -40,7 +40,7 @@ public class Teste2 extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addComponent(new Component(getDocument()).C_addText("FUncionalidade"));
+		addComponent(new Component().C_addText("FUncionalidade"));
 	}
 
 	@Override

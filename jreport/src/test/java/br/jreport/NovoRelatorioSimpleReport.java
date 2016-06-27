@@ -1,11 +1,8 @@
 package br.jreport;
 
-import java.awt.Color;
-
-import br.jreport.enums.TextAlign;
-import br.jreport.functions.Title;
-import br.jreport.style.TextStyleClass;
+import br.jreport.template.Component;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Title;
 
 public class NovoRelatorioSimpleReport extends SimpleReport {
 
@@ -16,24 +13,27 @@ public class NovoRelatorioSimpleReport extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Poder Judiciário da União")
+		addTitle(new Title().T_addBrasao().T_addTitle("Poder Judiciário da União")
 				.T_addTitle("Tribunal Regional Eleitoral do Pará")
 				.T_addTitle("Relatório de Pontos de Transmissão e Locais de Votação 2016"));
 	}
 
 	@Override
 	protected void detail() {
+		addComponent(new Component().C_addText("novo texto"));
+		addNewPage();
+		addComponent(new Component().C_addText("novo texto").C_addBlankLine().C_addSeparator().C_addText("outro texto"));
 	}
 
 	@Override
 	protected void pageHeader() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	protected void pageFooter() {
-		// TODO Auto-generated method stub
+		addComponent(new Component().C_addText("novo texto").C_addBlankLine().C_addSeparator().C_addText("outro texto"));
 
 	}
 

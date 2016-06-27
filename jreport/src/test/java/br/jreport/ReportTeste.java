@@ -1,8 +1,8 @@
 package br.jreport;
 
-import br.jreport.functions.Component;
-import br.jreport.functions.Title;
+import br.jreport.template.Component;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Title;
 
 public class ReportTeste extends SimpleReport {
 
@@ -13,7 +13,7 @@ public class ReportTeste extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addTitle(new Title(getDocument()).T_addBrasao().T_addTitle("Tribunal Regional Eleitoral do Pará").T_addTitle("Relatório de Nome e Sobrenomes"));
+		addTitle(new Title().T_addBrasao().T_addTitle("Tribunal Regional Eleitoral do Pará").T_addTitle("Relatório de Nome e Sobrenomes"));
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class ReportTeste extends SimpleReport {
 
 	@Override
 	protected void detail() {
-		addComponent(new Component(getDocument()).C_addText("Testando funcionalidade"));
+		addComponent(new Component().C_addText("Testando funcionalidade"));
 
 	}
 

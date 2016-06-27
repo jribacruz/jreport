@@ -19,9 +19,6 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
-import br.jreport.functions.Component;
-import br.jreport.functions.DataTable;
-import br.jreport.functions.Title;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
@@ -114,7 +111,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		return document;
 	}
 
-	protected void newPage() {
+	protected void addNewPage() {
 		DocumentHelper.newPage(document);
 	}
 
@@ -123,18 +120,22 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	}
 
 	protected void addTitle(Title title) {
-
+		for (Element element : title.getElements()) {
+			DocumentHelper.add(document, element);
+		}
 	}
 
-	protected void addComponent(Component text) {
-
+	protected void addComponent(Component componente) {
+		for (Element element : componente.getElements()) {
+			DocumentHelper.add(document, element);
+		}
 	}
 
-	protected void addDataTable(DataTable table) {
-		if (table.getHeadersObject() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(table.getHeadersObject(), table.getCells()).getPdfPTable());
-		} else if (table.getHeadersString() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(table.getHeadersString(), table.getCells()).getPdfPTable());
+	protected void addDataTable(DataTable dataTable) {
+		if (dataTable.getHeadersObject() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersObject(), dataTable.getCells()).getPdfPTable());
+		} else if (dataTable.getHeadersString() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersString(), dataTable.getCells()).getPdfPTable());
 
 		}
 	}

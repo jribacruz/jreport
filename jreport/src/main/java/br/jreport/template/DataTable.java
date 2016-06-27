@@ -1,4 +1,4 @@
-package br.jreport.functions;
+package br.jreport.template;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,12 +77,8 @@ public class DataTable {
 		this.headersObject = headersObject;
 	}
 
-	public List<PdfPCell> getCells() {
+	protected List<PdfPCell> getCells() {
 		return cells;
-	}
-
-	public void setCells(List<PdfPCell> cells) {
-		this.cells = cells;
 	}
 
 	public List getModelList() {

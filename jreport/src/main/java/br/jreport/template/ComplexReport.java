@@ -23,7 +23,6 @@ import br.jreport.core.ComplexDataModelReport;
 import br.jreport.core.ComplexModelFactory;
 import br.jreport.core.DataModelReport;
 import br.jreport.enums.PageOrientation;
-import br.jreport.functions.Component;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class ComplexReport<T extends DataModelReport> extends SimpleReport {
@@ -45,7 +44,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	}
 
 	public void nomeRelatorio() {
-		addComponent(new Component(getDocument()).C_addText(getNomePdf()));
+		addComponent(new Component().C_addText(getNomePdf()));
 	}
 
 	public ComplexReport(List<List<T>> lista, String nomeRelatorio, Class<? extends ComplexReport<T>> classe) {
@@ -203,7 +202,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.addComponent(new Component(document).C_addBlankLine());
+				complexReport.addComponent(new Component().C_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
@@ -229,7 +228,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.addComponent(new Component(document).C_addBlankLine());
+				complexReport.addComponent(new Component().C_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
@@ -275,14 +274,14 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.addComponent(new Component(document).C_addBlankLine());
+			complexReport.addComponent(new Component().C_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
-					complexReportAux.newPage();
+					complexReportAux.addNewPage();
 					complexReportAux.detail();
 				}
 			}
@@ -309,14 +308,14 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.addComponent(new Component(document).C_addBlankLine());
+			complexReport.addComponent(new Component().C_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
-					complexReportAux.newPage();
+					complexReportAux.addNewPage();
 					complexReportAux.detail();
 				}
 			}
