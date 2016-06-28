@@ -9,14 +9,16 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
+import br.jreport.style.DefaultTextPageHeaderStyleClass;
 import br.jreport.style.DefaultTextTitleStyleClass;
 
-public class Title {
+public class PageHeader {
 
 	private List<Element> elements = new ArrayList<Element>();
 
 	protected final DefaultTextTitleStyleClass titleStyleClass = new DefaultTextTitleStyleClass();
 
+	
 	/**
 	 * Adiciona o Brasão da República
 	 * <br>
@@ -28,39 +30,27 @@ public class Title {
 	 * <b>
 	 * Exemplo:
 	 * <pre>
-	 *  addTitle(new Title().T_addBrasao());
+	 *  addPageHeader(new PageHeader().H_addBrasao());
 	 * </pre>
 	 * </b>
 	 **/
-	public Title T_addBrasao() {
+	public PageHeader H_addBrasao() {
 		Image brasao = DocumentHelper.loadImage("brasao.png");
 		brasao.setAlignment(Image.ALIGN_CENTER);
 		brasao.scaleAbsolute(40f, 40f);
-		// DocumentHelper.add(document, brasao);
 		elements.add(brasao);
 		return this;
 	}
 
-	/**
-	 * Adiciona um Título <br>
-	 * <b>
-	 * Exemplo:
-	 * <pre>
-	 *  addTitle(new Title().T_addTitle("Relatório Geral");
-	 * </pre>
-	 * </b>
-	 **/
-	public Title T_addTitle(String text) {
+
+	public PageHeader H_addTitle(String text) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
-		// DocumentHelper.add(document, DocumentHelper.createText(text,
-		// titleStyleClass));
+
 		return this;
 	}
 
-	public Title T_addTitle(String text, DefaultTextTitleStyleClass titleStyleClass) {
+	public PageHeader H_addTitle(String text, DefaultTextPageHeaderStyleClass titleStyleClass) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
-		// DocumentHelper.add(document, DocumentHelper.createText(text,
-		// titleStyleClass));
 		return this;
 	}
 
@@ -68,9 +58,9 @@ public class Title {
 	 * Adiciona uma linha em branco
 	 * 
 	 */
-	public Title T_newLine() {
+	public PageHeader H_newLine() {
 		elements.add(DocumentHelper.newLine());
-		// DocumentHelper.add(document, DocumentHelper.newLine());
+
 		return this;
 	}
 
@@ -81,9 +71,8 @@ public class Title {
 	 * @param imageName:caminho da imagem a ser adicionada
 	 * 
 	 */
-	public Title T_addImage(String imageName) {
+	public PageHeader H_addImage(String imageName) {
 		elements.add(DocumentHelper.loadImage(imageName));
-		// DocumentHelper.add(document, DocumentHelper.loadImage(imageName));
 		return this;
 	}
 
@@ -91,16 +80,15 @@ public class Title {
 	 * Adiciona uma barra horrizontal
 	 * 
 	 */
-	public Title T_addSeparator() {
+	public PageHeader H_addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
-		// DocumentHelper.add(document,
-		// DocumentHelper.createDefaultSeparator());
 		return this;
 	}
 
 	protected List<Element> getElements() {
 		return elements;
 	}
+
 
 
 

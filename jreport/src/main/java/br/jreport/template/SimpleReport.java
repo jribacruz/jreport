@@ -50,13 +50,28 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	}
 
 	/**
-	 * This section appears only once at the beginning of the report.
+	*
+	 * Será mostrado apenas na primeira página
+	 * do relatório
+	 * <br>
+	 * <b>Exemplo:
+	 * <pre>
+	 *  addTitle(new Title().T_addTitle("Relatório Geral");
+	 * </pre>
+	 * </b>
 	 */
 	protected abstract void title();
 
 	/**
-	 * This section appears at the beginning of each page in the generated
-	 * document.
+	 * Será mostrado apenas a partir da segunda página
+	 * do relatório
+	 * <br>
+	 * <b>Exemplo:
+	 * <pre>
+	 *  addPageHeader(new PageHeader()
+	 *  			.H_addTitle("Título Mostrado a partir da 2º Página"));
+	 * </pre>
+	 * </b>
 	 */
 	protected abstract void pageHeader();
 
@@ -125,6 +140,12 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		}
 	}
 
+	protected void addPageHeader(PageHeader	pageHeader) {
+		for (Element element : pageHeader.getElements()) {
+			DocumentHelper.add(document, element);
+		}
+	}
+	
 	protected void addComponent(Component componente) {
 		for (Element element : componente.getElements()) {
 			DocumentHelper.add(document, element);

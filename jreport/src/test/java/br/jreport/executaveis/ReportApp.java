@@ -12,6 +12,7 @@ public class ReportApp {
 		Teste2 report1 = new Teste2();
 		report1.generate(new FileOutputStream(new File("target/teste2.pdf")));
 		
+
 	}
 
 }
