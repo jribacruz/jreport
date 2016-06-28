@@ -1,6 +1,5 @@
 package br.jreport.style;
 
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.FontStyle;
 import br.jreport.enums.TextAlign;
 

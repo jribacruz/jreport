@@ -1,11 +1,8 @@
-package br.jreport.template;
+package br.jreport.core;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import br.jreport.core.ComplexDataModelReport;
-import br.jreport.core.DataModelReport;
 
 public class ComplexModelFactory<T extends DataModelReport> extends ComplexDataModelReport<T> {
 	

@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import br.jreport.model.Teste2;
+import br.jreport.ReportTeste;
 
-public class ReportApp {
+public class ReportTesteExec {
 
 	public static void main(String[] args) throws IOException {
-		Teste2 report1 = new Teste2();
-		report1.generate(new FileOutputStream(new File("target/teste2.pdf")));
+		ReportTeste rep = new ReportTeste();
+		rep.generate(new FileOutputStream(new File("target/testeLeo.pdf")));
 		
 	}
 

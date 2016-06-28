@@ -1,86 +1,53 @@
 package br.jreport.table;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
-public abstract class DataTableBody<T> extends TableBody {
+import br.jreport.helper.DocumentHelper;
+import br.jreport.style.TableDataStyleClass;
 
-	private int index;
+public class DataTableBody {
+	
+	protected PdfPTable pdfPTable;
 
-	private boolean first;
+	private List<PdfPCell> cells = new ArrayList<PdfPCell>();
 
-	private boolean middle;
-
-	private boolean last;
-
-	private boolean even;
-
-	private boolean odd;
-
-	public DataTableBody() {
-		super();
+	/*
+	 * STRING
+	 */
+	protected void addCell(String text) {
+		TableDataStyleClass styleClass = new TableDataStyleClass();
+		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
+		addCellToTable(paragraph, styleClass);
 	}
 
-	public abstract void body(T model);
-
-	public PdfPTable getPdfPTable() {
-		return pdfPTable;
+	protected void addCell(String text, TableDataStyleClass styleClass) {
+		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
+		addCellToTable(paragraph, styleClass);
 	}
 
-	public void setPdfPTable(PdfPTable pdfPTable) {
-		this.pdfPTable = pdfPTable;
+	protected void addLine(float height, int colspan) {
+		TableDataStyleClass v = new TableDataStyleClass();
+		v.setFixedHeight(height);
+		v.setColspan(colspan);
+		Paragraph paragraph = DocumentHelper.createText("", v);
+		addCellToTable(paragraph, v);
 	}
 
-	public int getIndex() {
-		return index;
+	private void addCellToTable(Paragraph p, TableDataStyleClass styleClass) {
+		cells.add(DocumentHelper.createPdfPCell(p, styleClass));
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
+	public List<PdfPCell> getCells() {
+		return cells;
 	}
 
-	public boolean isFirst() {
-		return first;
-	}
-
-	public void setFirst(boolean first) {
-		this.first = first;
-	}
-
-	public boolean isMiddle() {
-		return middle;
-	}
-
-	public void setMiddle(boolean middle) {
-		this.middle = middle;
-	}
-
-	public boolean isLast() {
-		return last;
-	}
-
-	public void setLast(boolean last) {
-		this.last = last;
-	}
-
-	public boolean isEven() {
-		return even;
-	}
-
-	public void setEven(boolean even) {
-		this.even = even;
-	}
-
-	public boolean isOdd() {
-		return odd;
-	}
-
-	public void setOdd(boolean odd) {
-		this.odd = odd;
-	}
-
-	@Override
-	protected void body() {
-
+	public void setCells(List<PdfPCell> cells) {
+		this.cells = cells;
 	}
 
 }

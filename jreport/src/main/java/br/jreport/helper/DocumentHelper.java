@@ -21,14 +21,11 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.draw.LineSeparator;
 
 import br.jreport.core.DataModelReport;
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.TextDecoration;
 import br.jreport.style.DefaultTextStyleClass;
 import br.jreport.style.TableDataStyleClass;
-import br.jreport.table.DataTable;
-import br.jreport.table.DataTableBody;
-import br.jreport.table.Table;
-import br.jreport.table.TableBody;
+import br.jreport.style.TextStyleClass;
+import br.jreport.table.TableConstructor;
 import br.jreport.table.TableHeader;
 
 public class DocumentHelper {
@@ -88,6 +85,26 @@ public class DocumentHelper {
 
 		pdfPTable.addCell(cell);
 
+	}
+
+	public static PdfPCell createPdfPCell(Paragraph p, TableDataStyleClass styleClass) {
+		PdfPCell cell = new PdfPCell();
+		// Não funciona com texto;
+		if (styleClass.getFixedHeight() != null) {
+			cell.setFixedHeight(styleClass.getFixedHeight());
+			cell.setColspan(styleClass.getColspan());
+			cell.setBorderWidth(0);
+		} else {
+			cell.addElement(p);
+			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+			cell.setBorder(styleClass.getBorder().getBorder());
+			cell.setBorderWidth(styleClass.getBorderWidth());
+			cell.setBorderColor(styleClass.getBorderColor().getColor());
+			cell.setColspan(styleClass.getColspan());
+			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+		}
+		return cell;
 	}
 
 	/**
@@ -228,36 +245,15 @@ public class DocumentHelper {
 		return linebreak;
 	}
 
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, TableHeader[] headers,
-			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(headers);
-		table.addBody(modelList, dataTableBody);
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
 		return table;
 	}
 
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, String[] headers,
-			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(headers);
-		table.addBody(modelList, dataTableBody);
-		return table;
-	}
-
-	public static <T extends DataModelReport> DataTable<T> createDataTable(List<T> modelList, int numColumns,
-			DataTableBody<T> dataTableBody) {
-		DataTable<T> table = new DataTable<T>(numColumns);
-		table.addBody(modelList, dataTableBody);
-		return table;
-	}
-
-	public static Table createTable(String[] headers, TableBody tableBody) {
-		Table table = new Table(headers);
-		table.addBody(tableBody);
-		return table;
-	}
-
-	public static Table createTable(int numColumns, TableBody tableBody) {
-		Table table = new Table(numColumns);
-		table.addBody(tableBody);
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
 		return table;
 	}
 

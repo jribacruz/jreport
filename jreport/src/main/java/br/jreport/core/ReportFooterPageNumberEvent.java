@@ -1,4 +1,4 @@
-package br.jreport.template;
+package br.jreport.core;
 
 import java.awt.Color;
 import java.text.SimpleDateFormat;

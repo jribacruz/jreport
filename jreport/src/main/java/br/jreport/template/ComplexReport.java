@@ -20,6 +20,7 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.core.ComplexDataModelReport;
+import br.jreport.core.ComplexModelFactory;
 import br.jreport.core.DataModelReport;
 import br.jreport.enums.PageOrientation;
 
@@ -41,18 +42,18 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	public ComplexReport() {
 
 	}
-	
-	public void nomeRelatorio(){
-		addText(getNomePdf());
+
+	public void nomeRelatorio() {
+		addComponent(new Component().C_addText(getNomePdf()));
 	}
-	
+
 	public ComplexReport(List<List<T>> lista, String nomeRelatorio, Class<? extends ComplexReport<T>> classe) {
 		Integer cont = 1;
 		try {
 			this.type = (Class<ComplexReport<T>>) classe;
 			Constructor ctor = type.getDeclaredConstructor();
 			ctor.setAccessible(true);
-			
+
 			ComplexModelFactory<T> factory = new ComplexModelFactory<T>();
 			List<ComplexModelFactory<T>> complexModelTest = (List<ComplexModelFactory<T>>) factory.factory(lista);
 			for (ComplexDataModelReport<T> list : complexModelTest) {
@@ -77,8 +78,9 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			e.printStackTrace();
 		}
 	}
-	
-	public ComplexReport(List<List<T>> lista, String nomeRelatorio, PageOrientation pageOrientation, Class<? extends ComplexReport<T>> classe) {
+
+	public ComplexReport(List<List<T>> lista, String nomeRelatorio, PageOrientation pageOrientation,
+			Class<? extends ComplexReport<T>> classe) {
 		Integer cont = 1;
 		try {
 			this.type = (Class<ComplexReport<T>>) classe;
@@ -109,14 +111,14 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ComplexReport(LinkedHashMap<String, List<T>> lista, Class<? extends ComplexReport<T>> classe) {
 		Integer cont = 1;
 		try {
 			this.type = (Class<ComplexReport<T>>) classe;
 			Constructor ctor = type.getDeclaredConstructor();
 			ctor.setAccessible(true);
-			
+
 			ComplexModelFactory<T> factory = new ComplexModelFactory<T>();
 			List<ComplexModelFactory<T>> complexModelTest = (List<ComplexModelFactory<T>>) factory.factory(lista);
 			for (ComplexDataModelReport<T> complexReport : complexModelTest) {
@@ -141,7 +143,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ComplexReport(LinkedHashMap<String, List<T>> lista, PageOrientation pageOrientation, Class<? extends ComplexReport<T>> classe) {
 		Integer cont = 1;
 		try {
@@ -183,7 +185,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	private void nomeiaRelatorio(Integer cont, ComplexDataModelReport<T> complexReport, ComplexReport<T> sr) {
 		if (complexReport.getNomePdf().isEmpty()) {
 			sr.setNomePdf(cont + "º " + sr.getNomePdf());
-		}else {
+		} else {
 			sr.setNomePdf(complexReport.getNomePdf());
 		}
 	}
@@ -200,12 +202,12 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.newLine();
+				complexReport.addComponent(new Component().C_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
 			} catch (DocumentException e) {
-//				e.printStackTrace();
+				// e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -226,7 +228,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
 				complexReport.title();
-				complexReport.newLine();
+				complexReport.addComponent(new Component().C_addBlankLine());
 				complexReport.detail();
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
@@ -236,10 +238,10 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			zos.close();
 
 		} catch (DocumentException e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return new ByteArrayInputStream(zipOutputStream.toByteArray());
 	}
@@ -250,8 +252,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	 * @param complexReport
 	 * @throws IOException
 	 */
-	private void inserirNoZip(ZipOutputStream zos, ByteArrayOutputStream outputStream, ComplexReport<T> complexReport)
-			throws IOException {
+	private void inserirNoZip(ZipOutputStream zos, ByteArrayOutputStream outputStream, ComplexReport<T> complexReport) throws IOException {
 		byte[] buffer = new byte[1024];
 		ByteArrayInputStream inStream = new ByteArrayInputStream(outputStream.toByteArray());
 		ZipEntry ze = new ZipEntry(complexReport.getNomePdf());
@@ -263,7 +264,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 		inStream.close();
 	}
 
-	public void generate(String diretorio)  {
+	public void generate(String diretorio) {
 		try {
 			FileOutputStream outputStream = new FileOutputStream(new File(diretorio));
 			ComplexReport<T> complexReport = pdfs.get(0);
@@ -273,23 +274,23 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.newLine();
+			complexReport.addComponent(new Component().C_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
-					complexReportAux.newPage();
+					complexReportAux.addNewPage();
 					complexReportAux.detail();
 				}
-			} 
+			}
 			complexReport.document.close();
 		} catch (DocumentException e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -301,34 +302,34 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			ComplexReport<T> complexReport = pdfs.get(0);
 			ComplexReport<T> complexReportAux;
-			
+
 			complexReport.document = new Document(complexReport.pageOrientation.getValue());
 			complexReport.pdfWriter = PdfWriter.getInstance(complexReport.document, outputStream);
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
 			complexReport.title();
-			complexReport.newLine();
+			complexReport.addComponent(new Component().C_addBlankLine());
 			complexReport.detail();
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
-					complexReportAux.newPage();
+					complexReportAux.addNewPage();
 					complexReportAux.detail();
 				}
-			} 
+			}
 			complexReport.document.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (Exception e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	@Deprecated
 	public void generate(OutputStream outputStream) {
-		
+
 	}
 
 	protected List<ComplexReport<T>> getPdfs() {

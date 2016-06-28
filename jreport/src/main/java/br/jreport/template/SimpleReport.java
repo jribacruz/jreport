@@ -7,30 +7,24 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.jreport.core.DataModelReport;
-import br.jreport.core.TextStyleClass;
 import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
-import br.jreport.table.DataTableBody;
-import br.jreport.table.TableBody;
 import br.jreport.table.TableHeader;
 
-public class SimpleReport extends PdfPageEventHelper implements Serializable {
+public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
 
 	/**
 	 * 
@@ -58,39 +52,29 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 	/**
 	 * This section appears only once at the beginning of the report.
 	 */
-	protected void title() {
-
-	}
+	protected abstract void title();
 
 	/**
 	 * This section appears at the beginning of each page in the generated
 	 * document.
 	 */
-	protected void pageHeader() {
-
-	}
+	protected abstract void pageHeader();
 
 	/**
 	 * This section is repeated for each line of data supplied by the report's
 	 * data source. The detail section can be made of multiple bands.
 	 */
-	protected void detail() {
-
-	}
+	protected abstract void detail();
 
 	/**
 	 * This section appears at the bottom of each page.
 	 */
-	protected void pageFooter() {
-
-	}
+	protected abstract void pageFooter();
 
 	/**
 	 * This section appears only once at the end of the report.
 	 */
-	protected void summary() {
-
-	}
+	protected abstract void summary();
 
 	public void generate(OutputStream outputStream) {
 		try {
@@ -98,7 +82,7 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 			document.open();
 			pdfWriter.setPageEvent(this);
 			this.title();
-			newLine();
+			addNewLine();
 			this.detail();
 			document.close();
 		} catch (DocumentException e) {
@@ -113,7 +97,7 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 			document.open();
 			pdfWriter.setPageEvent(this);
 			this.title();
-			newLine();
+			addNewLine();
 			this.detail();
 			document.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
@@ -127,63 +111,33 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 		return document;
 	}
 
-	protected void addBrasao() {
-		Image brasao = DocumentHelper.loadImage("brasao.png");
-		brasao.setAlignment(Image.ALIGN_CENTER);
-		brasao.scaleAbsolute(40f, 40f);
-		try {
-			document.add(brasao);
-		} catch (DocumentException e) {
-			e.printStackTrace();
+	protected void addNewPage() {
+		DocumentHelper.newPage(document);
+	}
+
+	protected void addNewLine() {
+		DocumentHelper.add(document, DocumentHelper.newLine());
+	}
+
+	protected void addTitle(Title title) {
+		for (Element element : title.getElements()) {
+			DocumentHelper.add(document, element);
 		}
 	}
 
-	protected void newLine() {
-		DocumentHelper.add(getDocument(), DocumentHelper.newLine());
+	protected void addComponent(Component componente) {
+		for (Element element : componente.getElements()) {
+			DocumentHelper.add(document, element);
+		}
 	}
 
-	protected void newPage() {
-		DocumentHelper.newPage(getDocument());
-	}
+	protected void addDataTable(DataTable dataTable) {
+		if (dataTable.getHeadersObject() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersObject(), dataTable.getCells()).getPdfPTable());
+		} else if (dataTable.getHeadersString() != null) {
+			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersString(), dataTable.getCells()).getPdfPTable());
 
-	protected void addText(String text) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createText(text));
-	}
-
-	protected void addText(String text, TextStyleClass styleClass) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createText(text, styleClass));
-	}
-
-	protected void addTitle(String text) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createText(text, titleStyleClass));
-	}
-
-	protected void addImage(String imageName) {
-		DocumentHelper.add(getDocument(), DocumentHelper.loadImage(imageName));
-	}
-
-	protected void addSeparator() {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDefaultSeparator());
-	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, TableHeader[] headers, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
-	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, String[] headers, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, headers, tableBody).getPdfPTable());
-	}
-
-	protected <T extends DataModelReport> void addDataTable(List<T> modelList, int numColumns, DataTableBody<T> tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createDataTable(modelList, numColumns, tableBody).getPdfPTable());
-	}
-
-	protected void addTable(String[] headers, TableBody tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createTable(headers, tableBody).getPdfPTable());
-	}
-
-	protected void addTable(int numColumns, TableBody tableBody) {
-		DocumentHelper.add(getDocument(), DocumentHelper.createTable(numColumns, tableBody).getPdfPTable());
+		}
 	}
 
 	@Override
@@ -219,12 +173,12 @@ public class SimpleReport extends PdfPageEventHelper implements Serializable {
 	protected static TableHeader th(String nome) {
 		return new TableHeader(nome);
 	}
-	
+
 	/**
 	 * @param nome:
 	 *            Nome da coluna no header
-	 * @param nome: 
-	 * 			  Estilo para o datatable
+	 * @param nome:
+	 *            Estilo para o datatable
 	 * 
 	 **/
 	protected static TableHeader th(String nome, TableHeaderStyleClass style) {
