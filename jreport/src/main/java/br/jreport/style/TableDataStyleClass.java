@@ -1,12 +1,12 @@
 package br.jreport.style;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import com.google.common.base.Splitter;
 
 import br.jreport.enums.BorderStyle;
-import br.jreport.enums.ColorJReport;
 import br.jreport.enums.TextAlign;
 
 public class TableDataStyleClass extends TextStyleClass {
@@ -23,11 +23,11 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private float borderWidth = 0.5f;
 
-	private ColorJReport borderColor = ColorJReport.BLACK;
+	private Color borderColor = Color.BLACK;
 
 	private int colspan = 1;
 
-	private ColorJReport backgroundCellColor = ColorJReport.WHITE;
+	private Color backgroundCellColor = Color.WHITE;
 
 	public TableDataStyleClass(String style) {
 		super(style);
@@ -53,8 +53,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		super();
 	}
 
-	public TableDataStyleClass(float width, int colspan, ColorJReport backgroundTableColor, ColorJReport borderColor,
-			float tableSpaceCell) {
+	public TableDataStyleClass(float width, int colspan, Color backgroundTableColor, Color borderColor, float tableSpaceCell) {
 		super();
 		this.colspan = colspan;
 		this.backgroundCellColor = backgroundTableColor;
@@ -63,10 +62,25 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	public void setBackgroundCellColor(String backgroundCellColor) {
 		if (backgroundCellColor != null) {
-			if (backgroundCellColor.startsWith("#")) {
-				this.backgroundCellColor.setColor(Color.getColor(backgroundCellColor.trim().toUpperCase()));
+			if (backgroundCellColor.trim().startsWith("#")) {
+				this.backgroundCellColor = Color.decode(backgroundCellColor.trim().toUpperCase());
 			} else {
-				this.backgroundCellColor = ColorJReport.valueOf(backgroundCellColor.trim().toUpperCase());
+				try {
+					Field field = Color.class.getField(backgroundCellColor.trim().toLowerCase());
+					this.backgroundCellColor = (Color) field.get(null);
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -79,10 +93,25 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	public void setBorderColor(String borderColor) {
 		if (borderColor != null) {
-			if (borderColor.startsWith("#")) {
-				this.borderColor.setColor(Color.getColor(borderColor.trim().toUpperCase()));
+			if (borderColor.trim().startsWith("#")) {
+				this.borderColor = Color.decode(borderColor.trim().toUpperCase());
 			} else {
-				this.borderColor = ColorJReport.valueOf(borderColor.trim().toUpperCase());
+				try {
+					Field field = Color.class.getField(borderColor.trim().toLowerCase());
+					this.borderColor = (Color) field.get(null);
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -169,14 +198,6 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.border = border;
 	}
 
-	public ColorJReport getBorderColor() {
-		return borderColor;
-	}
-
-	public void setBorderColor(ColorJReport borderColor) {
-		this.borderColor = borderColor;
-	}
-
 	public float getBorderWidth() {
 		return borderWidth;
 	}
@@ -193,12 +214,20 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.colspan = colspan;
 	}
 
-	public ColorJReport getBackgroundCellColor() {
+	public Color getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(Color borderColor) {
+		this.borderColor = borderColor;
+	}
+
+	public Color getBackgroundCellColor() {
 		return backgroundCellColor;
 	}
 
-	public void setBackgroundCellColor(ColorJReport backgroundTableColor) {
-		this.backgroundCellColor = backgroundTableColor;
+	public void setBackgroundCellColor(Color backgroundCellColor) {
+		this.backgroundCellColor = backgroundCellColor;
 	}
 
 }

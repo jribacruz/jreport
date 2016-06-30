@@ -1,10 +1,10 @@
 package br.jreport.style;
 
+import java.awt.Color;
 import java.util.Map;
 
 import com.google.common.base.Splitter;
 
-import br.jreport.enums.ColorJReport;
 import br.jreport.enums.FontStyle;
 
 public class TableHeaderStyleClass extends TableDataStyleClass {
@@ -23,7 +23,7 @@ public class TableHeaderStyleClass extends TableDataStyleClass {
 		this.setFontStyle(FontStyle.BOLD);
 	}
 
-	public TableHeaderStyleClass(float width, int colspan, ColorJReport backgroundTableColor, ColorJReport borderColor,
+	public TableHeaderStyleClass(float width, int colspan, Color backgroundTableColor, Color borderColor,
 			float tableHeaderSpacer) {
 		super();
 		this.widthHeaderTable = width;

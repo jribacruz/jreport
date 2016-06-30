@@ -1,6 +1,7 @@
 package br.jreport.style;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import com.google.common.base.Splitter;
@@ -89,10 +90,25 @@ public class TextStyleClass {
 
 	public void setBackgroudColor(String backgroudColor) {
 		if (backgroudColor != null) {
-			if (backgroudColor.startsWith("#")) {
+			if (backgroudColor.trim().startsWith("#")) {
 				this.backgroudColor = Color.decode(backgroudColor.trim().toUpperCase());
 			} else {
-				this.backgroudColor = Color.getColor(backgroudColor.trim().toUpperCase());
+				try {
+					Field field = Color.class.getField(backgroudColor.trim().toLowerCase());
+					this.backgroudColor = (Color)field.get(null);
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -127,10 +143,25 @@ public class TextStyleClass {
 
 	public void setFontColor(String fontColor) {
 		if (fontColor != null) {
-			if (fontColor.startsWith("#")) {
+			if (fontColor.trim().startsWith("#")) {
 				this.fontColor = Color.decode(fontColor.trim().toUpperCase());
 			} else {
-				this.fontColor = Color.getColor(fontColor.trim().toUpperCase());
+				try {
+					Field field = Color.class.getField(fontColor.trim().toLowerCase());
+					this.fontColor = (Color)field.get(null);
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

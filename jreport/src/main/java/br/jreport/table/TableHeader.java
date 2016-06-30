@@ -1,5 +1,7 @@
 package br.jreport.table;
 
+import java.awt.Color;
+
 import br.jreport.enums.ColorJReport;
 import br.jreport.style.TableHeaderStyleClass;
 
@@ -74,7 +76,7 @@ public class TableHeader {
 	 * 
 	 **/
 	@Deprecated
-	public TableHeader(String nome, float width, int colspan, ColorJReport backgroundTableColor) {
+	public TableHeader(String nome, float width, int colspan, Color backgroundTableColor) {
 		super();
 		this.nome = nome;
 		style.setWidthHeaderTable(width);
@@ -94,7 +96,7 @@ public class TableHeader {
 	 * 
 	 **/
 	@Deprecated
-	public TableHeader(String nome, float width, int colspan, ColorJReport backgroundTableColor, ColorJReport borderTableColor) {
+	public TableHeader(String nome, float width, int colspan, Color backgroundTableColor, Color borderTableColor) {
 		super();
 		this.nome = nome;
 		style.setWidthHeaderTable(width);

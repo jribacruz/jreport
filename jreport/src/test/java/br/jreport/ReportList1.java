@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.jreport.enums.BorderStyle;
 import br.jreport.enums.ColorJReport;
+import br.jreport.enums.FontStyle;
 import br.jreport.model.ModelTest;
+import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
 import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
@@ -20,7 +22,7 @@ public class ReportList1 extends SimpleReport {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String[] headers = { "a", "b", "c", "d" };
+	public static final String[] headers = { "", "", "", "" };
 	// public static final TableHeader[] headers2 = {
 	// th("Nome", new TableDataStyleClass(1f, 2, ColorJReport.LIGHT_GRAY,
 	// ColorJReport.LIGHT_GRAY, 1)), th("Teste",1f, 3) };
@@ -51,22 +53,37 @@ public class ReportList1 extends SimpleReport {
 		//
 		// }
 		// }));
-		addComponent(new Component().C_addBlankLine().C_addText("Componente text"));
-		addDataTable(new DataTable().addHeader(headers).addCell("aaa1").addCell("aaaaa2").addCell("aaa3").addCell("aaaaa4").addCell("aaa")
-				.addCell("aaaaa").addCell("aaa").addCell("aaaaa").addCell("aaa").addCell("aaaaa").addCell("aaa").addCell("aaaaa")
-				.addCell("aaa").addCell("aaaaa").addCell("aaa").addCell("aaaaa")
-				.addDataTableBody(modelList, new DataTableBodyModel<ModelTest>() {
-
-					@Override
-					public void body(ModelTest model) {
-						addCell(model.getNome() + "coluna1");
-						addCell(model.getSobrenome() + "coluna2");
-						addCell(model.getNome() + "coluna3");
-						addCell(model.getSobrenome() + "coluna4");
-
-					}
-				}).addCell("aaa").addCell("aaaaa").addCell("aaa").addCell("aaaaa").addCell("!!!!!!!!!").addCell("aaa").addCell("aaaaa")
-				.addCell("aaa").addCell("aaaaa").addCell("!!!!!!!!!").addCell("!!!!!!!!!"));
+		//@formatter:off
+		
+		TableDataStyleClass a = new TableDataStyleClass();
+		a.setFontStyle(FontStyle.BOLD);
+		addDataTable(new DataTable().addHeader(4)
+				.addCell("Assunto:", a).addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
+				
+				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
+				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+				
+				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
+				
+				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+//				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+//				
+				);
+		addNewLine();
+		addDataTable(new DataTable().addHeader(headers)
+				.addCell("Assunto:", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
+				
+				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
+				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+				
+				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
+				
+				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+//				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+//				
+				);
+		//@formatter:on
+		
 
 		// TableHeaderStyleClass td = new TableHeaderStyleClass(1f, 1,
 		// ColorJReport.LIGHT_GRAY, ColorJReport.LIGHT_GRAY, 1);

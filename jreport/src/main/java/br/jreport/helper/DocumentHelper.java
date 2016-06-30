@@ -78,9 +78,9 @@ public class DocumentHelper {
 			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 			cell.setBorder(styleClass.getBorder().getBorder());
 			cell.setBorderWidth(styleClass.getBorderWidth());
-			cell.setBorderColor(styleClass.getBorderColor().getColor());
+			cell.setBorderColor(styleClass.getBorderColor());
 			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundCellColor().getColor());
+			cell.setBackgroundColor(styleClass.getBackgroundCellColor());
 		}
 
 		pdfPTable.addCell(cell);
@@ -100,9 +100,9 @@ public class DocumentHelper {
 			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 			cell.setBorder(styleClass.getBorder().getBorder());
 			cell.setBorderWidth(styleClass.getBorderWidth());
-			cell.setBorderColor(styleClass.getBorderColor().getColor());
+			cell.setBorderColor(styleClass.getBorderColor());
 			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundCellColor().getColor());
+			cell.setBackgroundColor(styleClass.getBackgroundCellColor());
 		}
 		return cell;
 	}
@@ -252,6 +252,12 @@ public class DocumentHelper {
 	}
 
 	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
+		return table;
+	}
+	
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(int headers, List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;

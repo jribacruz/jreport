@@ -18,11 +18,18 @@ public class DataTable {
 
 	private TableHeader[] headersObject;
 
+	private Integer headersColspan;
+
 	private List<PdfPCell> cells = new ArrayList<PdfPCell>();
 
 	private List modelList;
 
 	private DataTableBodyModel dtbody;
+
+	public DataTable addHeader(Integer headersColspan) {
+		this.headersColspan = headersColspan;
+		return this;
+	}
 
 	public DataTable addHeader(String[] headers) {
 		this.headersString = headers;
@@ -44,6 +51,13 @@ public class DataTable {
 	public DataTable addCell(String text, TableDataStyleClass style) {
 		Paragraph paragraph = DocumentHelper.createText(text, style);
 		addCellToTable(paragraph, style);
+		return this;
+	}
+
+	public DataTable addCell(String text, String style) {
+		TableDataStyleClass dataStyle = new TableDataStyleClass(style);
+		Paragraph paragraph = DocumentHelper.createText(text, dataStyle);
+		addCellToTable(paragraph, dataStyle);
 		return this;
 	}
 
@@ -95,6 +109,14 @@ public class DataTable {
 
 	public void setDtbody(DataTableBodyModel dtbody) {
 		this.dtbody = dtbody;
+	}
+
+	public Integer getHeadersColspan() {
+		return headersColspan;
+	}
+
+	public void setHeadersColspan(Integer headersColspan) {
+		this.headersColspan = headersColspan;
 	}
 
 }

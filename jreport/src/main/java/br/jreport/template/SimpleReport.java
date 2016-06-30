@@ -17,7 +17,6 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.DefaultTextTitleStyleClass;
@@ -50,27 +49,26 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	}
 
 	/**
-	*
-	 * Será mostrado apenas na primeira página
-	 * do relatório
-	 * <br>
+	 *
+	 * Será mostrado apenas na primeira página do relatório <br>
 	 * <b>Exemplo:
+	 * 
 	 * <pre>
 	 *  addTitle(new Title().T_addTitle("Relatório Geral");
 	 * </pre>
+	 * 
 	 * </b>
 	 */
 	protected abstract void title();
 
 	/**
-	 * Será mostrado apenas a partir da segunda página
-	 * do relatório
-	 * <br>
+	 * Será mostrado apenas a partir da segunda página do relatório <br>
 	 * <b>Exemplo:
+	 * 
 	 * <pre>
-	 *  addPageHeader(new PageHeader()
-	 *  			.H_addTitle("Título Mostrado a partir da 2º Página"));
+	 * addPageHeader(new PageHeader().H_addTitle("Título Mostrado a partir da 2º Página"));
 	 * </pre>
+	 * 
 	 * </b>
 	 */
 	protected abstract void pageHeader();
@@ -140,12 +138,12 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		}
 	}
 
-	protected void addPageHeader(PageHeader	pageHeader) {
+	protected void addPageHeader(PageHeader pageHeader) {
 		for (Element element : pageHeader.getElements()) {
 			DocumentHelper.add(document, element);
 		}
 	}
-	
+
 	protected void addComponent(Component componente) {
 		for (Element element : componente.getElements()) {
 			DocumentHelper.add(document, element);
@@ -157,7 +155,9 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersObject(), dataTable.getCells()).getPdfPTable());
 		} else if (dataTable.getHeadersString() != null) {
 			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersString(), dataTable.getCells()).getPdfPTable());
-
+		} else if (dataTable.getHeadersColspan() != null) {
+			DocumentHelper.add(document,
+					DocumentHelper.createDataTable(dataTable.getHeadersColspan(), dataTable.getCells()).getPdfPTable());
 		}
 	}
 
@@ -241,7 +241,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * 
 	 **/
 	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, ColorJReport backgroundTableColor) {
+	protected static TableHeader th(String nome, float width, int colspan, Color backgroundTableColor) {
 		return new TableHeader(nome, width, colspan, backgroundTableColor);
 	}
 
@@ -256,8 +256,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * 
 	 **/
 	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, ColorJReport backgroundTableColor,
-			ColorJReport borderTableColor) {
+	protected static TableHeader th(String nome, float width, int colspan, Color backgroundTableColor, Color borderTableColor) {
 		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
 	}
 

@@ -1,5 +1,6 @@
 package br.jreport;
 
+import br.jreport.style.TextStyleClass;
 import br.jreport.template.Component;
 import br.jreport.template.SimpleReport;
 import br.jreport.template.Title;

@@ -29,6 +29,12 @@ public class DataTableBody {
 		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
 		addCellToTable(paragraph, styleClass);
 	}
+	
+	protected void addCell(String text, String style) {
+		TableDataStyleClass styleClass = new TableDataStyleClass(style);
+		Paragraph paragraph = DocumentHelper.createText(text, styleClass);
+		addCellToTable(paragraph, styleClass);
+	}
 
 	protected void addLine(float height, int colspan) {
 		TableDataStyleClass v = new TableDataStyleClass();
