@@ -80,7 +80,7 @@ public class DocumentHelper {
 			cell.setBorderWidth(styleClass.getBorderWidth());
 			cell.setBorderColor(styleClass.getBorderColor().getColor());
 			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+			cell.setBackgroundColor(styleClass.getBackgroundCellColor().getColor());
 		}
 
 		pdfPTable.addCell(cell);
@@ -102,7 +102,7 @@ public class DocumentHelper {
 			cell.setBorderWidth(styleClass.getBorderWidth());
 			cell.setBorderColor(styleClass.getBorderColor().getColor());
 			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+			cell.setBackgroundColor(styleClass.getBackgroundCellColor().getColor());
 		}
 		return cell;
 	}

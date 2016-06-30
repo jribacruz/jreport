@@ -79,7 +79,7 @@ public class TableHeader {
 		this.nome = nome;
 		style.setWidthHeaderTable(width);
 		style.setColspan(colspan);
-		style.setBackgroundTableColor(backgroundTableColor);
+		style.setBackgroundCellColor(backgroundTableColor);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class TableHeader {
 		this.nome = nome;
 		style.setWidthHeaderTable(width);
 		style.setColspan(colspan);
-		style.setBackgroundTableColor(backgroundTableColor);
+		style.setBackgroundCellColor(backgroundTableColor);
 		style.setBorderColor(borderTableColor);
 	}
 

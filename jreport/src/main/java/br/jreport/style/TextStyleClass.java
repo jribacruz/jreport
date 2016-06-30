@@ -1,6 +1,9 @@
 package br.jreport.style;
 
 import java.awt.Color;
+import java.util.Map;
+
+import com.google.common.base.Splitter;
 
 import br.jreport.enums.FontStyle;
 import br.jreport.enums.TextAlign;
@@ -8,34 +11,128 @@ import br.jreport.enums.TextDecoration;
 
 public class TextStyleClass {
 
-	/**	Font **/ 
-	private FontStyle fontStyle;
-	
-	private float fontSize;
+	/** Font **/
+	private FontStyle fontStyle = FontStyle.NORMAL;
 
-	private Color fontColor;
+	private float fontSize = 9;
 
-	private TextDecoration textDecoration;
+	private Color fontColor = Color.BLACK;
+
+	private TextDecoration textDecoration = TextDecoration.NONE;
 
 	private Color backgroudColor;
 
-	
-	/**	Paragraph identation **/ 
-	private float firstLineIndent;
+	/** Paragraph identation **/
+	private float firstLineIndent = 0;
 
-	private float indentationLeft;
-	
-	private TextAlign textAlign;
+	private float indentationLeft = 0;
+
+	private TextAlign textAlign = TextAlign.JUSTIFIED;
+
+	public static void main(String[] args) {
+		TextStyleClass a = new TextStyleClass(
+				"text-align: center ; font-size:1.5; font-style:normal; "
+				+ "font-color:#000000; text-decoration: underline; background-color: #FFFFFF; text-indent:10; indentation-left: 10");
+		System.out.println(a);
+	}
 
 	public TextStyleClass() {
-		super();
-		this.textAlign = TextAlign.JUSTIFIED;
-		this.fontSize = 9;
-		this.fontStyle = FontStyle.NORMAL;
-		this.fontColor = Color.BLACK;
-		this.textDecoration = TextDecoration.NONE;
-		this.indentationLeft = 0;
-		this.firstLineIndent = 0;
+
+	}
+
+	public TextStyleClass(String style) {
+		try {
+			if (style.contains(":")) {
+				Map<String, String> map = Splitter.on(";").trimResults().omitEmptyStrings().withKeyValueSeparator(":").split(style);
+				setFontStyle(map.get("font-style"));
+				setFontSize(map.get("font-size"));
+				setFontColor(map.get("font-color"));
+
+				setTextDecoration(map.get("text-decoration"));
+				setBackgroudColor(map.get("background-color"));
+
+				setFirstLineIndent(map.get("text-indent"));
+				setIndentationLeft(map.get("indentation-left"));
+				setTextAlign(map.get("text-align"));
+			} else {
+				throw new Exception("formato css inválido, chave e valor separados por ':' e elementos separados por ';' ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// TODO se todos os parametros fossem String
+		// DozerBeanMapper seria a melhor solução.
+		// DozerBeanMapper mapper = new DozerBeanMapper();
+		// TextStyleClass pojo = mapper.map(map, TextStyleClass.class);
+	}
+
+	public void setIndentationLeft(String indentationLeft) {
+		if (indentationLeft != null) {
+			try {
+				this.indentationLeft = Float.valueOf(indentationLeft.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para indentationLeft, valor: " + indentationLeft);
+			}
+		}
+	}
+
+	public void setFirstLineIndent(String textIndent) {
+		if (textIndent != null) {
+			try {
+				this.firstLineIndent = Float.valueOf(textIndent.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para textIndent, valor: " + textIndent);
+			}
+		}
+	}
+
+	public void setBackgroudColor(String backgroudColor) {
+		if (backgroudColor != null) {
+			if (backgroudColor.startsWith("#")) {
+				this.backgroudColor = Color.decode(backgroudColor.trim().toUpperCase());
+			} else {
+				this.backgroudColor = Color.getColor(backgroudColor.trim().toUpperCase());
+			}
+		}
+	}
+
+	public void setTextDecoration(String textDecoration) {
+		if (textDecoration != null) {
+			this.textDecoration = TextDecoration.valueOf(textDecoration.trim().toUpperCase());
+		}
+	}
+
+	public void setFontStyle(String fontStyle) {
+		if (fontStyle != null) {
+			this.fontStyle = FontStyle.valueOf(fontStyle.trim().toUpperCase());
+		}
+	}
+
+	public void setTextAlign(String textAlign) {
+		if (textAlign != null) {
+			this.textAlign = TextAlign.valueOf(textAlign.trim().toUpperCase());
+		}
+	}
+
+	public void setFontSize(String fontSize) {
+		if (fontSize != null) {
+			try {
+				this.fontSize = Float.valueOf(fontSize.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para fontSize, valor: " + fontSize);
+			}
+		}
+	}
+
+	public void setFontColor(String fontColor) {
+		if (fontColor != null) {
+			if (fontColor.startsWith("#")) {
+				this.fontColor = Color.decode(fontColor.trim().toUpperCase());
+			} else {
+				this.fontColor = Color.getColor(fontColor.trim().toUpperCase());
+			}
+		}
 	}
 
 	public TextAlign getTextAlign() {

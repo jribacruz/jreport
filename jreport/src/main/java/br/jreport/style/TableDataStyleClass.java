@@ -1,9 +1,13 @@
 package br.jreport.style;
 
-import com.lowagie.text.Element;
+import java.awt.Color;
+import java.util.Map;
+
+import com.google.common.base.Splitter;
 
 import br.jreport.enums.BorderStyle;
 import br.jreport.enums.ColorJReport;
+import br.jreport.enums.TextAlign;
 
 public class TableDataStyleClass extends TextStyleClass {
 
@@ -11,9 +15,9 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private Float fixedHeight = null;
 
-	private int horizontalAlignment = Element.ALIGN_LEFT;
+	private int horizontalAlignment = TextAlign.LEFT.getValue();
 
-	private int verticalAlignment = Element.ALIGN_TOP;
+	private int verticalAlignment = TextAlign.TOP.getValue();
 
 	private BorderStyle border = BorderStyle.BOX;
 
@@ -23,25 +27,114 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private int colspan = 1;
 
-	private ColorJReport backgroundTableColor = ColorJReport.WHITE;
+	private ColorJReport backgroundCellColor = ColorJReport.WHITE;
+
+	public TableDataStyleClass(String style) {
+		super(style);
+		try {
+			if (style.contains(":")) {
+				Map<String, String> map = Splitter.on(";").trimResults().omitEmptyStrings().withKeyValueSeparator(":").split(style);
+				setFixedHeight(map.get("height"));
+				setVerticalAlignment(map.get("vertical-alignment"));
+				setHorizontalAlignment(map.get("horizontal-alignment"));
+				setBorder(map.get("border"));
+				setBorderWidth(map.get("border-width"));
+				setBorderColor(map.get("border-color"));
+				setColspan(map.get("colspan"));
+			} else {
+				throw new Exception("formato css inválido, chave e valor separados por ':' e elementos separados por ';' ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public TableDataStyleClass() {
 		super();
-		this.horizontalAlignment = Element.ALIGN_LEFT;
-		this.verticalAlignment = Element.ALIGN_TOP;
-		this.borderColor = ColorJReport.BLACK;
-		this.borderWidth = 0.5f;
-		this.border = BorderStyle.BOX;
-		this.colspan = 1;
-		this.backgroundTableColor = ColorJReport.WHITE;
 	}
 
 	public TableDataStyleClass(float width, int colspan, ColorJReport backgroundTableColor, ColorJReport borderColor,
 			float tableSpaceCell) {
 		super();
 		this.colspan = colspan;
-		this.backgroundTableColor = backgroundTableColor;
+		this.backgroundCellColor = backgroundTableColor;
 		this.borderColor = borderColor;
+	}
+
+	public void setBackgroundCellColor(String backgroundCellColor) {
+		if (backgroundCellColor != null) {
+			if (backgroundCellColor.startsWith("#")) {
+				this.backgroundCellColor.setColor(Color.getColor(backgroundCellColor.trim().toUpperCase()));
+			} else {
+				this.backgroundCellColor = ColorJReport.valueOf(backgroundCellColor.trim().toUpperCase());
+			}
+		}
+	}
+
+	public void setColspan(String colspan) {
+		if (colspan != null) {
+			this.colspan = Integer.valueOf(colspan.trim());
+		}
+	}
+
+	public void setBorderColor(String borderColor) {
+		if (borderColor != null) {
+			if (borderColor.startsWith("#")) {
+				this.borderColor.setColor(Color.getColor(borderColor.trim().toUpperCase()));
+			} else {
+				this.borderColor = ColorJReport.valueOf(borderColor.trim().toUpperCase());
+			}
+		}
+	}
+
+	public void setBorderWidth(String borderWidth) {
+		if (borderWidth != null) {
+			try {
+				this.borderWidth = Float.valueOf(borderWidth.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border-width, valor: " + borderWidth);
+			}
+		}
+	}
+
+	public void setBorder(String border) {
+		if (border != null) {
+			try {
+				this.border = BorderStyle.valueOf(border.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border, valor: " + border);
+			}
+		}
+	}
+
+	public void setVerticalAlignment(String verticalAlignment) {
+		if (verticalAlignment != null) {
+			try {
+				this.verticalAlignment = TextAlign.valueOf(verticalAlignment.trim()).getValue();
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para vertical-alignment, valor: " + verticalAlignment);
+			}
+		}
+	}
+
+	public void setHorizontalAlignment(String horizontalAlignment) {
+		if (horizontalAlignment != null) {
+			try {
+				this.horizontalAlignment = TextAlign.valueOf(horizontalAlignment.trim()).getValue();
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para horizontal-alignment, valor: " + horizontalAlignment);
+			}
+		}
+	}
+
+	public void setFixedHeight(String fixedHeight) {
+		if (fixedHeight != null) {
+			try {
+				this.fixedHeight = Float.valueOf(fixedHeight.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para height, valor: " + fixedHeight);
+			}
+		}
 	}
 
 	public Float getFixedHeight() {
@@ -100,12 +193,12 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.colspan = colspan;
 	}
 
-	public ColorJReport getBackgroundTableColor() {
-		return backgroundTableColor;
+	public ColorJReport getBackgroundCellColor() {
+		return backgroundCellColor;
 	}
 
-	public void setBackgroundTableColor(ColorJReport backgroundTableColor) {
-		this.backgroundTableColor = backgroundTableColor;
+	public void setBackgroundCellColor(ColorJReport backgroundTableColor) {
+		this.backgroundCellColor = backgroundTableColor;
 	}
 
 }

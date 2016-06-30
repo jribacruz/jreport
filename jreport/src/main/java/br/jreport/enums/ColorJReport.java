@@ -21,4 +21,8 @@ public enum ColorJReport {
 		return color;
 	}
 
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 }
