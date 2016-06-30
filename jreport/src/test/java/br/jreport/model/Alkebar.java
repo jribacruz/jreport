@@ -13,7 +13,10 @@ public class Alkebar extends SimpleReport {
 	addTitle(new Title().T_addBrasao().T_addTitle("Tribunal Regional Eleitoral do Pará2").T_addSeparator());
 
 	}
+	
+	
 
+	
 	@Override
 	protected void pageHeader() {
 	
