@@ -56,6 +56,9 @@ public class DocumentHelper {
 		}
 		if (styleClass.getBackgroudColor() != null) {
 			chunk.setBackground(styleClass.getBackgroudColor());
+			//@formatter:off TODO implementação para background color de texto deve passar também o tamanho 
+			//                    do retangulo para não ficar estranho, como atualmente fica 
+			//chunk.setBackground(color, extraLeft, extraBottom, extraRight, extraTop) @formatter:on
 		}
 		Paragraph p = new Paragraph(chunk);
 		p.setFirstLineIndent(styleClass.getFirstLineIndent());
@@ -77,7 +80,6 @@ public class DocumentHelper {
 			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
 			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 			cell.setBorder(styleClass.getBorder().getBorder());
-			cell.setBorderWidth(styleClass.getBorderWidth());
 			cell.setBorderColor(styleClass.getBorderColor());
 			cell.setColspan(styleClass.getColspan());
 			cell.setBackgroundColor(styleClass.getBackgroundCellColor());
@@ -256,7 +258,7 @@ public class DocumentHelper {
 		table.addBody(cells);
 		return table;
 	}
-	
+
 	public static <T extends DataModelReport> TableConstructor<T> createDataTable(int headers, List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);

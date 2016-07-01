@@ -21,7 +21,7 @@ public class TextStyleClass {
 
 	private TextDecoration textDecoration = TextDecoration.NONE;
 
-	private Color backgroudColor;
+	private Color backgroudColor;//TODO remover essa propriedade.
 
 	/** Paragraph identation **/
 	private float firstLineIndent = 0;

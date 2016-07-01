@@ -19,7 +19,7 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private int verticalAlignment = TextAlign.TOP.getValue();
 
-	private BorderStyle border = BorderStyle.BOX;
+	private BorderStyle border = BorderStyle.BOX;//TODO remover essa propriedade, controle de exibição ou não da borda será no width
 
 	private float borderWidth = 0.5f;
 
