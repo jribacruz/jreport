@@ -6,8 +6,8 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.DefaultTextTableHeaderStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
+import br.jreport.style.defined.DefaultTextTableHeaderStyleClass;
 
 public class Table {
 

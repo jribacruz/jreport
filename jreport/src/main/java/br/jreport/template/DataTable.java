@@ -60,6 +60,16 @@ public class DataTable {
 		addCellToTable(paragraph, dataStyle);
 		return this;
 	}
+	
+	public DataTable addLine(float height, int colspan) {
+		TableDataStyleClass v = new TableDataStyleClass();
+		v.setHeight(height);
+		v.setColspan(colspan);
+		v.setBorderWidth(0);
+		Paragraph paragraph = DocumentHelper.createText("", v);
+		addCellToTable(paragraph, v);
+		return this;
+	}
 
 	public DataTable addDataTableBody(List modelList, DataTableBodyModel dtbody) {
 		this.modelList = modelList;

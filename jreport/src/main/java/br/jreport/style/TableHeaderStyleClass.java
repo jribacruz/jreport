@@ -8,7 +8,7 @@ import com.google.common.base.Splitter;
 import br.jreport.enums.FontStyle;
 
 public class TableHeaderStyleClass extends TableDataStyleClass {
-
+//TODO essa classe não precisa mais.
 	/** Tamanho do espaço entre uma célula e outra, da table **/
 
 	private float tableHeaderSpacer = 0;

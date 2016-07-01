@@ -38,7 +38,7 @@ public class DataTableBody {
 
 	protected void addLine(float height, int colspan) {
 		TableDataStyleClass v = new TableDataStyleClass();
-		v.setFixedHeight(height);
+		v.setHeight(height);
 		v.setColspan(colspan);
 		Paragraph paragraph = DocumentHelper.createText("", v);
 		addCellToTable(paragraph, v);

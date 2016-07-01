@@ -1,7 +1,5 @@
 package br.jreport.model;
 
-import br.jreport.template.Component;
-import br.jreport.template.Foo;
 import br.jreport.template.PageHeader;
 import br.jreport.template.SimpleReport;
 import br.jreport.template.Title;

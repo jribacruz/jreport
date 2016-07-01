@@ -9,7 +9,7 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.DefaultTextTitleStyleClass;
+import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
 public class Title {
 

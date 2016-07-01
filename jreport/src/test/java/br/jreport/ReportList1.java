@@ -8,6 +8,7 @@ import br.jreport.enums.FontStyle;
 import br.jreport.model.ModelTest;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
+import br.jreport.style.TextStyleClass;
 import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
 import br.jreport.template.Component;
@@ -55,33 +56,37 @@ public class ReportList1 extends SimpleReport {
 		// }));
 		//@formatter:off
 		
-		TableDataStyleClass a = new TableDataStyleClass();
-		a.setFontStyle(FontStyle.BOLD);
-		addDataTable(new DataTable().addHeader(4)
-				.addCell("Assunto:", a).addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
-				
-				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
-				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
-				
-				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
-				
-				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+		TextStyleClass a = new TextStyleClass();
+		a.setFontSize(5);
+//		addComponent(new Component().C_addText("teste",a));
+		addDataTable(new DataTable().addHeader(1).addCell("Teste","font-size:9; height: 50").addLine(1, 1).addCell("aaaaaaaaaaaaaa"));
+//		TableDataStyleClass a = new TableDataStyleClass();
+//		a.setFontStyle(FontStyle.BOLD);
+//		addDataTable(new DataTable().addHeader(4)
+//				.addCell("Assunto:", a).addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
+//				
+//				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
 //				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
 //				
-				);
-		addNewLine();
-		addDataTable(new DataTable().addHeader(headers)
-				.addCell("Assunto:", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
-				
-				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
-				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
-				
-				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
-				
-				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+//				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
+//				
+//				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+////				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+////				
+//				);
+//		addNewLine();
+//		addDataTable(new DataTable().addHeader(headers)
+//				.addCell("Assunto:", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("PRESTAÇÃO DE CONTAS DE SUPRIMENTO", "colspan:3; border:RIGHT_TOP_BOTTOM")
+//				
+//				.addCell("Suprido", "font-style:bold; border:LEFT_TOP_BOTTOM").addCell("Erica...", "border:TOP_BOTTOM")
 //				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
 //				
-				);
+//				.addCell("Portaria(s)", "font-style:bold; border:LEFT_TOP; colspan: 4")
+//				
+//				.addCell("Concessão", "border:LEFT").addCell("15.992/2016 - DG", "border: NONE; colspan: 3")
+////				.addCell("LOTACAO", "font-style:bold; border:TOP_BOTTOM").addCell("106ª ZE Parauapebas", "border:RIGHT_TOP_BOTTOM")
+////				
+//				);
 		//@formatter:on
 		
 

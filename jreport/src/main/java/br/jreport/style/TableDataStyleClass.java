@@ -13,20 +13,20 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	/** Cell table **/
 
-	private Float fixedHeight = null;
+	private int verticalAlignment = TextAlign.TOP.getValue();
 
 	private int horizontalAlignment = TextAlign.LEFT.getValue();
 
-	private int verticalAlignment = TextAlign.TOP.getValue();
-
-	private BorderStyle border = BorderStyle.BOX;//TODO remover essa propriedade, controle de exibição ou não da borda será no width
-
-	private float borderWidth = 0.5f;
+	private Float height = null;
 
 	private Color borderColor = Color.BLACK;
 
+	private float borderWidth = 0.5f;
+	private float borderWidthTop = 0.5f;
+	private float borderWidthLeft = 0.5f;
+	private float borderWidthRight = 0.5f;
+	private float borderWidthBottom = 0.5f;
 	private int colspan = 1;
-
 	private Color backgroundCellColor = Color.WHITE;
 
 	public TableDataStyleClass(String style) {
@@ -34,13 +34,13 @@ public class TableDataStyleClass extends TextStyleClass {
 		try {
 			if (style.contains(":")) {
 				Map<String, String> map = Splitter.on(";").trimResults().omitEmptyStrings().withKeyValueSeparator(":").split(style);
-				setFixedHeight(map.get("height"));
 				setVerticalAlignment(map.get("vertical-alignment"));
 				setHorizontalAlignment(map.get("horizontal-alignment"));
-				setBorder(map.get("border"));
-				setBorderWidth(map.get("border-width"));
+				setHeight(map.get("height"));
 				setBorderColor(map.get("border-color"));
+				setBorderWidth(map.get("border-width"));
 				setColspan(map.get("colspan"));
+				setBackgroundCellColor(map.get("background-color"));
 			} else {
 				throw new Exception("formato css inválido, chave e valor separados por ':' e elementos separados por ';' ");
 			}
@@ -126,15 +126,16 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorder(String border) {
-		if (border != null) {
-			try {
-				this.border = BorderStyle.valueOf(border.trim());
-			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Elemento inválido para border, valor: " + border);
-			}
-		}
-	}
+	// public void setBorder(String border) {
+	// if (border != null) {
+	// try {
+	// this.border = BorderStyle.valueOf(border.trim());
+	// } catch (NumberFormatException e) {
+	// throw new NumberFormatException("Elemento inválido para border, valor: "
+	// + border);
+	// }
+	// }
+	// }
 
 	public void setVerticalAlignment(String verticalAlignment) {
 		if (verticalAlignment != null) {
@@ -156,22 +157,22 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setFixedHeight(String fixedHeight) {
-		if (fixedHeight != null) {
+	public void setHeight(String height) {
+		if (height != null) {
 			try {
-				this.fixedHeight = Float.valueOf(fixedHeight.trim());
+				this.height = Float.valueOf(height.trim());
 			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Elemento inválido para height, valor: " + fixedHeight);
+				throw new NumberFormatException("Elemento inválido para height, valor: " + height);
 			}
 		}
 	}
 
-	public Float getFixedHeight() {
-		return fixedHeight;
+	public Float getHeight() {
+		return height;
 	}
 
-	public void setFixedHeight(Float fixedHeight) {
-		this.fixedHeight = fixedHeight;
+	public void setHeight(Float fixedHeight) {
+		this.height = fixedHeight;
 	}
 
 	public int getHorizontalAlignment() {
@@ -190,13 +191,13 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.verticalAlignment = verticalAlignment;
 	}
 
-	public BorderStyle getBorder() {
-		return border;
-	}
-
-	public void setBorder(BorderStyle border) {
-		this.border = border;
-	}
+	// public BorderStyle getBorder() {
+	// return border;
+	// }
+	//
+	// public void setBorder(BorderStyle border) {
+	// this.border = border;
+	// }
 
 	public float getBorderWidth() {
 		return borderWidth;

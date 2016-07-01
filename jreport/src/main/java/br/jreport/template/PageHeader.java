@@ -9,8 +9,8 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.DefaultTextPageHeaderStyleClass;
-import br.jreport.style.DefaultTextTitleStyleClass;
+import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
+import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
 public class PageHeader {
 

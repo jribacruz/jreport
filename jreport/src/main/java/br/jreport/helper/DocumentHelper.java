@@ -22,9 +22,9 @@ import com.lowagie.text.pdf.draw.LineSeparator;
 
 import br.jreport.core.DataModelReport;
 import br.jreport.enums.TextDecoration;
-import br.jreport.style.DefaultTextStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
+import br.jreport.style.defined.DefaultTextStyleClass;
 import br.jreport.table.TableConstructor;
 import br.jreport.table.TableHeader;
 
@@ -48,21 +48,23 @@ public class DocumentHelper {
 		Font f = new Font(Font.HELVETICA);
 		f.setSize(styleClass.getFontSize());
 		f.setStyle(styleClass.getFontStyle().getValue());
-		f.setColor(styleClass.getFontColor());
+		f.setColor(styleClass.getTextFontColor());
 
 		Chunk chunk = new Chunk(text, f);
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
 			chunk.setUnderline(styleClass.getTextDecoration().getThick(), styleClass.getTextDecoration().getY());
 		}
-		if (styleClass.getBackgroudColor() != null) {
-			chunk.setBackground(styleClass.getBackgroudColor());
-			//@formatter:off TODO implementação para background color de texto deve passar também o tamanho 
-			//                    do retangulo para não ficar estranho, como atualmente fica 
-			//chunk.setBackground(color, extraLeft, extraBottom, extraRight, extraTop) @formatter:on
-		}
+//@formatter:off
+//		if (styleClass.getBackgroudColor() != null) {
+//		chunk.setBackground(styleClass.getBackgroudColor());
+// (TODO implementação para background color de texto deve passar também o tamanho do retangulo 
+//		para não ficar estranho, como atualmente fica) 
+//		chunk.setBackground(color, extraLeft, extraBottom, extraRight, extraTop)
+//		}@
+//formatter:on
 		Paragraph p = new Paragraph(chunk);
-		p.setFirstLineIndent(styleClass.getFirstLineIndent());
-		p.setIndentationLeft(styleClass.getIndentationLeft());
+		p.setFirstLineIndent(styleClass.getTextIndent());
+		p.setIndentationLeft(styleClass.getTextMarginLeft());
 		p.setAlignment(styleClass.getTextAlign().getValue());
 
 		return p;
@@ -70,20 +72,13 @@ public class DocumentHelper {
 
 	public static void createPdfPCell(Paragraph p, TableDataStyleClass styleClass, PdfPTable pdfPTable) {
 		PdfPCell cell = new PdfPCell();
-		// Não funciona com texto;
-		if (styleClass.getFixedHeight() != null) {
-			cell.setFixedHeight(styleClass.getFixedHeight());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBorderWidth(0);
-		} else {
-			cell.addElement(p);
-			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
-			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
-			cell.setBorder(styleClass.getBorder().getBorder());
-			cell.setBorderColor(styleClass.getBorderColor());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundCellColor());
-		}
+		cell.addElement(p);
+		cell.setFixedHeight(styleClass.getHeight());
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
 
 		pdfPTable.addCell(cell);
 
@@ -91,21 +86,16 @@ public class DocumentHelper {
 
 	public static PdfPCell createPdfPCell(Paragraph p, TableDataStyleClass styleClass) {
 		PdfPCell cell = new PdfPCell();
-		// Não funciona com texto;
-		if (styleClass.getFixedHeight() != null) {
-			cell.setFixedHeight(styleClass.getFixedHeight());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBorderWidth(0);
-		} else {
-			cell.addElement(p);
-			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
-			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
-			cell.setBorder(styleClass.getBorder().getBorder());
-			cell.setBorderWidth(styleClass.getBorderWidth());
-			cell.setBorderColor(styleClass.getBorderColor());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+		cell.addElement(p);
+		if (styleClass.getHeight() !=null) {
+			cell.setFixedHeight(styleClass.getHeight());
 		}
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+		cell.setBorderWidth(styleClass.getBorderWidth());
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
 		return cell;
 	}
 

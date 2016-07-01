@@ -12,28 +12,30 @@ import br.jreport.enums.TextDecoration;
 
 public class TextStyleClass {
 
-	/** Font **/
-	private FontStyle fontStyle = FontStyle.NORMAL;
+	/** Text **/
 
-	private float fontSize = 9;
-
-	private Color fontColor = Color.BLACK;
-
-	private TextDecoration textDecoration = TextDecoration.NONE;
-
-	private Color backgroudColor;//TODO remover essa propriedade.
-
-	/** Paragraph identation **/
-	private float firstLineIndent = 0;
-
-	private float indentationLeft = 0;
+	private Color textFontColor = Color.BLACK;
 
 	private TextAlign textAlign = TextAlign.JUSTIFIED;
 
+	private TextDecoration textDecoration = TextDecoration.NONE;
+
+	private float textIndent = 0;
+
+	private float textMarginLeft = 0;
+	
+	/** Font **/
+
+	private float fontSize = 9;
+
+	private FontStyle fontStyle = FontStyle.NORMAL;
+
+	// private Color backgroudColor;// TODO verificar melhor como configurar essa propriedade.
+
+	
 	public static void main(String[] args) {
-		TextStyleClass a = new TextStyleClass(
-				"text-align: center ; font-size:1.5; font-style:normal; "
-				+ "font-color:#000000; text-decoration: underline; background-color: #FFFFFF; text-indent:10; indentation-left: 10");
+		TextStyleClass a = new TextStyleClass("text-align: center ; font-size:1.5; font-style:italic;  "
+				+ "color:#005000; text-decoration: underline; background-color: #FFFFFF; text-indent:10; indentation-left: 10");
 		System.out.println(a);
 	}
 
@@ -45,16 +47,17 @@ public class TextStyleClass {
 		try {
 			if (style.contains(":")) {
 				Map<String, String> map = Splitter.on(";").trimResults().omitEmptyStrings().withKeyValueSeparator(":").split(style);
-				setFontStyle(map.get("font-style"));
-				setFontSize(map.get("font-size"));
-				setFontColor(map.get("font-color"));
-
-				setTextDecoration(map.get("text-decoration"));
-				setBackgroudColor(map.get("background-color"));
-
-				setFirstLineIndent(map.get("text-indent"));
-				setIndentationLeft(map.get("indentation-left"));
+				setFontColor(map.get("color"));
 				setTextAlign(map.get("text-align"));
+				setTextDecoration(map.get("text-decoration"));
+				setFirstLineIndent(map.get("text-indent"));
+				setMarginLeft(map.get("margin-left"));
+				setFontSize(map.get("font-size"));
+				setFontStyle(map.get("font-style"), map.get("font-weight"));
+				// @formatter:off
+				// setBackgroudColor(map.get("background-color"));
+				// TODO removido, caso tenha que ser habilitado vai precisar de ajustes. @formatter:on
+
 			} else {
 				throw new Exception("formato css inválido, chave e valor separados por ':' e elementos separados por ';' ");
 			}
@@ -68,12 +71,12 @@ public class TextStyleClass {
 		// TextStyleClass pojo = mapper.map(map, TextStyleClass.class);
 	}
 
-	public void setIndentationLeft(String indentationLeft) {
-		if (indentationLeft != null) {
+	public void setMarginLeft(String marginLeft) {
+		if (marginLeft != null) {
 			try {
-				this.indentationLeft = Float.valueOf(indentationLeft.trim());
+				this.textMarginLeft = Float.valueOf(marginLeft.trim());
 			} catch (NumberFormatException e) {
-				throw new NumberFormatException("Elemento inválido para indentationLeft, valor: " + indentationLeft);
+				throw new NumberFormatException("Elemento inválido para margin-left, valor: " + marginLeft);
 			}
 		}
 	}
@@ -81,37 +84,37 @@ public class TextStyleClass {
 	public void setFirstLineIndent(String textIndent) {
 		if (textIndent != null) {
 			try {
-				this.firstLineIndent = Float.valueOf(textIndent.trim());
+				this.textIndent = Float.valueOf(textIndent.trim());
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException("Elemento inválido para textIndent, valor: " + textIndent);
 			}
 		}
 	}
 
-	public void setBackgroudColor(String backgroudColor) {
-		if (backgroudColor != null) {
-			if (backgroudColor.trim().startsWith("#")) {
-				this.backgroudColor = Color.decode(backgroudColor.trim().toUpperCase());
-			} else {
-				try {
-					Field field = Color.class.getField(backgroudColor.trim().toLowerCase());
-					this.backgroudColor = (Color)field.get(null);
-				} catch (NoSuchFieldException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+	// public void setBackgroudColor(String backgroudColor) {
+	// if (backgroudColor != null) {
+	// if (backgroudColor.trim().startsWith("#")) {
+	// this.backgroudColor = Color.decode(backgroudColor.trim().toUpperCase());
+	// } else {
+	// try {
+	// Field field = Color.class.getField(backgroudColor.trim().toLowerCase());
+	// this.backgroudColor = (Color) field.get(null);
+	// } catch (NoSuchFieldException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } catch (SecurityException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } catch (IllegalArgumentException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } catch (IllegalAccessException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// }
 
 	public void setTextDecoration(String textDecoration) {
 		if (textDecoration != null) {
@@ -119,9 +122,21 @@ public class TextStyleClass {
 		}
 	}
 
-	public void setFontStyle(String fontStyle) {
+	public void setFontStyle(String fontStyle, String fontWeight) {
 		if (fontStyle != null) {
+			fontStyle = fontStyle.trim().toUpperCase().equals("NORMAL") ? null : fontStyle;
+		}
+		if (fontWeight != null) {
+			fontWeight = fontWeight.trim().toUpperCase().equals("NORMAL") ? null : fontWeight;
+		}
+		if (fontStyle != null && fontWeight == null) {
 			this.fontStyle = FontStyle.valueOf(fontStyle.trim().toUpperCase());
+		} else if (fontStyle == null && fontWeight != null) {
+			this.fontStyle = FontStyle.valueOf(fontWeight.trim().toUpperCase());
+		} else if (fontStyle != null && fontWeight != null) {
+			if (fontStyle.trim().toUpperCase().equals("ITALIC") && fontWeight.trim().toUpperCase().equals("BOLD")) {
+				this.fontStyle = FontStyle.BOLDITALIC;
+			}
 		}
 	}
 
@@ -144,11 +159,11 @@ public class TextStyleClass {
 	public void setFontColor(String fontColor) {
 		if (fontColor != null) {
 			if (fontColor.trim().startsWith("#")) {
-				this.fontColor = Color.decode(fontColor.trim().toUpperCase());
+				this.textFontColor = Color.decode(fontColor.trim().toUpperCase());
 			} else {
 				try {
 					Field field = Color.class.getField(fontColor.trim().toLowerCase());
-					this.fontColor = (Color)field.get(null);
+					this.textFontColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -190,21 +205,21 @@ public class TextStyleClass {
 		this.fontSize = fontSize;
 	}
 
-	public Color getFontColor() {
-		return fontColor;
+	public Color getTextFontColor() {
+		return textFontColor;
 	}
 
-	public void setFontColor(Color fontColor) {
-		this.fontColor = fontColor;
+	public void setTextFontColor(Color fontColor) {
+		this.textFontColor = fontColor;
 	}
 
-	public Color getBackgroudColor() {
-		return backgroudColor;
-	}
-
-	public void setBackgroudColor(Color backgroudColor) {
-		this.backgroudColor = backgroudColor;
-	}
+	// public Color getBackgroudColor() {
+	// return backgroudColor;
+	// }
+	//
+	// public void setBackgroudColor(Color backgroudColor) {
+	// this.backgroudColor = backgroudColor;
+	// }
 
 	public TextDecoration getTextDecoration() {
 		return textDecoration;
@@ -214,20 +229,26 @@ public class TextStyleClass {
 		this.textDecoration = textDecoration;
 	}
 
-	public float getFirstLineIndent() {
-		return firstLineIndent;
+	public float getTextIndent() {
+		return textIndent;
 	}
 
-	public void setFirstLineIndent(float firstLineIndent) {
-		this.firstLineIndent = firstLineIndent;
+	public void setTextIndent(float indent) {
+		this.textIndent = indent;
 	}
 
-	public float getIndentationLeft() {
-		return indentationLeft;
+	public float getTextMarginLeft() {
+		return textMarginLeft;
 	}
 
-	public void setIndentationLeft(float indentationLeft) {
-		this.indentationLeft = indentationLeft;
+	public void setTextMarginLeft(float marginLeft) {
+		this.textMarginLeft = marginLeft;
+	}
+
+	@Override
+	public String toString() {
+		return "TextStyleClass [fontColor=" + textFontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration + ", indent="
+				+ textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
 	}
 
 }

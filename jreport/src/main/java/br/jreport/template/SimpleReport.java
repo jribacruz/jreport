@@ -19,8 +19,8 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.DefaultTextTitleStyleClass;
 import br.jreport.style.TableHeaderStyleClass;
+import br.jreport.style.defined.DefaultTextTitleStyleClass;
 import br.jreport.table.TableHeader;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
