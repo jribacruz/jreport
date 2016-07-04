@@ -31,7 +31,7 @@ public class Title {
 	 * <b> Exemplo:
 	 * 
 	 * <pre>
-	 * addTitle(new Title().T_addBrasao());
+	 * t.addBrasao().build();
 	 * </pre>
 	 * 
 	 * </b>
@@ -40,7 +40,6 @@ public class Title {
 		Image brasao = DocumentHelper.loadImage("brasao.png");
 		brasao.setAlignment(Image.ALIGN_CENTER);
 		brasao.scaleAbsolute(40f, 40f);
-		// DocumentHelper.add(document, brasao);
 		elements.add(brasao);
 		return this;
 	}
@@ -50,54 +49,52 @@ public class Title {
 	 * <b> Exemplo:
 	 * 
 	 * <pre>
-	 *  addTitle(new Title().T_addTitle("Relatório Geral");
+	 * t.addBrasao().addTitle("Relatório de Pontos").build();
 	 * </pre>
 	 * 
 	 * </b>
 	 **/
 	public Title addTitle(String text) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
-		// DocumentHelper.add(document, DocumentHelper.createText(text,
-		// titleStyleClass));
 		return this;
 	}
 
 	public Title addTitle(String text, DefaultTextTitleStyleClass titleStyleClass) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
-		// DocumentHelper.add(document, DocumentHelper.createText(text,
-		// titleStyleClass));
 		return this;
 	}
-	
+
 	public Title addTitle(String text, String titleStyleClass) {
 		TextStyleClass style = new TextStyleClass(titleStyleClass);
 		elements.add(DocumentHelper.createText(text, style));
-		// DocumentHelper.add(document, DocumentHelper.createText(text,
-		// titleStyleClass));
 		return this;
 	}
 
 	/**
 	 * Adiciona uma linha em branco
 	 * 
+	 * <pre>
+	 * t.addNewLine().build();
+	 * </pre>
 	 */
-	public Title newLine() {
+	public Title addNewLine() {
 		elements.add(DocumentHelper.newLine());
-		// DocumentHelper.add(document, DocumentHelper.newLine());
 		return this;
 	}
 
 	/**
 	 * Adiciona uma imagem Deve-se passar o caminho do arquivo que contém a
 	 * imagem
-	 * 
-	 * @param imageName:caminho
-	 *            da imagem a ser adicionada
+	 * <br>
+	 * <br>
+	 * AO arquivo da imagem deve estar em src/main/resources
+	 * <pre>
+	 * t.addImage("ok.jpg").build();
+	 * </pre>
 	 * 
 	 */
 	public Title addImage(String imageName) {
 		elements.add(DocumentHelper.loadImage(imageName));
-		// DocumentHelper.add(document, DocumentHelper.loadImage(imageName));
 		return this;
 	}
 
@@ -107,11 +104,22 @@ public class Title {
 	 */
 	public Title addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
-		// DocumentHelper.add(document,
-		// DocumentHelper.createDefaultSeparator());
 		return this;
 	}
 
+	/**
+	 * O método build é o responsável por ler os elementos do <b>Title</b> e
+	 * acrescentá-los ao documento <br>
+	 * <br>
+	 * O padrão Builder é muito útil quando lidamos com a construção de objetos
+	 * complexos, com construtores que requerem muitos parâmetros ou com
+	 * múltiplos construtores.
+	 * 
+	 * <pre>
+	 * t.addBrasao().addTitle("Relatório de Pontos").build();
+	 * </pre>
+	 * 
+	 */
 	public void build() {
 		for (Element element : getElements()) {
 			DocumentHelper.add(document, element);
