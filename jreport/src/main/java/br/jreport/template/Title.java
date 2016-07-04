@@ -83,11 +83,11 @@ public class Title {
 	}
 
 	/**
-	 * Adiciona uma imagem Deve-se passar o caminho do arquivo que contém a
-	 * imagem
-	 * <br>
+	 * Adiciona uma imagem <br>
+	 * Deve-se passar o caminho do arquivo que contém a imagem <br>
 	 * <br>
 	 * AO arquivo da imagem deve estar em src/main/resources
+	 * 
 	 * <pre>
 	 * t.addImage("ok.jpg").build();
 	 * </pre>
@@ -100,6 +100,9 @@ public class Title {
 
 	/**
 	 * Adiciona uma barra horrizontal
+	 * <pre>
+	 *     ph.addSeparator().build();
+	 * </pre>
 	 * 
 	 */
 	public Title addSeparator() {
