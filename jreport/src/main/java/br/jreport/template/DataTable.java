@@ -3,6 +3,7 @@ package br.jreport.template;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 
@@ -25,6 +26,12 @@ public class DataTable {
 	private List modelList;
 
 	private DataTableBodyModel dtbody;
+
+	private Document document;
+
+	public DataTable(Document document) {
+		this.document = document;
+	}
 
 	public DataTable addHeader(Integer headersColspan) {
 		this.headersColspan = headersColspan;
@@ -60,14 +67,28 @@ public class DataTable {
 		addCellToTable(paragraph, dataStyle);
 		return this;
 	}
-	
-	public DataTable addLine(float height, int colspan) {
-		TableDataStyleClass v = new TableDataStyleClass();
-		v.setHeight(height);
-		v.setColspan(colspan);
-		v.setBorderWidth(0);
-		Paragraph paragraph = DocumentHelper.createText("", v);
-		addCellToTable(paragraph, v);
+
+	public DataTable addLine(float height) {
+		try {
+			TableDataStyleClass v = new TableDataStyleClass();
+
+			if (headersString != null) {
+				v.setColspan(headersString.length);
+			} else if (headersObject != null) {
+				v.setColspan(headersObject.length);
+			} else if (headersColspan != null) {
+				v.setColspan(headersColspan);
+			} else {
+				throw new Exception("Defina o Header");
+			}
+
+			v.setHeight(height);
+			v.setBorderWidth(0);
+			Paragraph paragraph = DocumentHelper.createText("", v);
+			addCellToTable(paragraph, v);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return this;
 	}
 
@@ -83,6 +104,24 @@ public class DataTable {
 
 	private void addCellToTable(Paragraph p, TableDataStyleClass styleClass) {
 		cells.add(DocumentHelper.createPdfPCell(p, styleClass));
+	}
+
+	public void build() {
+		try {
+			if (getHeadersObject() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(getHeadersObject(), getCells()).getPdfPTable());
+			} else if (getHeadersString() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(getHeadersString(), getCells()).getPdfPTable());
+			} else if (getHeadersColspan() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(getHeadersColspan(), getCells()).getPdfPTable());
+			} else {
+				throw new Exception("Defina o Header");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		cells = new ArrayList<PdfPCell>();
+
 	}
 
 	public String[] getHeadersString() {

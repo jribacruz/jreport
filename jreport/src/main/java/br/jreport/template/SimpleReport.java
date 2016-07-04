@@ -19,8 +19,8 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.TableHeaderStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
+import br.jreport.style.defined.DetaultTableHeaderStyleClass;
 import br.jreport.table.TableHeader;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
@@ -59,7 +59,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * 
 	 * </b>
 	 */
-	protected abstract void title();
+	protected abstract void title(Title t);
 
 	/**
 	 * Será mostrado apenas a partir da segunda página do relatório <br>
@@ -71,32 +71,32 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * 
 	 * </b>
 	 */
-	protected abstract void pageHeader();
+	protected abstract void pageHeader(PageHeader ph);
 
 	/**
 	 * This section is repeated for each line of data supplied by the report's
 	 * data source. The detail section can be made of multiple bands.
 	 */
-	protected abstract void detail();
+	protected abstract void detail(Detail d);
 
 	/**
 	 * This section appears at the bottom of each page.
 	 */
-	protected abstract void pageFooter();
+	protected abstract void pageFooter(PageFooter pf);
 
 	/**
 	 * This section appears only once at the end of the report.
 	 */
-	protected abstract void summary();
+	protected abstract void summary(Summary s);
 
 	public void generate(OutputStream outputStream) {
 		try {
 			this.pdfWriter = PdfWriter.getInstance(document, outputStream);
 			document.open();
 			pdfWriter.setPageEvent(this);
-			this.title();
+			this.title(new Title(getDocument()));
 			addNewLine();
-			this.detail();
+			this.detail(new Detail(getDocument()));
 			document.close();
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -109,9 +109,9 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 			this.pdfWriter = PdfWriter.getInstance(document, outputStream);
 			document.open();
 			pdfWriter.setPageEvent(this);
-			this.title();
+			this.title(new Title(getDocument()));
 			addNewLine();
-			this.detail();
+			this.detail(new Detail(getDocument()));
 			document.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (DocumentException e) {
@@ -132,47 +132,18 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		DocumentHelper.add(document, DocumentHelper.newLine());
 	}
 
-	protected void addTitle(Title title) {
-		for (Element element : title.getElements()) {
-			DocumentHelper.add(document, element);
-		}
-	}
-
-	protected void addPageHeader(PageHeader pageHeader) {
-		for (Element element : pageHeader.getElements()) {
-			DocumentHelper.add(document, element);
-		}
-	}
-
-	protected void addComponent(Component componente) {
-		for (Element element : componente.getElements()) {
-			DocumentHelper.add(document, element);
-		}
-	}
-
-	protected void addDataTable(DataTable dataTable) {
-		if (dataTable.getHeadersObject() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersObject(), dataTable.getCells()).getPdfPTable());
-		} else if (dataTable.getHeadersString() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersString(), dataTable.getCells()).getPdfPTable());
-		} else if (dataTable.getHeadersColspan() != null) {
-			DocumentHelper.add(document,
-					DocumentHelper.createDataTable(dataTable.getHeadersColspan(), dataTable.getCells()).getPdfPTable());
-		}
-	}
-
 	@Override
 	public void onStartPage(PdfWriter writer, Document document) {
 		pagenumber++;
 		if (this.document.isOpen()) {
-			pageHeader();
+			pageHeader(new PageHeader(getDocument()));
 		}
 	}
 
 	@Override
 	public void onEndPage(PdfWriter writer, Document document) {
 		this.document = document;
-		pageFooter();
+		pageFooter(new PageFooter(getDocument()));
 		Font font = new Font(Font.HELVETICA, 8f);
 		font.setColor(Color.DARK_GRAY);
 		float xRight = document.right();
@@ -202,7 +173,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 *            Estilo para o datatable
 	 * 
 	 **/
-	protected static TableHeader th(String nome, TableHeaderStyleClass style) {
+	protected static TableHeader th(String nome, DetaultTableHeaderStyleClass style) {
 		return new TableHeader(nome, style);
 	}
 
@@ -210,54 +181,11 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * @param nome:
 	 *            Nome da coluna no header
 	 * @param width:
-	 *            Espaçamento que a coluna do header
+	 *            Estilo em string
 	 * 
 	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width) {
-		return new TableHeader(nome, width);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan) {
-		return new TableHeader(nome, width, colspan);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * @param backgroundTableColor
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, Color backgroundTableColor) {
-		return new TableHeader(nome, width, colspan, backgroundTableColor);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * @param backgroundTableColor
-	 * @param borderTableColor
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, Color backgroundTableColor, Color borderTableColor) {
-		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
+	protected static TableHeader th(String nome, String style) {
+		return new TableHeader(nome, style);
 	}
 
 }

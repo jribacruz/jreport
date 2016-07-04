@@ -15,7 +15,7 @@ public class ComplexReportListTableHeaderSuport extends ComplexReport<ModelTest>
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final TableHeader[] headers = { th("Nome"), th("Sobrenome", 1, 2), th("s") };
+	public static final TableHeader[] headers = { th("Nome"), th("Sobrenome", 1), th("s") };
 
 	public ComplexReportListTableHeaderSuport() {
 	}

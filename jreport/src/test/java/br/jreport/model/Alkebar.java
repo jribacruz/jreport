@@ -8,7 +8,7 @@ public class Alkebar extends SimpleReport {
 
 	@Override
 	protected void title() {
-	addTitle(new Title().T_addBrasao().T_addTitle("Tribunal Regional Eleitoral do Pará2").T_addSeparator());
+	addTitle(new Title().addBrasao().addTitle("Tribunal Regional Eleitoral do Pará2").addSeparator());
 
 	}
 	
@@ -18,11 +18,11 @@ public class Alkebar extends SimpleReport {
 	@Override
 	protected void pageHeader() {
 	
-	addPageHeader(new PageHeader().H_addTitle("teste de segunda"));
+	addPageHeader(new PageHeader().addTitle("teste de segunda"));
 	
-	addPageHeader(new PageHeader().H_addBrasao());
+	addPageHeader(new PageHeader().addBrasao());
 	
-	addPageHeader(new PageHeader().H_addTitle("Título Mostrado a partir da segunda página"));
+	addPageHeader(new PageHeader().addTitle("Título Mostrado a partir da segunda página"));
 	
 		
 		

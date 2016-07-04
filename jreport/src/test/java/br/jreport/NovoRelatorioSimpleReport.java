@@ -1,7 +1,7 @@
 package br.jreport;
 
 import br.jreport.style.TextStyleClass;
-import br.jreport.template.Component;
+import br.jreport.template.Elemento;
 import br.jreport.template.SimpleReport;
 import br.jreport.template.Title;
 
@@ -14,16 +14,16 @@ public class NovoRelatorioSimpleReport extends SimpleReport {
 
 	@Override
 	protected void title() {
-		addTitle(new Title().T_addBrasao().T_addTitle("Poder Judiciário da União")
-				.T_addTitle("Tribunal Regional Eleitoral do Pará")
-				.T_addTitle("Relatório de Pontos de Transmissão e Locais de Votação 2016"));
+		addTitle(new Title().addBrasao().addTitle("Poder Judiciário da União")
+				.addTitle("Tribunal Regional Eleitoral do Pará")
+				.addTitle("Relatório de Pontos de Transmissão e Locais de Votação 2016"));
 	}
 
 	@Override
 	protected void detail() {
-		addComponent(new Component().C_addText("novo texto"));
+		addComponent(new Elemento().addText("novo texto"));
 		addNewPage();
-		addComponent(new Component().C_addText("novo texto").C_addBlankLine().C_addSeparator().C_addText("outro texto"));
+		addComponent(new Elemento().addText("novo texto").addBlankLine().addSeparator().addText("outro texto"));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class NovoRelatorioSimpleReport extends SimpleReport {
 
 	@Override
 	protected void pageFooter() {
-		addComponent(new Component().C_addText("novo texto").C_addBlankLine().C_addSeparator().C_addText("outro texto"));
+		addComponent(new Elemento().addText("novo texto").addBlankLine().addSeparator().addText("outro texto"));
 
 	}
 

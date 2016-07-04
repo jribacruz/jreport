@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.google.common.base.Splitter;
 
-import br.jreport.enums.BorderStyle;
 import br.jreport.enums.TextAlign;
 
 public class TableDataStyleClass extends TextStyleClass {
@@ -18,9 +17,9 @@ public class TableDataStyleClass extends TextStyleClass {
 	private int horizontalAlignment = TextAlign.LEFT.getValue();
 
 	private Float height = null;
+	private float width = 1f;
 
 	private Color borderColor = Color.BLACK;
-
 	private float borderWidth = 0.5f;
 	private float borderWidthTop = 0.5f;
 	private float borderWidthLeft = 0.5f;
@@ -41,6 +40,7 @@ public class TableDataStyleClass extends TextStyleClass {
 				setBorderWidth(map.get("border-width"));
 				setColspan(map.get("colspan"));
 				setBackgroundCellColor(map.get("background-color"));
+				setWidth(map.get("width"));
 			} else {
 				throw new Exception("formato css inválido, chave e valor separados por ':' e elementos separados por ';' ");
 			}
@@ -58,6 +58,16 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.colspan = colspan;
 		this.backgroundCellColor = backgroundTableColor;
 		this.borderColor = borderColor;
+	}
+	
+	public void setWidth(String width) {
+		if (width != null) {
+			try {
+				this.width = Float.valueOf(width.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para width, valor: " + width);
+			}
+		}
 	}
 
 	public void setBackgroundCellColor(String backgroundCellColor) {
@@ -229,6 +239,46 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	public void setBackgroundCellColor(Color backgroundCellColor) {
 		this.backgroundCellColor = backgroundCellColor;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public float getBorderWidthTop() {
+		return borderWidthTop;
+	}
+
+	public void setBorderWidthTop(float borderWidthTop) {
+		this.borderWidthTop = borderWidthTop;
+	}
+
+	public float getBorderWidthLeft() {
+		return borderWidthLeft;
+	}
+
+	public void setBorderWidthLeft(float borderWidthLeft) {
+		this.borderWidthLeft = borderWidthLeft;
+	}
+
+	public float getBorderWidthRight() {
+		return borderWidthRight;
+	}
+
+	public void setBorderWidthRight(float borderWidthRight) {
+		this.borderWidthRight = borderWidthRight;
+	}
+
+	public float getBorderWidthBottom() {
+		return borderWidthBottom;
+	}
+
+	public void setBorderWidthBottom(float borderWidthBottom) {
+		this.borderWidthBottom = borderWidthBottom;
 	}
 
 }

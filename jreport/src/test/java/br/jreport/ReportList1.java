@@ -2,18 +2,16 @@ package br.jreport;
 
 import java.util.List;
 
-import br.jreport.enums.BorderStyle;
-import br.jreport.enums.ColorJReport;
 import br.jreport.enums.FontStyle;
 import br.jreport.model.ModelTest;
 import br.jreport.style.TableDataStyleClass;
-import br.jreport.style.TableHeaderStyleClass;
-import br.jreport.style.TextStyleClass;
 import br.jreport.table.DataTableBodyModel;
-import br.jreport.table.TableHeader;
-import br.jreport.template.Component;
 import br.jreport.template.DataTable;
+import br.jreport.template.Detail;
+import br.jreport.template.PageFooter;
+import br.jreport.template.PageHeader;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Summary;
 import br.jreport.template.Title;
 
 public class ReportList1 extends SimpleReport {
@@ -23,7 +21,7 @@ public class ReportList1 extends SimpleReport {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String[] headers = { "", "", "", "" };
+	public static final String[] headers = { "aaa", "aaa", "aaa", "ddd" };
 	// public static final TableHeader[] headers2 = {
 	// th("Nome", new TableDataStyleClass(1f, 2, ColorJReport.LIGHT_GRAY,
 	// ColorJReport.LIGHT_GRAY, 1)), th("Teste",1f, 3) };
@@ -35,14 +33,21 @@ public class ReportList1 extends SimpleReport {
 		this.modelList = modelList;
 	}
 
-	protected void title() {
-		Title titulo = new Title();
-		titulo.T_addBrasao();
-		titulo.T_addTitle("teste");
-		addTitle(titulo);
+	protected void title(Title t) {
+
+		t.addBrasao().addTitle("Relatorio xxxxxxx");
+
+		// Title titulo = new Title();
+		// titulo.addBrasao();
+		// titulo.addTitle("teste");
+		// addTitle(titulo);
 	}
 
-	protected void detail() {
+	@Override
+	protected void detail(Detail d) {
+		d.addDataTable().addCell("").build();
+		d.addElemento().addText("Texto").build();
+		// addComponent(new Component().);
 		// addComponent(new Component(getDocument()).C_addText("a"));
 		// addDataTableNew(new
 		// DataTableMethods().addHeader(headers).addDataTableBody(modelList, new
@@ -56,10 +61,10 @@ public class ReportList1 extends SimpleReport {
 		// }));
 		//@formatter:off
 		
-		TextStyleClass a = new TextStyleClass();
-		a.setFontSize(5);
+//		TextStyleClass a = new TextStyleClass();
+//		a.setFontSize(5);
 //		addComponent(new Component().C_addText("teste",a));
-		addDataTable(new DataTable().addHeader(1).addCell("Teste","font-size:9; height: 50").addLine(1, 1).addCell("aaaaaaaaaaaaaa"));
+//		addDataTable(new DataTable().addHeader(headers).addLine(1, 4).addCell("Teste","font-size:9; height: 50").addCell("aaaaaaaaaaaaaa").addCell("aaaaaaaaaaaaaa").addCell("aaaaaaaaaaaaaa"));
 //		TableDataStyleClass a = new TableDataStyleClass();
 //		a.setFontStyle(FontStyle.BOLD);
 //		addDataTable(new DataTable().addHeader(4)
@@ -88,7 +93,6 @@ public class ReportList1 extends SimpleReport {
 ////				
 //				);
 		//@formatter:on
-		
 
 		// TableHeaderStyleClass td = new TableHeaderStyleClass(1f, 1,
 		// ColorJReport.LIGHT_GRAY, ColorJReport.LIGHT_GRAY, 1);
@@ -99,19 +103,19 @@ public class ReportList1 extends SimpleReport {
 		// td2.setBorder(BorderStyle.RIGHT_TOP_BOTTOM);
 		// TableHeader[] headers2 = { th("Nome", td), th("Teste", td2) };
 
-		// addDataTable(new
-		// DataTable<ModelTest>(getDocument()).addDataTable(null, 0, new
-		// DataTableBody<ModelTest>() {
-		// @Override
-		// public void body(ModelTest model) {
-		// // addComponent(text);
-		//
-		// }
-		// }));
+		d.addDataTable().addHeader(2).addDataTableBody(modelList, new DataTableBodyModel<ModelTest>() {
+
+			@Override
+			public void body(ModelTest model) {
+				addCell(model.getNome());
+				addCell(model.getSobrenome());
+			}
+		}).build();
 		//
 		// // for (int i = 0; i < 3; i++) {
 		// addDataTable(new
-		// DataTable<ModelTest>(getDocument()).addDataTable(modelList, headers2,
+		// DataTable<ModelTest>(getDocument()).addDataTable(modelListp,
+		// headers2,
 		// new DataTableBody<ModelTest>() {
 		//
 		// @Override
@@ -150,19 +154,19 @@ public class ReportList1 extends SimpleReport {
 	}
 
 	@Override
-	protected void pageHeader() {
+	protected void pageHeader(PageHeader ph) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void pageFooter() {
+	protected void pageFooter(PageFooter pf) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void summary() {
+	protected void summary(Summary s) {
 		// TODO Auto-generated method stub
 
 	}

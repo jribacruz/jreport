@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import br.jreport.ReportList1;
+import br.jreport.NovoRel;
 import br.jreport.model.ModelTest;
 
 public class MainReportListApp {
@@ -20,8 +20,11 @@ public class MainReportListApp {
 		List<ModelTest> list = Arrays.asList(modelTest1, modelTest2, modelTest3, modelTest4);
 		
 		
-		ReportList1 report1 = new ReportList1(list);
-		report1.generate(new FileOutputStream(new File("target/report1.pdf")));
+//		ReportList1 report1 = new ReportList1(list);
+//		report1.generate(new FileOutputStream(new File("target/report1.pdf")));
+		
+		NovoRel relP = new NovoRel();
+		relP.generate(new FileOutputStream(new File("target/reportreaaaaaaaalP.pdf")));
 
 //		ReportListTableHeaderSuport report2 = new ReportListTableHeaderSuport(list);
 //		report2.generate(new FileOutputStream(new File("target/report2.pdf")));
