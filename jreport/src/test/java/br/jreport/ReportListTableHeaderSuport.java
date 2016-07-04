@@ -5,36 +5,41 @@ import java.util.List;
 import br.jreport.model.ModelTest;
 import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
+import br.jreport.template.Detail;
+import br.jreport.template.PageFooter;
+import br.jreport.template.PageHeader;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Summary;
+import br.jreport.template.Title;
 
 public class ReportListTableHeaderSuport extends SimpleReport {
 
 	@Override
-	protected void title() {
+	protected void title(Title t) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void pageHeader() {
+	protected void pageHeader(PageHeader ph) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void detail() {
+	protected void detail(Detail d) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void pageFooter() {
+	protected void pageFooter(PageFooter pf) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void summary() {
+	protected void summary(Summary s) {
 		// TODO Auto-generated method stub
 		
 	}

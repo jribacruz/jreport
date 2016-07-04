@@ -3,7 +3,12 @@ package br.jreport;
 import br.jreport.enums.TextAlign;
 import br.jreport.model.ModelTest;
 import br.jreport.style.TextStyleClass;
+import br.jreport.template.Detail;
+import br.jreport.template.PageFooter;
+import br.jreport.template.PageHeader;
 import br.jreport.template.SimpleReport;
+import br.jreport.template.Summary;
+import br.jreport.template.Title;
 
 public class Report2 extends SimpleReport {
 //
@@ -45,32 +50,33 @@ public class Report2 extends SimpleReport {
 //				+ "Duis commodo mauris eget sapien pulvinar, mollis eleifend dui congue. In porta id erat id interdum. ");
 //	}
 
+
 	@Override
-	protected void pageFooter() {
+	protected void title(Title t) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void summary() {
+	protected void pageHeader(PageHeader ph) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void title() {
+	protected void detail(Detail d) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void pageHeader() {
+	protected void pageFooter(PageFooter pf) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void detail() {
+	protected void summary(Summary s) {
 		// TODO Auto-generated method stub
 		
 	}

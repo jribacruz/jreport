@@ -1,6 +1,5 @@
 package br.jreport;
 
-import br.jreport.style.defined.DetaultTableHeaderStyleClass;
 import br.jreport.table.TableHeader;
 import br.jreport.template.Detail;
 import br.jreport.template.PageFooter;
@@ -20,8 +19,8 @@ public class NovoRel extends SimpleReport {
 
 	@Override
 	protected void title(Title t) {
-		t.addBrasao().addTitle("Teste titulo").addTitle("subtitulo").build();
-		t.addTitle("texto2").build();
+//		 addTitle(new Title().T_addTitle("Relatório Geral");
+		t.addTitle("Relatorio Geral").addBrasao().addTitle("aaaaaaa").build();
 	}
 
 	@Override
