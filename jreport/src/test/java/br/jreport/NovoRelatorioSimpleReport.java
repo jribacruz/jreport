@@ -1,7 +1,7 @@
 package br.jreport;
 
-import br.jreport.style.TextStyleClass;
 import br.jreport.template.Detail;
+import br.jreport.template.Elemento;
 import br.jreport.template.Elemento;
 import br.jreport.template.PageFooter;
 import br.jreport.template.PageHeader;
@@ -48,11 +48,6 @@ public class NovoRelatorioSimpleReport extends SimpleReport {
 //
 //	}
 
-	@Override
-	protected void title(Title t) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void pageHeader(PageHeader ph) {
@@ -74,6 +69,12 @@ public class NovoRelatorioSimpleReport extends SimpleReport {
 
 	@Override
 	protected void summary(Summary s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void title(Title t) {
 		// TODO Auto-generated method stub
 		
 	}
