@@ -6,8 +6,8 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.TableHeaderStyleClass;
 import br.jreport.style.defined.DefaultTextTableHeaderStyleClass;
+import br.jreport.style.defined.DetaultTableHeaderStyleClass;
 
 public class Table {
 
@@ -69,15 +69,14 @@ public class Table {
 
 	private void addTheaders() {
 		float[] columnWidths = new float[theaders.length];
-		TableHeaderStyleClass styleHeader = null;
+		DetaultTableHeaderStyleClass styleHeader = null;
 		for (int i = 0; i < theaders.length; i++) {
 			TableHeader header = theaders[i];
 			styleHeader = countColspan(styleHeader, header);
 			Paragraph paragraph = DocumentHelper.createText(header.getNome(), header.getStyle());
 			DocumentHelper.createPdfPCell(paragraph, header.getStyle(), pdfPTable);
-			columnWidths[i] = header.getStyle().getWidthHeaderTable();
+			columnWidths[i] = header.getStyle().getWidth();
 		}
-		addHeaderSeparatorIfExists(styleHeader);
 		try {
 			pdfPTable.setWidths(columnWidths);
 		} catch (DocumentException e) {
@@ -89,26 +88,13 @@ public class Table {
 	 * @param header
 	 * @return
 	 */
-	private TableHeaderStyleClass countColspan(TableHeaderStyleClass styleHeader, TableHeader header) {
+	private DetaultTableHeaderStyleClass countColspan(DetaultTableHeaderStyleClass styleHeader, TableHeader header) {
 		if (styleHeader == null) {
 			styleHeader = header.getStyle();
 		} else {
 			styleHeader.setColspan(styleHeader.getColspan() + header.getStyle().getColspan());
 		}
 		return styleHeader;
-	}
-
-	/**
-	 * @param styleHeader
-	 */
-	private void addHeaderSeparatorIfExists(TableHeaderStyleClass styleHeader) {
-		if (styleHeader != null && styleHeader.getTableHeaderSpacer() != 0) {
-			PdfPCell spaceCell = new PdfPCell(new Paragraph(""));
-			spaceCell.setFixedHeight(styleHeader.getTableHeaderSpacer());
-			spaceCell.setColspan(styleHeader.getColspan());
-			spaceCell.setBorderWidth(0);
-			pdfPTable.addCell(spaceCell);
-		}
 	}
 
 	public PdfPTable getPdfPTable() {

@@ -73,7 +73,9 @@ public class DocumentHelper {
 	public static void createPdfPCell(Paragraph p, TableDataStyleClass styleClass, PdfPTable pdfPTable) {
 		PdfPCell cell = new PdfPCell();
 		cell.addElement(p);
-		cell.setFixedHeight(styleClass.getHeight());
+		if (styleClass.getHeight() !=null) {
+			cell.setFixedHeight(styleClass.getHeight());
+		}
 		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
 		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 		cell.setBorderColor(styleClass.getBorderColor());

@@ -23,16 +23,16 @@ public class TextStyleClass {
 	private float textIndent = 0;
 
 	private float textMarginLeft = 0;
-	
+
 	/** Font **/
 
 	private float fontSize = 9;
 
 	private FontStyle fontStyle = FontStyle.NORMAL;
 
-	// private Color backgroudColor;// TODO verificar melhor como configurar essa propriedade.
+	// private Color backgroudColor;// TODO verificar melhor como configurar
+	// essa propriedade.
 
-	
 	public static void main(String[] args) {
 		TextStyleClass a = new TextStyleClass("text-align: center ; font-size:1.5; font-style:italic;  "
 				+ "color:#005000; text-decoration: underline; background-color: #FFFFFF; text-indent:10; indentation-left: 10");
@@ -247,8 +247,8 @@ public class TextStyleClass {
 
 	@Override
 	public String toString() {
-		return "TextStyleClass [fontColor=" + textFontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration + ", indent="
-				+ textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
+		return "TextStyleClass [fontColor=" + textFontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration
+				+ ", indent=" + textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
 	}
 
 }

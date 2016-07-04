@@ -44,7 +44,7 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 	}
 
 	public void nomeRelatorio() {
-		addComponent(new Component().C_addText(getNomePdf()));
+		new Elemento(getDocument()).addText(getNomePdf());
 	}
 
 	public ComplexReport(List<List<T>> lista, String nomeRelatorio, Class<? extends ComplexReport<T>> classe) {
@@ -201,9 +201,9 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.pdfWriter = PdfWriter.getInstance(complexReport.document, outputStream);
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
-				complexReport.title();
-				complexReport.addComponent(new Component().C_addBlankLine());
-				complexReport.detail();
+				complexReport.title(new Title(getDocument()));
+				new Elemento(getDocument()).addBlankLine();
+				complexReport.detail(new Detail(getDocument()));
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
 			} catch (DocumentException e) {
@@ -227,9 +227,9 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 				complexReport.pdfWriter = PdfWriter.getInstance(complexReport.document, outputStream);
 				complexReport.document.open();
 				complexReport.pdfWriter.setPageEvent(this);
-				complexReport.title();
-				complexReport.addComponent(new Component().C_addBlankLine());
-				complexReport.detail();
+				complexReport.title(new Title(getDocument()));
+				new Elemento(getDocument()).addBlankLine();
+				complexReport.detail(new Detail(getDocument()));
 				complexReport.document.close();
 				inserirNoZip(zos, outputStream, complexReport);
 			}
@@ -273,16 +273,16 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.pdfWriter = PdfWriter.getInstance(complexReport.document, outputStream);
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
-			complexReport.title();
-			complexReport.addComponent(new Component().C_addBlankLine());
-			complexReport.detail();
+			complexReport.title(new Title(getDocument()));
+			new Elemento(getDocument()).addBlankLine();
+			complexReport.detail(new Detail(getDocument()));
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
 					complexReportAux.addNewPage();
-					complexReportAux.detail();
+					complexReportAux.detail(new Detail(getDocument()));
 				}
 			}
 			complexReport.document.close();
@@ -307,16 +307,16 @@ public abstract class ComplexReport<T extends DataModelReport> extends SimpleRep
 			complexReport.pdfWriter = PdfWriter.getInstance(complexReport.document, outputStream);
 			complexReport.document.open();
 			complexReport.pdfWriter.setPageEvent(this);
-			complexReport.title();
-			complexReport.addComponent(new Component().C_addBlankLine());
-			complexReport.detail();
+			complexReport.title(new Title(getDocument()));
+			new Elemento(getDocument()).addBlankLine();
+			complexReport.detail(new Detail(getDocument()));
 			if (pdfs.size() > 1) {
 				for (int i = 1; i < pdfs.size(); i++) {
 					complexReportAux = pdfs.get(i);
 					complexReportAux.pdfWriter = complexReport.pdfWriter;
 					complexReportAux.document = complexReport.document;
 					complexReportAux.addNewPage();
-					complexReportAux.detail();
+					complexReportAux.detail(new Detail(getDocument()));
 				}
 			}
 			complexReport.document.close();
