@@ -11,6 +11,11 @@ import br.jreport.helper.DocumentHelper;
 import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
+/**
+ * 
+ * @author amarques
+ *
+ */
 public class PageHeader {
 
 	private List<Element> elements = new ArrayList<Element>();
@@ -31,7 +36,7 @@ public class PageHeader {
 	 * <b> Exemplo:
 	 * 
 	 * <pre>
-	 * addPageHeader(new PageHeader().H_addBrasao());
+	 * ph.addBrasao().build();
 	 * </pre>
 	 * 
 	 * </b>
@@ -44,6 +49,16 @@ public class PageHeader {
 		return this;
 	}
 
+	/**
+	 * Adiciona um Título <br>
+	 * <b> Exemplo:
+	 * 
+	 * <pre>
+	 * ph.addTitle("Resumo por Zona").build();
+	 * </pre>
+	 * 
+	 * </b>
+	 **/
 	public PageHeader addTitle(String text) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
 		return this;
@@ -57,18 +72,24 @@ public class PageHeader {
 	/**
 	 * Adiciona uma linha em branco
 	 * 
+	 * <pre>
+	 * ph.addNewLine().build();
+	 * </pre>
 	 */
-	public PageHeader newLine() {
+	public PageHeader addNewLine() {
 		elements.add(DocumentHelper.newLine());
 		return this;
 	}
 
 	/**
-	 * Adiciona uma imagem Deve-se passar o caminho do arquivo que contém a
-	 * imagem
+	 * Adiciona uma imagem <br>
+	 * Deve-se passar o caminho do arquivo que contém a imagem <br>
+	 * <br>
+	 * AO arquivo da imagem deve estar em src/main/resources
 	 * 
-	 * @param imageName:caminho
-	 *            da imagem a ser adicionada
+	 * <pre>
+	 * ph.addImage("ok.jpg").build();
+	 * </pre>
 	 * 
 	 */
 	public PageHeader addImage(String imageName) {
@@ -78,6 +99,9 @@ public class PageHeader {
 
 	/**
 	 * Adiciona uma barra horrizontal
+	 * <pre>
+	 *     ph.addSeparator().build();
+	 * </pre>
 	 * 
 	 */
 	public PageHeader addSeparator() {

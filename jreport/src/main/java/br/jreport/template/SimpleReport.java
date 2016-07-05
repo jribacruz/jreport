@@ -54,7 +54,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * <b>Exemplo:
 	 * 
 	 * <pre>
-	 *  addTitle(new Title().T_addTitle("Relatório Geral");
+	 *  t.addBrasao().addTitle("Relatório de Pontos").build();
 	 * </pre>
 	 * 
 	 * </b>
@@ -66,7 +66,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * <b>Exemplo:
 	 * 
 	 * <pre>
-	 * addPageHeader(new PageHeader().H_addTitle("Título Mostrado a partir da 2º Página"));
+	 * ph.addTitle("Resumo por Zona").build();
 	 * </pre>
 	 * 
 	 * </b>
@@ -124,6 +124,14 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		return document;
 	}
 
+	/**
+	 * Adiciona uma nova página
+	 * <pre>
+	 * 	protected void detail(Detail d) {
+	 *	   addNewPage();
+     *	}
+	 * </pre>
+	 */
 	protected void addNewPage() {
 		DocumentHelper.newPage(document);
 	}
