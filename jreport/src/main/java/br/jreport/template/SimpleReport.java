@@ -148,7 +148,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		font.setColor(Color.DARK_GRAY);
 		float xRight = document.right();
 		float xLeft = document.left() + document.leftMargin();
-		float y = document.bottom();
+		float y = document.bottom()-10;
 		String now = new SimpleDateFormat("dd/MM/yyyy HH:ss").format(new Date());
 
 		ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(String.format("%d", pagenumber), font),
