@@ -22,6 +22,7 @@ import com.lowagie.text.pdf.draw.LineSeparator;
 
 import br.jreport.core.DataModelReport;
 import br.jreport.enums.TextDecoration;
+import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextStyleClass;
@@ -48,7 +49,7 @@ public class DocumentHelper {
 		Font f = new Font(Font.HELVETICA);
 		f.setSize(styleClass.getFontSize());
 		f.setStyle(styleClass.getFontStyle().getValue());
-		f.setColor(styleClass.getTextFontColor());
+		f.setColor(styleClass.getFontColor());
 
 		Chunk chunk = new Chunk(text, f);
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
@@ -64,7 +65,7 @@ public class DocumentHelper {
 //formatter:on
 		Paragraph p = new Paragraph(chunk);
 		p.setFirstLineIndent(styleClass.getTextIndent());
-		p.setIndentationLeft(styleClass.getTextMarginLeft());
+		p.setIndentationLeft(styleClass.getMarginLeft());
 		p.setAlignment(styleClass.getTextAlign().getValue());
 
 		return p;
@@ -221,6 +222,24 @@ public class DocumentHelper {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
 			Image image = Image.getInstance(imageURL);
+			ImageStyleClass style = new ImageStyleClass();
+			image.setAlignment(style.getAlign().getValue());
+			return image;
+		} catch (BadElementException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static Image loadImage(String imageName, ImageStyleClass style) {
+		try {
+			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
+			Image image = Image.getInstance(imageURL);
+			image.setAlignment(style.getAlign().getValue());
 			return image;
 		} catch (BadElementException e) {
 			e.printStackTrace();

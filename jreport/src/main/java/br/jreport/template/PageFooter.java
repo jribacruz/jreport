@@ -8,8 +8,9 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
-import br.jreport.style.defined.DefaultTextTitleStyleClass;
+import br.jreport.style.ImageStyleClass;
+import br.jreport.style.TextStyleClass;
+import br.jreport.style.defined.DefaultTextPageFooterStyleClass;
 
 public class PageFooter {
 
@@ -17,69 +18,87 @@ public class PageFooter {
 
 	private Document document;
 
-	protected final DefaultTextTitleStyleClass titleStyleClass = new DefaultTextTitleStyleClass();
+	protected final DefaultTextPageFooterStyleClass footerStyleClass = new DefaultTextPageFooterStyleClass();
 
 	public PageFooter(Document document) {
 		this.document = document;
 	}
 
 	/**
-	 * Adiciona o Brasão da República <br>
-	 * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
-	 * O arquivo do brasão já esta definido em /src/main/resources do próprio
-	 * Jreport <br>
+	 * Adiciona um Footer <br>
 	 * <b> Exemplo:
 	 * 
 	 * <pre>
-	 * addPageHeader(new PageHeader().H_addBrasao());
+	 * pf.addFooter("Rodapé pagina").build();
 	 * </pre>
 	 * 
 	 * </b>
 	 **/
-	public PageFooter addBrasao() {
-		Image brasao = DocumentHelper.loadImage("brasao.png");
-		brasao.setAlignment(Image.ALIGN_CENTER);
-		brasao.scaleAbsolute(40f, 40f);
-		elements.add(brasao);
+	public PageFooter addFooter(String text) {
+		elements.add(DocumentHelper.createText(text, footerStyleClass));
 		return this;
 	}
 
-	public PageFooter addTitle(String text) {
-		elements.add(DocumentHelper.createText(text, titleStyleClass));
-
+	public PageFooter addFooter(String text, DefaultTextPageFooterStyleClass footerStyleClass) {
+		elements.add(DocumentHelper.createText(text, footerStyleClass));
 		return this;
 	}
 
-	public PageFooter addTitle(String text, DefaultTextPageHeaderStyleClass titleStyleClass) {
-		elements.add(DocumentHelper.createText(text, titleStyleClass));
+	public PageFooter addFooter(String text, String footerStyleClass) {
+		TextStyleClass style = new TextStyleClass(footerStyleClass);
+		elements.add(DocumentHelper.createText(text, style));
 		return this;
 	}
 
 	/**
 	 * Adiciona uma linha em branco
 	 * 
+	 * <pre>
+	 * pf.addNewLine().build();
+	 * </pre>
 	 */
 	public PageFooter newLine() {
 		elements.add(DocumentHelper.newLine());
-
 		return this;
 	}
 
 	/**
-	 * Adiciona uma imagem Deve-se passar o caminho do arquivo que contém a
-	 * imagem
+	 * Adiciona uma imagem <br>
+	 * Deve-se passar o caminho do arquivo que contém a imagem <br>
+	 * <br>
+	 * AO arquivo da imagem deve estar em src/main/resources
 	 * 
-	 * @param imageName:caminho
-	 *            da imagem a ser adicionada
+	 * <pre>
+	 * pf.addImage("ok.jpg").build();
+	 * </pre>
 	 * 
 	 */
 	public PageFooter addImage(String imageName) {
-		elements.add(DocumentHelper.loadImage(imageName));
+		Image brasao = DocumentHelper.loadImage(imageName);
+		brasao.setAlignment(Image.ALIGN_CENTER);
+		elements.add(brasao);
+		return this;
+	}
+
+	public PageFooter addImage(String imageName, ImageStyleClass style) {
+		Image brasao = DocumentHelper.loadImage(imageName, style);
+		elements.add(brasao);
+		return this;
+	}
+
+	public PageFooter addImage(String imageName, String style) {
+		ImageStyleClass styleClass = new ImageStyleClass(style);
+		Image brasao = DocumentHelper.loadImage(imageName, styleClass);
+		elements.add(brasao);
 		return this;
 	}
 
 	/**
 	 * Adiciona uma barra horrizontal
+	 * 
+	 * <pre>
+	 * pf.addSeparator().build();
+	 * </pre>
 	 * 
 	 */
 	public PageFooter addSeparator() {

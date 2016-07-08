@@ -14,7 +14,7 @@ public class TextStyleClass {
 
 	/** Text **/
 
-	private Color textFontColor = Color.BLACK;
+	private Color fontColor = Color.BLACK;
 
 	private TextAlign textAlign = TextAlign.JUSTIFIED;
 
@@ -159,11 +159,11 @@ public class TextStyleClass {
 	public void setFontColor(String fontColor) {
 		if (fontColor != null) {
 			if (fontColor.trim().startsWith("#")) {
-				this.textFontColor = Color.decode(fontColor.trim().toUpperCase());
+				this.fontColor = Color.decode(fontColor.trim().toUpperCase());
 			} else {
 				try {
 					Field field = Color.class.getField(fontColor.trim().toLowerCase());
-					this.textFontColor = (Color) field.get(null);
+					this.fontColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -205,12 +205,12 @@ public class TextStyleClass {
 		this.fontSize = fontSize;
 	}
 
-	public Color getTextFontColor() {
-		return textFontColor;
+	public Color getFontColor() {
+		return fontColor;
 	}
 
-	public void setTextFontColor(Color fontColor) {
-		this.textFontColor = fontColor;
+	public void setFontColor(Color fontColor) {
+		this.fontColor = fontColor;
 	}
 
 	// public Color getBackgroudColor() {
@@ -237,17 +237,17 @@ public class TextStyleClass {
 		this.textIndent = indent;
 	}
 
-	public float getTextMarginLeft() {
+	public float getMarginLeft() {
 		return textMarginLeft;
 	}
 
-	public void setTextMarginLeft(float marginLeft) {
+	public void setMarginLeft(float marginLeft) {
 		this.textMarginLeft = marginLeft;
 	}
 
 	@Override
 	public String toString() {
-		return "TextStyleClass [fontColor=" + textFontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration
+		return "TextStyleClass [fontColor=" + fontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration
 				+ ", indent=" + textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
 	}
 

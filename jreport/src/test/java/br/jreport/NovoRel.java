@@ -25,7 +25,7 @@ public class NovoRel extends SimpleReport {
 
 	@Override
 	protected void pageHeader(PageHeader ph) {
-		ph.addTitle("texto").addTitle("texto2").build();
+		ph.addPageHeader("texto").addPageHeader("texto2").build();
 	}
 
 	@Override

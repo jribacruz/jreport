@@ -8,45 +8,20 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
+import br.jreport.style.ImageStyleClass;
+import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
-import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
-/**
- * 
- * @author amarques
- *
- */
 public class PageHeader {
 
 	private List<Element> elements = new ArrayList<Element>();
 
 	private Document document;
 
-	protected final DefaultTextTitleStyleClass titleStyleClass = new DefaultTextTitleStyleClass();
+	protected final DefaultTextPageHeaderStyleClass titleStyleClass = new DefaultTextPageHeaderStyleClass();
 
 	public PageHeader(Document document) {
 		this.document = document;
-	}
-
-	/**
-	 * Adiciona o Brasão da República <br>
-	 * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
-	 * O arquivo do brasão já esta definido em /src/main/resources do próprio
-	 * Jreport <br>
-	 * <b> Exemplo:
-	 * 
-	 * <pre>
-	 * ph.addBrasao().build();
-	 * </pre>
-	 * 
-	 * </b>
-	 **/
-	public PageHeader addBrasao() {
-		Image brasao = DocumentHelper.loadImage("brasao.png");
-		brasao.setAlignment(Image.ALIGN_CENTER);
-		brasao.scaleAbsolute(40f, 40f);
-		elements.add(brasao);
-		return this;
 	}
 
 	/**
@@ -59,13 +34,19 @@ public class PageHeader {
 	 * 
 	 * </b>
 	 **/
-	public PageHeader addTitle(String text) {
+	public PageHeader addPageHeader(String text) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
 		return this;
 	}
 
-	public PageHeader addTitle(String text, DefaultTextPageHeaderStyleClass titleStyleClass) {
+	public PageHeader addPageHeader(String text, DefaultTextPageHeaderStyleClass titleStyleClass) {
 		elements.add(DocumentHelper.createText(text, titleStyleClass));
+		return this;
+	}
+
+	public PageHeader addPageHeader(String text, String titleStyleClass) {
+		TextStyleClass style = new TextStyleClass(titleStyleClass);
+		elements.add(DocumentHelper.createText(text, style));
 		return this;
 	}
 
@@ -93,14 +74,30 @@ public class PageHeader {
 	 * 
 	 */
 	public PageHeader addImage(String imageName) {
-		elements.add(DocumentHelper.loadImage(imageName));
+		Image brasao = DocumentHelper.loadImage(imageName);
+		brasao.setAlignment(Image.ALIGN_CENTER);
+		elements.add(brasao);
+		return this;
+	}
+
+	public PageHeader addImage(String imageName, ImageStyleClass style) {
+		Image brasao = DocumentHelper.loadImage(imageName, style);
+		elements.add(brasao);
+		return this;
+	}
+
+	public PageHeader addImage(String imageName, String style) {
+		ImageStyleClass styleClass = new ImageStyleClass(style);
+		Image brasao = DocumentHelper.loadImage(imageName, styleClass);
+		elements.add(brasao);
 		return this;
 	}
 
 	/**
 	 * Adiciona uma barra horrizontal
+	 * 
 	 * <pre>
-	 *     ph.addSeparator().build();
+	 * ph.addSeparator().build();
 	 * </pre>
 	 * 
 	 */
@@ -113,6 +110,7 @@ public class PageHeader {
 		for (Element element : getElements()) {
 			DocumentHelper.add(document, element);
 		}
+		elements = new ArrayList<Element>();
 	}
 
 	protected List<Element> getElements() {

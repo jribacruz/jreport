@@ -11,6 +11,7 @@ import br.jreport.helper.DocumentHelper;
 import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
+//TODO falta implementar e especificar essa classe
 public class Summary {
 
 	private List<Element> elements = new ArrayList<Element>();

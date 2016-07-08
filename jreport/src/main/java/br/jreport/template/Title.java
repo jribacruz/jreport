@@ -8,6 +8,7 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
 import br.jreport.helper.DocumentHelper;
+import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
@@ -94,14 +95,30 @@ public class Title {
 	 * 
 	 */
 	public Title addImage(String imageName) {
-		elements.add(DocumentHelper.loadImage(imageName));
+		Image brasao = DocumentHelper.loadImage(imageName);
+		brasao.setAlignment(Image.ALIGN_CENTER);
+		elements.add(brasao);
+		return this;
+	}
+
+	public Title addImage(String imageName, ImageStyleClass style) {
+		Image brasao = DocumentHelper.loadImage(imageName, style);
+		elements.add(brasao);
+		return this;
+	}
+
+	public Title addImage(String imageName, String style) {
+		ImageStyleClass styleClass = new ImageStyleClass(style);
+		Image brasao = DocumentHelper.loadImage(imageName, styleClass);
+		elements.add(brasao);
 		return this;
 	}
 
 	/**
 	 * Adiciona uma barra horrizontal
+	 * 
 	 * <pre>
-	 *     ph.addSeparator().build();
+	 * ph.addSeparator().build();
 	 * </pre>
 	 * 
 	 */
