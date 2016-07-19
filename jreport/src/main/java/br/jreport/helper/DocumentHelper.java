@@ -218,6 +218,12 @@ public class DocumentHelper {
 		return setupText(text, styleClass);
 	}
 
+	public static Image loadImage(Image image) {
+		ImageStyleClass style = new ImageStyleClass();
+		image.setAlignment(style.getAlign().getValue());
+		return null;
+	}
+	
 	public static Image loadImage(String imageName) {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);

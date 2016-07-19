@@ -19,19 +19,28 @@ public class NovoRel extends SimpleReport {
 
 	@Override
 	protected void title(Title t) {
-//		 addTitle(new Title().T_addTitle("Relatório Geral");
-		t.addTitle("Relatorio Geral").addBrasao().addTitle("aaaaaaa").build();
+		t.addBrasao().addTitle("aaaaaaa").build();
 	}
 
 	@Override
 	protected void pageHeader(PageHeader ph) {
-		ph.addPageHeader("texto").addPageHeader("texto2").build();
+		// ph.addPageHeader("texto").addPageHeader("texto2").build();
 	}
 
 	@Override
 	protected void detail(Detail d) {
-		d.addDataTable().addHeader(headers).addCell("texto").addCell("texto").addCell("texto").addLine(0.1F).addCell("texto")
-				.addCell("texto").addCell("saaaaaaaaaaaaaa").build();
+		// d.addDataTable().addHeader(headers).addCell("texto").addCell("texto").addCell("texto").addLine(0.1F).addCell("texto")
+		// .addCell("texto").addCell("saaaaaaaaaaaaaa").build();
+		d.addChart().addChartBar().addFields("teste", "eixox", "eixoY");
+		for (int i = 0; i < 4; i++) {
+			d.addChart().addChartBar().addDataSet(i, "serie "+i, "su3");
+		}
+		d.addChart().addChartBar().addSize(200, 200).addOrientacaoHorizontal().build();
+		
+		
+		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(1, "serie 1", "su3").addDataSet(2, "serie 1", "su4")
+				.addDataSet(3, "serie 1", "su5").addDataSet(5, "serie 1", "su1").addSize(500, 200).build();
+		d.addChart().addChartPie().addTitle("pizza").addDataSet("aaa", 50).addDataSet("bb", 100).addDataSet("ddd", 150).build();
 
 	}
 
