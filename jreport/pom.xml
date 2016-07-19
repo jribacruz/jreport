@@ -6,7 +6,7 @@
 
 	<groupId>br.jreport</groupId>
 	<artifactId>jreport</artifactId>
-	<version>0.0.8</version>
+	<version>0.0.9</version>
 	<packaging>jar</packaging>
 
 	<name>jreport</name>
