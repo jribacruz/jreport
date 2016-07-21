@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -18,6 +19,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
+import br.jreport.core.DataModelChartPie;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
@@ -50,7 +52,7 @@ public class ChartPie {
 			ImageStyleClass style = new ImageStyleClass();
 			image.setAlignment(style.getAlign().getValue());
 		} catch (IOException e) {
-			System.err.println("Error creando grafico.");
+			System.err.println("Error criando grafico.");
 		} catch (BadElementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,8 +113,15 @@ public class ChartPie {
 		dataset.setValue(texto, valor);
 		return this;
 	}
+	
+	public ChartPie addDataSet(List<DataModelChartPie> list) {
+		for (DataModelChartPie dataModelChartBar : list) {
+			dataset.setValue(dataModelChartBar.getCategoria(), dataModelChartBar.getValue());
+		}
+		return this;
+	}
 
-	public ChartPie addTitle(String title) {
+	public ChartPie addLabel(String title) {
 		this.title = title;
 		return this;
 	}

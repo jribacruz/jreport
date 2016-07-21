@@ -3,6 +3,7 @@ package br.jreport.template;
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -17,6 +18,9 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
+import br.jreport.core.DataModelChartBar;
+import br.jreport.core.DataModelChartLine;
+import br.jreport.core.DataModelChartPie;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
@@ -101,7 +105,7 @@ public class ChartLine {
 
 	}
 
-	public ChartLine addFields(String title, String textX, String textY) {
+	public ChartLine addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;
@@ -110,6 +114,13 @@ public class ChartLine {
 
 	public ChartLine addDataSet(double value, String serie, String categoria) {
 		dataset.setValue(value, serie, categoria);
+		return this;
+	}
+
+	public ChartLine addDataSet(List<DataModelChartLine> list) {
+		for (DataModelChartLine dataModelChartBar : list) {
+			dataset.setValue(dataModelChartBar.getValue(), dataModelChartBar.getSerie(), dataModelChartBar.getCategoria());
+		}
 		return this;
 	}
 

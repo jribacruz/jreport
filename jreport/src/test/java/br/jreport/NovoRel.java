@@ -1,5 +1,9 @@
 package br.jreport;
 
+import java.util.Arrays;
+import java.util.List;
+
+import br.jreport.core.DataModelChartBar;
 import br.jreport.table.TableHeader;
 import br.jreport.template.Detail;
 import br.jreport.template.PageFooter;
@@ -37,10 +41,17 @@ public class NovoRel extends SimpleReport {
 		}
 		d.addChart().addChartBar().addSize(200, 200).addOrientacaoHorizontal().build();
 		
+		DataModelChartBar a = new DataModelChartBar(10D, "a", "1");
+		DataModelChartBar b = new DataModelChartBar(15D, "b", "1");
+		DataModelChartBar c = new DataModelChartBar(30D, "c", "1");
 		
-		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(1, "serie 1", "su3").addDataSet(2, "serie 1", "su4")
-				.addDataSet(3, "serie 1", "su5").addDataSet(5, "serie 1", "su1").addSize(500, 200).build();
-		d.addChart().addChartPie().addTitle("pizza").addDataSet("aaa", 50).addDataSet("bb", 100).addDataSet("ddd", 150).build();
+		List<DataModelChartBar> list = Arrays.asList(a, b, c);
+		d.addChart().addChartBar().addFields("teste", "eixox", "eixoY").addDataSet(list).build();;
+//		d.addChart().addChartPie().addTitle("teste").addDataSet(list).build();;
+//		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(list).build();;
+//		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(1, "serie 1", "su3").addDataSet(2, "serie 1", "su4")
+//				.addDataSet(3, "serie 1", "su5").addDataSet(5, "serie 1", "su1").addSize(500, 200).build();
+//		d.addChart().addChartPie().addTitle("pizza").addDataSet("aaa", 50).addDataSet("bb", 100).addDataSet("ddd", 150).build();
 
 	}
 

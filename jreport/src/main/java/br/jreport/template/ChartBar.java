@@ -3,11 +3,13 @@ package br.jreport.template;
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
@@ -19,6 +21,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
+import br.jreport.core.DataModelChartBar;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
@@ -67,7 +70,7 @@ public class ChartBar {
 	}
 
 	public void build() {
-		JFreeChart chart = ChartFactory.createBarChart(title, eixoX, eixoY, dataset, orientacao, false, true, false);
+		JFreeChart chart = ChartFactory.createBarChart(title, eixoX, eixoY, dataset, orientacao, true, true, false);
 		configStyleChart(chart);
 		Image image = null;
 		try {
@@ -92,13 +95,16 @@ public class ChartBar {
 	 */
 	private void configStyleChart(JFreeChart chart) {
 		chart.setBackgroundPaint(Color.white);
-		//TODO tamanho fonte
-//		chart.getTitle().setFont(font);
+		// TODO tamanho fonte
+		// chart.getTitle().setFont(font);
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.white);
 		plot.setDomainGridlinePaint(Color.black);
 		plot.setDomainGridlinesVisible(true);
 		plot.setRangeGridlinePaint(Color.black);
+	
+		
+	
 		
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
@@ -109,7 +115,7 @@ public class ChartBar {
 		renderer.setBarPainter(new StandardBarPainter());
 	}
 
-	public ChartBar addFields(String title, String textX, String textY) {
+	public ChartBar addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;
@@ -118,6 +124,13 @@ public class ChartBar {
 
 	public ChartBar addDataSet(double value, String serie, String categoria) {
 		dataset.setValue(value, serie, categoria);
+		return this;
+	}
+
+	public ChartBar addDataSet(List<DataModelChartBar> list) {
+		for (DataModelChartBar dataModelChartBar : list) {
+			dataset.setValue(dataModelChartBar.getValue(), dataModelChartBar.getSerie(), dataModelChartBar.getCategoria());
+		}
 		return this;
 	}
 
