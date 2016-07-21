@@ -8,6 +8,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
@@ -67,7 +68,7 @@ public class ChartBar {
 	}
 
 	public void build() {
-		JFreeChart chart = ChartFactory.createBarChart(title, eixoX, eixoY, dataset, orientacao, false, true, false);
+		JFreeChart chart = ChartFactory.createBarChart(title, eixoX, eixoY, dataset, orientacao, true, true, false);
 		configStyleChart(chart);
 		Image image = null;
 		try {
@@ -100,6 +101,8 @@ public class ChartBar {
 		plot.setDomainGridlinesVisible(true);
 		plot.setRangeGridlinePaint(Color.black);
 		
+	
+		
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -109,7 +112,7 @@ public class ChartBar {
 		renderer.setBarPainter(new StandardBarPainter());
 	}
 
-	public ChartBar addFields(String title, String textX, String textY) {
+	public ChartBar addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;

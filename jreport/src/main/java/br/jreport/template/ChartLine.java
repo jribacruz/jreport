@@ -101,7 +101,7 @@ public class ChartLine {
 
 	}
 
-	public ChartLine addFields(String title, String textX, String textY) {
+	public ChartLine addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;

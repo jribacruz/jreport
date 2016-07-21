@@ -16,6 +16,16 @@ public class Chart {
 		chartLine = new ChartLine(document);
 	}
 
+	/**
+	 * Adiciona um Gráfico Tipo Barra no detail<br>
+	 * <b> Exemplo:
+	 * 
+	 * <pre>
+	 * d.addChart().addChartBar().addLabel("Título do Gráfico", "Texto no Eixo x", "Texto no Eixo y").build();
+	 * </pre>
+	 * 
+	 * </b>
+	 **/
 	public ChartBar addChartBar() {
 		return chartBar;
 	}

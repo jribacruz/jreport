@@ -29,7 +29,7 @@ public class PageHeader {
 	 * <b> Exemplo:
 	 * 
 	 * <pre>
-	 * ph.addTitle("Resumo por Zona").build();
+	 * ph.addPageHeader("Resumo por Zona").build();
 	 * </pre>
 	 * 
 	 * </b>
