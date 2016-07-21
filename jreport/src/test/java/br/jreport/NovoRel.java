@@ -35,7 +35,7 @@ public class NovoRel extends SimpleReport {
 	protected void detail(Detail d) {
 		// d.addDataTable().addHeader(headers).addCell("texto").addCell("texto").addCell("texto").addLine(0.1F).addCell("texto")
 		// .addCell("texto").addCell("saaaaaaaaaaaaaa").build();
-		d.addChart().addChartBar().addFields("teste", "eixox", "eixoY");
+		d.addChart().addChartBar().addLabel("teste", "eixox", "eixoY");
 		for (int i = 0; i < 4; i++) {
 			d.addChart().addChartBar().addDataSet(i, "serie "+i, "su3");
 		}
@@ -46,7 +46,7 @@ public class NovoRel extends SimpleReport {
 		DataModelChartBar c = new DataModelChartBar(30D, "c", "1");
 		
 		List<DataModelChartBar> list = Arrays.asList(a, b, c);
-		d.addChart().addChartBar().addFields("teste", "eixox", "eixoY").addDataSet(list).build();;
+		d.addChart().addChartBar().addLabel("teste", "eixox", "eixoY").addDataSet(list).build();;
 //		d.addChart().addChartPie().addTitle("teste").addDataSet(list).build();;
 //		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(list).build();;
 //		d.addChart().addChartLine().addFields("teste", "eixox", "eixoY").addDataSet(1, "serie 1", "su3").addDataSet(2, "serie 1", "su4")
