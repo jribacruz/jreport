@@ -106,6 +106,8 @@ public class ChartBar {
 		
 	
 		
+	
+		
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());

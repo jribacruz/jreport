@@ -27,6 +27,19 @@ public class Detail {
 		return elemento;
 	}
 
+	
+	/**
+	 * Adiciona um Gráfico no detail<br>
+	 * <b> Exemplo:
+	 * 
+	 * <pre>
+	 * d.addChart().addChartBar().addLabel("Título do Gráfico", "Texto no Eixo x", "Texto no Eixo y").build();
+	 * d.addChart().addChartLine().addLabel("Título do Gráfico", "Texto no Eixo x", "Texto no Eixo y").build();
+	 * d.addChart().addChartPie().addLabel("Título do Gráfico").addDataSet("Label1", 3L).addDataSet("Label2", 4L).build();
+	 * </pre>
+	 * 
+	 * </b>
+	 **/
 	public Chart addChart() {
 		return chart;
 	}
