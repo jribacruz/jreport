@@ -1,7 +1,5 @@
 package br.jreport.model;
 
-import br.jreport.table.DataTableBodyModel;
-import br.jreport.template.ChartPie;
 import br.jreport.template.Detail;
 import br.jreport.template.PageFooter;
 import br.jreport.template.PageHeader;
@@ -18,7 +16,7 @@ public class ModelExempleOne extends SimpleReport {
 
 	@Override
 	protected void title(Title t) {
-		t.addBrasao().addTitle("Title Of Report").build();
+		t.addImage("brasao.png").addTitle("Title Of Report").build();
 
 	}
 

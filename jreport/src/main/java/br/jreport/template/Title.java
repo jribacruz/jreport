@@ -24,26 +24,26 @@ public class Title {
 		this.document = document;
 	}
 
-	/**
-	 * Adiciona o Brasão da República <br>
-	 * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
-	 * O arquivo do brasão já esta definido em /src/main/resources do próprio
-	 * Jreport <br>
-	 * <b> Exemplo:
-	 * 
-	 * <pre>
-	 * t.addBrasao().build();
-	 * </pre>
-	 * 
-	 * </b>
-	 **/
-	public Title addBrasao() {
-		Image brasao = DocumentHelper.loadImage("brasao.png");
-		brasao.setAlignment(Image.ALIGN_CENTER);
-		brasao.scaleAbsolute(40f, 40f);
-		elements.add(brasao);
-		return this;
-	}
+	// /** @formatter:off
+	// * Adiciona o Brasão da República <br>
+	// * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
+	// * O arquivo do brasão já esta definido em /src/main/resources do próprio
+	// * Jreport <br>
+	// * <b> Exemplo:
+	// *
+	// * <pre>
+	// * t.addBrasao().build();
+	// * </pre>
+	// *
+	// * </b>
+	// **/
+	// public Title addBrasao() {
+	// Image brasao = DocumentHelper.loadImage("brasao.png");
+	// brasao.setAlignment(Image.ALIGN_CENTER);
+	// brasao.scaleAbsolute(40f, 40f);
+	// elements.add(brasao);
+	// return this;
+	// } @formatter:on
 
 	/**
 	 * Adiciona um Título <br>
@@ -93,11 +93,20 @@ public class Title {
 	 * t.addImage("ok.jpg").build();
 	 * </pre>
 	 * 
+	 * Obs: Para adiciona o Brasão da República, passar string "brasao-republica" <br>
+	 * 
 	 */
 	public Title addImage(String imageName) {
-		Image brasao = DocumentHelper.loadImage(imageName);
-		brasao.setAlignment(Image.ALIGN_CENTER);
-		elements.add(brasao);
+		if (imageName.trim().toLowerCase().startsWith("brasao-republica")) {
+			Image brasao = DocumentHelper.loadImage("brasao-republica.png");
+			brasao.setAlignment(Image.ALIGN_CENTER);
+			brasao.scaleAbsolute(40f, 40f);
+			elements.add(brasao);
+		} else {
+			Image brasao = DocumentHelper.loadImage(imageName);
+			brasao.setAlignment(Image.ALIGN_CENTER);
+			elements.add(brasao);
+		}
 		return this;
 	}
 

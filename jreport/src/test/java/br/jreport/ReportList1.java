@@ -35,7 +35,7 @@ public class ReportList1 extends SimpleReport {
 
 	protected void title(Title t) {
 
-		t.addBrasao().addTitle("Relatorio xxxxxxx");
+		t.addImage("brasao-republica.png").addTitle("Relatorio xxxxxxx");
 
 		// Title titulo = new Title();
 		// titulo.addBrasao();

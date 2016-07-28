@@ -245,7 +245,15 @@ public class DocumentHelper {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
 			Image image = Image.getInstance(imageURL);
+			
 			image.setAlignment(style.getAlign().getValue());
+			if (style.getHeight() != null) {
+				image.scaleAbsoluteHeight(style.getHeight());
+			}
+			if (style.getWidth() != null) {
+				image.scaleAbsoluteWidth(style.getWidth());
+			}
+			
 			return image;
 		} catch (BadElementException e) {
 			e.printStackTrace();

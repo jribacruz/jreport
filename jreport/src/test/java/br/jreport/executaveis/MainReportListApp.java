@@ -24,7 +24,7 @@ public class MainReportListApp {
 //		report1.generate(new FileOutputStream(new File("target/report1.pdf")));
 		
 		NovoRel relP = new NovoRel();
-		relP.generate(new FileOutputStream(new File("target/reportreaaaaaaaalP.pdf")));
+		relP.generate(new FileOutputStream(new File("target/brasao4.pdf")));
 
 //		ReportListTableHeaderSuport report2 = new ReportListTableHeaderSuport(list);
 //		report2.generate(new FileOutputStream(new File("target/report2.pdf")));

@@ -23,7 +23,7 @@ public class NovoRel extends SimpleReport {
 
 	@Override
 	protected void title(Title t) {
-		t.addBrasao().addTitle("aaaaaaa").build();
+		t.addImage("brasao-republica").addTitle("aaaaaaa").build();
 	}
 
 	@Override
