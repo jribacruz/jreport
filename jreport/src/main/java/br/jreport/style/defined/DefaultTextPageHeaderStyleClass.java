@@ -13,7 +13,7 @@ public class DefaultTextPageHeaderStyleClass extends TextStyleClass {
 		this.setFontStyle(FontStyle.NORMAL);
 		this.setFontSize(9);
 		this.setTextAlign(TextAlign.RIGHT);
-		this.setFontColor(Color.GRAY);
+		this.setColor(Color.GRAY);
 	}
 
 }

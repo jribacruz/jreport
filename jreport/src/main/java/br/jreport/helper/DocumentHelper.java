@@ -49,7 +49,7 @@ public class DocumentHelper {
 		Font f = new Font(Font.HELVETICA);
 		f.setSize(styleClass.getFontSize());
 		f.setStyle(styleClass.getFontStyle().getValue());
-		f.setColor(styleClass.getFontColor());
+		f.setColor(styleClass.getColor());
 
 		Chunk chunk = new Chunk(text, f);
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
@@ -96,6 +96,12 @@ public class DocumentHelper {
 		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
 		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 		cell.setBorderWidth(styleClass.getBorderWidth());
+		
+		cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());
 		cell.setBackgroundColor(styleClass.getBackgroundCellColor());

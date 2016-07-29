@@ -14,7 +14,7 @@ public class TextStyleClass {
 
 	/** Text **/
 
-	private Color fontColor = Color.BLACK;
+	private Color color = Color.BLACK;
 
 	private TextAlign textAlign = TextAlign.JUSTIFIED;
 
@@ -47,10 +47,10 @@ public class TextStyleClass {
 		try {
 			if (style.contains(":")) {
 				Map<String, String> map = Splitter.on(";").trimResults().omitEmptyStrings().withKeyValueSeparator(":").split(style);
-				setFontColor(map.get("color"));
+				setColor(map.get("color"));
 				setTextAlign(map.get("text-align"));
 				setTextDecoration(map.get("text-decoration"));
-				setFirstLineIndent(map.get("text-indent"));
+				setTextIndent(map.get("text-indent"));
 				setMarginLeft(map.get("margin-left"));
 				setFontSize(map.get("font-size"));
 				setFontStyle(map.get("font-style"), map.get("font-weight"));
@@ -64,14 +64,9 @@ public class TextStyleClass {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// TODO se todos os parametros fossem String
-		// DozerBeanMapper seria a melhor solução.
-		// DozerBeanMapper mapper = new DozerBeanMapper();
-		// TextStyleClass pojo = mapper.map(map, TextStyleClass.class);
 	}
 
-	public void setMarginLeft(String marginLeft) {
+	private void setMarginLeft(String marginLeft) {
 		if (marginLeft != null) {
 			try {
 				this.textMarginLeft = Float.valueOf(marginLeft.trim());
@@ -81,7 +76,7 @@ public class TextStyleClass {
 		}
 	}
 
-	public void setFirstLineIndent(String textIndent) {
+	private void setTextIndent(String textIndent) {
 		if (textIndent != null) {
 			try {
 				this.textIndent = Float.valueOf(textIndent.trim());
@@ -91,38 +86,13 @@ public class TextStyleClass {
 		}
 	}
 
-	// public void setBackgroudColor(String backgroudColor) {
-	// if (backgroudColor != null) {
-	// if (backgroudColor.trim().startsWith("#")) {
-	// this.backgroudColor = Color.decode(backgroudColor.trim().toUpperCase());
-	// } else {
-	// try {
-	// Field field = Color.class.getField(backgroudColor.trim().toLowerCase());
-	// this.backgroudColor = (Color) field.get(null);
-	// } catch (NoSuchFieldException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (SecurityException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (IllegalArgumentException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (IllegalAccessException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	// }
-
-	public void setTextDecoration(String textDecoration) {
+	private void setTextDecoration(String textDecoration) {
 		if (textDecoration != null) {
 			this.textDecoration = TextDecoration.valueOf(textDecoration.trim().toUpperCase());
 		}
 	}
 
-	public void setFontStyle(String fontStyle, String fontWeight) {
+	private void setFontStyle(String fontStyle, String fontWeight) {
 		if (fontStyle != null) {
 			fontStyle = fontStyle.trim().toUpperCase().equals("NORMAL") ? null : fontStyle;
 		}
@@ -140,13 +110,13 @@ public class TextStyleClass {
 		}
 	}
 
-	public void setTextAlign(String textAlign) {
+	private void setTextAlign(String textAlign) {
 		if (textAlign != null) {
 			this.textAlign = TextAlign.valueOf(textAlign.trim().toUpperCase());
 		}
 	}
 
-	public void setFontSize(String fontSize) {
+	private void setFontSize(String fontSize) {
 		if (fontSize != null) {
 			try {
 				this.fontSize = Float.valueOf(fontSize.trim());
@@ -156,14 +126,14 @@ public class TextStyleClass {
 		}
 	}
 
-	public void setFontColor(String fontColor) {
+	private void setColor(String fontColor) {
 		if (fontColor != null) {
 			if (fontColor.trim().startsWith("#")) {
-				this.fontColor = Color.decode(fontColor.trim().toUpperCase());
+				this.color = Color.decode(fontColor.trim().toUpperCase());
 			} else {
 				try {
 					Field field = Color.class.getField(fontColor.trim().toLowerCase());
-					this.fontColor = (Color) field.get(null);
+					this.color = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -205,12 +175,12 @@ public class TextStyleClass {
 		this.fontSize = fontSize;
 	}
 
-	public Color getFontColor() {
-		return fontColor;
+	public Color getColor() {
+		return color;
 	}
 
-	public void setFontColor(Color fontColor) {
-		this.fontColor = fontColor;
+	public void setColor(Color fontColor) {
+		this.color = fontColor;
 	}
 
 	// public Color getBackgroudColor() {
@@ -247,8 +217,8 @@ public class TextStyleClass {
 
 	@Override
 	public String toString() {
-		return "TextStyleClass [fontColor=" + fontColor + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration
-				+ ", indent=" + textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
+		return "TextStyleClass [fontColor=" + color + ", textAlign=" + textAlign + ", textDecoration=" + textDecoration + ", indent="
+				+ textIndent + ", marginLeft=" + textMarginLeft + ", fontSize=" + fontSize + ", fontStyle=" + fontStyle + "]";
 	}
 
 }

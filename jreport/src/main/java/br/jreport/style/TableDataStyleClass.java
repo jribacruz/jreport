@@ -21,10 +21,10 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private Color borderColor = Color.BLACK;
 	private float borderWidth = 0.5f;
-	private float borderWidthTop = 0.5f;
-	private float borderWidthLeft = 0.5f;
-	private float borderWidthRight = 0.5f;
-	private float borderWidthBottom = 0.5f;
+	private float borderTopWidth = 0.5f;
+	private float borderLeftWidth = 0.5f;
+	private float borderRightWidth = 0.5f;
+	private float borderBottomWidth = 0.5f;
 	private int colspan = 1;
 	private Color backgroundCellColor = Color.WHITE;
 
@@ -38,6 +38,12 @@ public class TableDataStyleClass extends TextStyleClass {
 				setHeight(map.get("height"));
 				setBorderColor(map.get("border-color"));
 				setBorderWidth(map.get("border-width"));
+
+				setBorderTopWidth(map.get("border-top-width"));
+				setBorderLeftWidth(map.get("border-left-width"));
+				setBorderRightWidth(map.get("border-right-width"));
+				setBorderBottomWidth(map.get("border-bottom-width"));
+				
 				setColspan(map.get("colspan"));
 				setBackgroundCellColor(map.get("background-color"));
 				setWidth(map.get("width"));
@@ -132,6 +138,42 @@ public class TableDataStyleClass extends TextStyleClass {
 				this.borderWidth = Float.valueOf(borderWidth.trim());
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException("Elemento inválido para border-width, valor: " + borderWidth);
+			}
+		}
+	}
+	public void setBorderTopWidth(String borderTopWidth) {
+		if (borderTopWidth != null) {
+			try {
+				this.borderTopWidth = Float.valueOf(borderTopWidth.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border-top-width, valor: " + borderTopWidth);
+			}
+		}
+	}
+	public void setBorderLeftWidth(String borderLeftWidth) {
+		if (borderLeftWidth != null) {
+			try {
+				this.borderLeftWidth = Float.valueOf(borderLeftWidth.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border-left-width, valor: " + borderLeftWidth);
+			}
+		}
+	}
+	public void setBorderRightWidth(String borderRightWidth) {
+		if (borderRightWidth != null) {
+			try {
+				this.borderRightWidth = Float.valueOf(borderRightWidth.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border-right-width, valor: " + borderRightWidth);
+			}
+		}
+	}
+	public void setBorderBottomWidth(String borderBottomWidth) {
+		if (borderBottomWidth != null) {
+			try {
+				this.borderBottomWidth = Float.valueOf(borderBottomWidth.trim());
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Elemento inválido para border-bottom-width, valor: " + borderBottomWidth);
 			}
 		}
 	}
@@ -249,36 +291,36 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.width = width;
 	}
 
-	public float getBorderWidthTop() {
-		return borderWidthTop;
+	public float getBorderTopWidth() {
+		return borderTopWidth;
 	}
 
-	public void setBorderWidthTop(float borderWidthTop) {
-		this.borderWidthTop = borderWidthTop;
+	public void setBorderTopWidth(float borderWidthTop) {
+		this.borderTopWidth = borderWidthTop;
 	}
 
-	public float getBorderWidthLeft() {
-		return borderWidthLeft;
+	public float getBorderLeftWidth() {
+		return borderLeftWidth;
 	}
 
-	public void setBorderWidthLeft(float borderWidthLeft) {
-		this.borderWidthLeft = borderWidthLeft;
+	public void setBorderLeftWidth(float borderWidthLeft) {
+		this.borderLeftWidth = borderWidthLeft;
 	}
 
-	public float getBorderWidthRight() {
-		return borderWidthRight;
+	public float getBorderRightWidth() {
+		return borderRightWidth;
 	}
 
-	public void setBorderWidthRight(float borderWidthRight) {
-		this.borderWidthRight = borderWidthRight;
+	public void setBorderRightWidth(float borderWidthRight) {
+		this.borderRightWidth = borderWidthRight;
 	}
 
-	public float getBorderWidthBottom() {
-		return borderWidthBottom;
+	public float getBorderBottomWidth() {
+		return borderBottomWidth;
 	}
 
-	public void setBorderWidthBottom(float borderWidthBottom) {
-		this.borderWidthBottom = borderWidthBottom;
+	public void setBorderBottomWidth(float borderWidthBottom) {
+		this.borderBottomWidth = borderWidthBottom;
 	}
 
 }
