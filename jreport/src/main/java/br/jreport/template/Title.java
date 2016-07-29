@@ -24,26 +24,26 @@ public class Title {
 		this.document = document;
 	}
 
-	// /** @formatter:off
-	// * Adiciona o Brasão da República <br>
-	// * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
-	// * O arquivo do brasão já esta definido em /src/main/resources do próprio
-	// * Jreport <br>
-	// * <b> Exemplo:
-	// *
-	// * <pre>
-	// * t.addBrasao().build();
-	// * </pre>
-	// *
-	// * </b>
-	// **/
-	// public Title addBrasao() {
-	// Image brasao = DocumentHelper.loadImage("brasao.png");
-	// brasao.setAlignment(Image.ALIGN_CENTER);
-	// brasao.scaleAbsolute(40f, 40f);
-	// elements.add(brasao);
-	// return this;
-	// } @formatter:on
+//	/**
+//	 * Adiciona o Brasão da República <br>
+//	 * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
+//	 * O arquivo do brasão já esta definido em /src/main/resources do próprio
+//	 * Jreport <br>
+//	 * <b> Exemplo:
+//	 * 
+//	 * <pre>
+//	 * t.addBrasao().build();
+//	 * </pre>
+//	 * 
+//	 * </b>
+//	 **/
+//	public Title addBrasao() {
+//		Image brasao = DocumentHelper.loadImage("brasao.png");
+//		brasao.setAlignment(Image.ALIGN_CENTER);
+//		brasao.scaleAbsolute(40f, 40f);
+//		elements.add(brasao);
+//		return this;
+//	}
 
 	/**
 	 * Adiciona um Título <br>
