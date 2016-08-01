@@ -133,10 +133,18 @@ public class DocumentHelper {
 		
 		cell.setBorderWidth(styleClass.getBorderWidth());
 		
-		cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
-		cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
-		cell.setBorderWidthRight(styleClass.getBorderRightWidth());
-		cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		if (styleClass.getBorderBottomWidth()!=null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth()!=null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth()!=null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth()!=null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		}
 		
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());

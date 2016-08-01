@@ -38,7 +38,7 @@ public class ColspanLineEx extends SimpleReport {
 		//@formatter:off
 		d.addColspanLine().addCols(3)
 				.addElement(d.addElemento().addText("Para adicionar mais de um elemento em uma linha deve-se usar addColspanLine"))
-				.addElement(d.addElemento().addImage("tux.png", "width: 20; height:25; align: right"), "border-width:2")
+				.addElement(d.addElemento().addImage("tux.png", "width: 20; height:25; align: right"))
 				.addElement(d.addElemento().addImage("tux.png", "width: 20; height:25; align: right"))
 			.build();
 		espacoExemplo();

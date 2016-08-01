@@ -17,14 +17,14 @@ public class TableDataStyleClass extends TextStyleClass {
 	private int horizontalAlignment = TextAlign.LEFT.getValue();
 
 	private Float height = null;
-	private float width = 1f;
+	private Float width = 1f;
 
 	private Color borderColor = Color.BLACK;
-	private float borderWidth = 0.5f;
-	private float borderTopWidth = 0.5f;
-	private float borderLeftWidth = 0.5f;
-	private float borderRightWidth = 0.5f;
-	private float borderBottomWidth = 0.5f;
+	private Float borderWidth = 0.5f;
+	private Float borderTopWidth = 0.5f;
+	private Float borderLeftWidth = 0.5f;
+	private Float borderRightWidth = 0.5f;
+	private Float borderBottomWidth = 0.5f;
 	private int colspan = 1;
 	private Color backgroundCellColor = Color.WHITE;
 
@@ -43,7 +43,7 @@ public class TableDataStyleClass extends TextStyleClass {
 				setBorderLeftWidth(map.get("border-left-width"));
 				setBorderRightWidth(map.get("border-right-width"));
 				setBorderBottomWidth(map.get("border-bottom-width"));
-				
+
 				setColspan(map.get("colspan"));
 				setBackgroundCellColor(map.get("background-color"));
 				setWidth(map.get("width"));
@@ -59,13 +59,13 @@ public class TableDataStyleClass extends TextStyleClass {
 		super();
 	}
 
-	public TableDataStyleClass(float width, int colspan, Color backgroundTableColor, Color borderColor, float tableSpaceCell) {
+	public TableDataStyleClass(Float width, int colspan, Color backgroundTableColor, Color borderColor, Float tableSpaceCell) {
 		super();
 		this.colspan = colspan;
 		this.backgroundCellColor = backgroundTableColor;
 		this.borderColor = borderColor;
 	}
-	
+
 	public void setWidth(String width) {
 		if (width != null) {
 			try {
@@ -141,6 +141,7 @@ public class TableDataStyleClass extends TextStyleClass {
 			}
 		}
 	}
+
 	public void setBorderTopWidth(String borderTopWidth) {
 		if (borderTopWidth != null) {
 			try {
@@ -150,6 +151,7 @@ public class TableDataStyleClass extends TextStyleClass {
 			}
 		}
 	}
+
 	public void setBorderLeftWidth(String borderLeftWidth) {
 		if (borderLeftWidth != null) {
 			try {
@@ -159,6 +161,7 @@ public class TableDataStyleClass extends TextStyleClass {
 			}
 		}
 	}
+
 	public void setBorderRightWidth(String borderRightWidth) {
 		if (borderRightWidth != null) {
 			try {
@@ -168,6 +171,7 @@ public class TableDataStyleClass extends TextStyleClass {
 			}
 		}
 	}
+
 	public void setBorderBottomWidth(String borderBottomWidth) {
 		if (borderBottomWidth != null) {
 			try {
@@ -251,11 +255,11 @@ public class TableDataStyleClass extends TextStyleClass {
 	// this.border = border;
 	// }
 
-	public float getBorderWidth() {
+	public Float getBorderWidth() {
 		return borderWidth;
 	}
 
-	public void setBorderWidth(float borderWidth) {
+	public void setBorderWidth(Float borderWidth) {
 		this.borderWidth = borderWidth;
 	}
 
@@ -283,43 +287,43 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.backgroundCellColor = backgroundCellColor;
 	}
 
-	public float getWidth() {
+	public Float getWidth() {
 		return width;
 	}
 
-	public void setWidth(float width) {
+	public void setWidth(Float width) {
 		this.width = width;
 	}
 
-	public float getBorderTopWidth() {
+	public Float getBorderTopWidth() {
 		return borderTopWidth;
 	}
 
-	public void setBorderTopWidth(float borderWidthTop) {
+	public void setBorderTopWidth(Float borderWidthTop) {
 		this.borderTopWidth = borderWidthTop;
 	}
 
-	public float getBorderLeftWidth() {
+	public Float getBorderLeftWidth() {
 		return borderLeftWidth;
 	}
 
-	public void setBorderLeftWidth(float borderWidthLeft) {
+	public void setBorderLeftWidth(Float borderWidthLeft) {
 		this.borderLeftWidth = borderWidthLeft;
 	}
 
-	public float getBorderRightWidth() {
+	public Float getBorderRightWidth() {
 		return borderRightWidth;
 	}
 
-	public void setBorderRightWidth(float borderWidthRight) {
+	public void setBorderRightWidth(Float borderWidthRight) {
 		this.borderRightWidth = borderWidthRight;
 	}
 
-	public float getBorderBottomWidth() {
+	public Float getBorderBottomWidth() {
 		return borderBottomWidth;
 	}
 
-	public void setBorderBottomWidth(float borderWidthBottom) {
+	public void setBorderBottomWidth(Float borderWidthBottom) {
 		this.borderBottomWidth = borderWidthBottom;
 	}
 

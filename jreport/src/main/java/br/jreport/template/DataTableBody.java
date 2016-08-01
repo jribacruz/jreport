@@ -81,7 +81,7 @@ public class DataTableBody extends JReportElement {
 			}
 
 			v.setHeight(height);
-			v.setBorderWidth(0);
+			v.setBorderWidth(0f);
 			Paragraph paragraph = DocumentHelper.createText("", v);
 			addCellToTable(paragraph, v);
 		} catch (Exception e) {
