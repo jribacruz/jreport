@@ -12,7 +12,7 @@ import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
 //TODO falta implementar e especificar essa classe
-public class Summary {
+public class Summary extends JReportElement {
 
 	private List<Element> elements = new ArrayList<Element>();
 
@@ -22,6 +22,10 @@ public class Summary {
 
 	public Summary(Document document) {
 		this.document = document;
+	}
+
+	public ColspanLine addColspanLine() {
+		return new ColspanLine(document);
 	}
 
 	/**
@@ -86,6 +90,12 @@ public class Summary {
 	public Summary addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
 		return this;
+	}
+
+	protected Element buildElement() {
+		Element retorno = getElements().get(0);
+		elements = new ArrayList<Element>();
+		return retorno;
 	}
 
 	public void build() {

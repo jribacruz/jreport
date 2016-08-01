@@ -23,7 +23,7 @@ import br.jreport.core.DataModelChartPie;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
-public class ChartPie {
+public class ChartPie extends JReportElement {
 
 	private DefaultPieDataset dataset = new DefaultPieDataset();
 
@@ -41,7 +41,7 @@ public class ChartPie {
 
 	// Criar lógica para retornar elemento a fim de setar dentro de o outro
 	// componente. Ex.: DataTable
-	public Element createElement() {
+	protected Element buildElement() {
 		JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
 		configStyleChart(chart);
 		Image image = null;

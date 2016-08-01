@@ -18,13 +18,11 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 
-import br.jreport.core.DataModelChartBar;
 import br.jreport.core.DataModelChartLine;
-import br.jreport.core.DataModelChartPie;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
-public class ChartLine {
+public class ChartLine extends JReportElement {
 
 	private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -48,7 +46,7 @@ public class ChartLine {
 
 	// Criar lógica para retornar elemento a fim de setar dentro de o outro
 	// componente. Ex.: DataTable
-	public Element createElement() {
+	protected Element buildElement() {
 		JFreeChart chart = ChartFactory.createLineChart(title, eixoX, eixoY, dataset, orientacao, false, true, false);
 		configStyleChart(chart);
 		Image image = null;

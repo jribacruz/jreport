@@ -26,6 +26,7 @@ import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextStyleClass;
+import br.jreport.style.defined.DetaultColspanLineStyleClass;
 import br.jreport.table.TableConstructor;
 import br.jreport.table.TableHeader;
 
@@ -105,6 +106,42 @@ public class DocumentHelper {
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());
 		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+		return cell;
+	}
+	
+	public static PdfPCell addElementCellToTable(Element p) {
+		PdfPCell cell = new PdfPCell();
+		cell.addElement(p);
+		
+		cell.setBorderWidthBottom(0);
+		cell.setBorderWidthLeft(0);
+		cell.setBorderWidthRight(0);
+		cell.setBorderWidthTop(0);
+		
+		return cell;
+	}
+	
+	public static PdfPCell addElementCellToTable(Element p, DetaultColspanLineStyleClass styleClass) {
+		PdfPCell cell = new PdfPCell();
+		cell.addElement(p);
+		
+		if (styleClass.getHeight() !=null) {
+			cell.setFixedHeight(styleClass.getHeight());
+		}
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+		
+		cell.setBorderWidth(styleClass.getBorderWidth());
+		
+		cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+		
 		return cell;
 	}
 

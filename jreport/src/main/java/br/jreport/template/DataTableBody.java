@@ -1,8 +1,9 @@
-package br.jreport.core;
+package br.jreport.template;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 
@@ -10,10 +11,9 @@ import br.jreport.helper.DocumentHelper;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
-import br.jreport.template.DataTable;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DataTableBody {
+public class DataTableBody extends JReportElement {
 
 	private List<PdfPCell> cells = new ArrayList<PdfPCell>();
 
@@ -109,6 +109,10 @@ public class DataTableBody {
 
 	private void addCellToTable(Paragraph p, TableDataStyleClass styleClass) {
 		cells.add(DocumentHelper.createPdfPCell(p, styleClass));
+	}
+
+	protected Element buildElement() {
+		return parent.buildElement();
 	}
 
 	public void build() {

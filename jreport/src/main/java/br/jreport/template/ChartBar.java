@@ -9,7 +9,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
@@ -25,7 +24,7 @@ import br.jreport.core.DataModelChartBar;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 
-public class ChartBar {
+public class ChartBar extends JReportElement {
 
 	private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -49,7 +48,7 @@ public class ChartBar {
 
 	// Criar lógica para retornar elemento a fim de setar dentro de o outro
 	// componente. Ex.: DataTable
-	public Element createElement() {
+	protected Element buildElement() {
 		JFreeChart chart = ChartFactory.createBarChart(title, eixoX, eixoY, dataset, orientacao, false, true, false);
 		configStyleChart(chart);
 		Image image = null;
@@ -102,12 +101,6 @@ public class ChartBar {
 		plot.setDomainGridlinePaint(Color.black);
 		plot.setDomainGridlinesVisible(true);
 		plot.setRangeGridlinePaint(Color.black);
-	
-		
-	
-		
-	
-		
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());

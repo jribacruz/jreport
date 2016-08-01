@@ -6,28 +6,22 @@ public class Detail {
 
 	private Document document;
 
-	private Elemento elemento;
-
-	private DataTable datatable;
-
-	private Chart chart;
-
 	public Detail(Document document) {
 		this.document = document;
-		elemento = new Elemento(this.document);
-		datatable = new DataTable(this.document);
-		chart = new Chart(this.document);
+	}
+
+	public ColspanLine addColspanLine() {
+		return new ColspanLine(this.document);
 	}
 
 	public DataTable addDataTable() {
-		return datatable;
+		return new DataTable(this.document);
 	}
 
 	public Elemento addElemento() {
-		return elemento;
+		return new Elemento(this.document);
 	}
 
-	
 	/**
 	 * Adiciona um Gráfico no detail<br>
 	 * <b> Exemplo:
@@ -41,7 +35,7 @@ public class Detail {
 	 * </b>
 	 **/
 	public Chart addChart() {
-		return chart;
+		return new Chart(this.document);
 	}
 
 }

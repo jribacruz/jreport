@@ -3,13 +3,13 @@ package br.jreport.template;
 import java.util.ArrayList;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.pdf.PdfPCell;
 
-import br.jreport.core.DataTableBody;
 import br.jreport.helper.DocumentHelper;
 import br.jreport.table.TableHeader;
 
-public class DataTable {
+public class DataTable extends JReportElement {
 
 	private Document document;
 
@@ -32,6 +32,26 @@ public class DataTable {
 	public DataTableBody addHeader(TableHeader[] headers) {
 		child = new DataTableBody(headers, this);
 		return child;
+	}
+	
+	@Override
+	protected Element buildElement() {
+		Element elemento = null;
+		try {
+			if (child.getHeadersObject() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersObject(), child.getCells()).getPdfPTable();
+			} else if (child.getHeadersString() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersString(), child.getCells()).getPdfPTable();
+			} else if (child.getHeadersColspan() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersColspan(), child.getCells()).getPdfPTable();
+			} else {
+				throw new Exception("Defina o Header");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		clear();
+		return elemento;
 	}
 
 	public void build() {

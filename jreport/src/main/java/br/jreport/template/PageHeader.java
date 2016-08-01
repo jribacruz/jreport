@@ -12,7 +12,7 @@ import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextPageHeaderStyleClass;
 
-public class PageHeader {
+public class PageHeader extends JReportElement {
 
 	private List<Element> elements = new ArrayList<Element>();
 
@@ -22,6 +22,10 @@ public class PageHeader {
 
 	public PageHeader(Document document) {
 		this.document = document;
+	}
+
+	public ColspanLine addColspanLine() {
+		return new ColspanLine(document);
 	}
 
 	/**
@@ -104,6 +108,12 @@ public class PageHeader {
 	public PageHeader addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
 		return this;
+	}
+
+	protected Element buildElement() {
+		Element retorno = getElements().get(0);
+		elements = new ArrayList<Element>();
+		return retorno;
 	}
 
 	public void build() {

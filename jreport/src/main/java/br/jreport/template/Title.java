@@ -12,7 +12,7 @@ import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TextStyleClass;
 import br.jreport.style.defined.DefaultTextTitleStyleClass;
 
-public class Title {
+public class Title extends JReportElement {
 
 	private List<Element> elements = new ArrayList<Element>();
 
@@ -24,26 +24,30 @@ public class Title {
 		this.document = document;
 	}
 
-//	/**
-//	 * Adiciona o Brasão da República <br>
-//	 * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
-//	 * O arquivo do brasão já esta definido em /src/main/resources do próprio
-//	 * Jreport <br>
-//	 * <b> Exemplo:
-//	 * 
-//	 * <pre>
-//	 * t.addBrasao().build();
-//	 * </pre>
-//	 * 
-//	 * </b>
-//	 **/
-//	public Title addBrasao() {
-//		Image brasao = DocumentHelper.loadImage("brasao.png");
-//		brasao.setAlignment(Image.ALIGN_CENTER);
-//		brasao.scaleAbsolute(40f, 40f);
-//		elements.add(brasao);
-//		return this;
-//	}
+	public ColspanLine addColspanLine() {
+		return new ColspanLine(document);
+	}
+
+	// /**
+	// * Adiciona o Brasão da República <br>
+	// * Não é necessário passar o caminho do arquivo que contém o Brasão. <br>
+	// * O arquivo do brasão já esta definido em /src/main/resources do próprio
+	// * Jreport <br>
+	// * <b> Exemplo:
+	// *
+	// * <pre>
+	// * t.addBrasao().build();
+	// * </pre>
+	// *
+	// * </b>
+	// **/
+	// public Title addBrasao() {
+	// Image brasao = DocumentHelper.loadImage("brasao.png");
+	// brasao.setAlignment(Image.ALIGN_CENTER);
+	// brasao.scaleAbsolute(40f, 40f);
+	// elements.add(brasao);
+	// return this;
+	// }
 
 	/**
 	 * Adiciona um Título <br>
@@ -93,7 +97,8 @@ public class Title {
 	 * t.addImage("ok.jpg").build();
 	 * </pre>
 	 * 
-	 * Obs: Para adiciona o Brasão da República, passar string "brasao-republica" <br>
+	 * Obs: Para adiciona o Brasão da República, passar string
+	 * "brasao-republica" <br>
 	 * 
 	 */
 	public Title addImage(String imageName) {
@@ -134,6 +139,12 @@ public class Title {
 	public Title addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
 		return this;
+	}
+
+	protected Element buildElement() {
+		Element retorno = getElements().get(0);
+		elements = new ArrayList<Element>();
+		return retorno;
 	}
 
 	/**

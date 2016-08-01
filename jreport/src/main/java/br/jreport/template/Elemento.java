@@ -11,7 +11,7 @@ import br.jreport.helper.DocumentHelper;
 import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TextStyleClass;
 
-public class Elemento {
+public class Elemento extends JReportElement {
 
 	private List<Element> elements = new ArrayList<Element>();
 
@@ -68,6 +68,12 @@ public class Elemento {
 	public Elemento addSeparator() {
 		elements.add(DocumentHelper.createDefaultSeparator());
 		return this;
+	}
+
+	protected Element buildElement() {
+		Element retorno = getElements().get(0);
+		elements = new ArrayList<Element>();
+		return retorno;
 	}
 
 	public void build() {
