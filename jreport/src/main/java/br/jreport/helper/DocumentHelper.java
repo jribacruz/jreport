@@ -56,14 +56,16 @@ public class DocumentHelper {
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
 			chunk.setUnderline(styleClass.getTextDecoration().getThick(), styleClass.getTextDecoration().getY());
 		}
-//@formatter:off
-//		if (styleClass.getBackgroudColor() != null) {
-//		chunk.setBackground(styleClass.getBackgroudColor());
-// (TODO implementação para background color de texto deve passar também o tamanho do retangulo 
-//		para não ficar estranho, como atualmente fica) 
-//		chunk.setBackground(color, extraLeft, extraBottom, extraRight, extraTop)
-//		}@
-//formatter:on
+		// @formatter:off
+		// if (styleClass.getBackgroudColor() != null) {
+		// chunk.setBackground(styleClass.getBackgroudColor());
+		// (TODO implementação para background color de texto deve passar também
+		// o tamanho do retangulo
+		// para não ficar estranho, como atualmente fica)
+		// chunk.setBackground(color, extraLeft, extraBottom, extraRight,
+		// extraTop)
+		// }@
+		// formatter:on
 		Paragraph p = new Paragraph(chunk);
 		p.setFirstLineIndent(styleClass.getTextIndent());
 		p.setIndentationLeft(styleClass.getMarginLeft());
@@ -75,7 +77,7 @@ public class DocumentHelper {
 	public static void createPdfPCell(Paragraph p, TableDataStyleClass styleClass, PdfPTable pdfPTable) {
 		PdfPCell cell = new PdfPCell();
 		cell.addElement(p);
-		if (styleClass.getHeight() !=null) {
+		if (styleClass.getHeight() != null) {
 			cell.setFixedHeight(styleClass.getHeight());
 		}
 		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
@@ -83,6 +85,21 @@ public class DocumentHelper {
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());
 		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+
+		cell.setBorderWidth(styleClass.getBorderWidth());
+
+		if (styleClass.getBorderBottomWidth() != null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth() != null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth() != null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth() != null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		}
 
 		pdfPTable.addCell(cell);
 
@@ -91,65 +108,73 @@ public class DocumentHelper {
 	public static PdfPCell createPdfPCell(Paragraph p, TableDataStyleClass styleClass) {
 		PdfPCell cell = new PdfPCell();
 		cell.addElement(p);
-		if (styleClass.getHeight() !=null) {
+		if (styleClass.getHeight() != null) {
 			cell.setFixedHeight(styleClass.getHeight());
 		}
 		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
 		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
 		cell.setBorderWidth(styleClass.getBorderWidth());
-		
-		cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
-		cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
-		cell.setBorderWidthRight(styleClass.getBorderRightWidth());
-		cell.setBorderWidthTop(styleClass.getBorderTopWidth());
-		
+
+		if (styleClass.getBorderBottomWidth() != null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth() != null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth() != null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth() != null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		}
+
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());
 		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
 		return cell;
 	}
-	
+
 	public static PdfPCell addElementCellToTable(Element p) {
 		PdfPCell cell = new PdfPCell();
 		cell.addElement(p);
-		
+
 		cell.setBorderWidthBottom(0);
 		cell.setBorderWidthLeft(0);
 		cell.setBorderWidthRight(0);
 		cell.setBorderWidthTop(0);
-		
+
 		return cell;
 	}
-	
+
 	public static PdfPCell addElementCellToTable(Element p, DetaultColspanLineStyleClass styleClass) {
 		PdfPCell cell = new PdfPCell();
 		cell.addElement(p);
-		
-		if (styleClass.getHeight() !=null) {
+
+		if (styleClass.getHeight() != null) {
 			cell.setFixedHeight(styleClass.getHeight());
 		}
 		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
 		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
-		
+
 		cell.setBorderWidth(styleClass.getBorderWidth());
-		
-		if (styleClass.getBorderBottomWidth()!=null) {
+
+		if (styleClass.getBorderBottomWidth() != null) {
 			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
 		}
-		if (styleClass.getBorderLeftWidth()!=null) {
+		if (styleClass.getBorderLeftWidth() != null) {
 			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
 		}
-		if (styleClass.getBorderRightWidth()!=null) {
+		if (styleClass.getBorderRightWidth() != null) {
 			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
 		}
-		if (styleClass.getBorderTopWidth()!=null) {
+		if (styleClass.getBorderTopWidth() != null) {
 			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
 		}
-		
+
 		cell.setBorderColor(styleClass.getBorderColor());
 		cell.setColspan(styleClass.getColspan());
 		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
-		
+
 		return cell;
 	}
 
@@ -274,7 +299,7 @@ public class DocumentHelper {
 		image.setAlignment(style.getAlign().getValue());
 		return null;
 	}
-	
+
 	public static Image loadImage(String imageName) {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
@@ -291,12 +316,12 @@ public class DocumentHelper {
 		}
 		return null;
 	}
-	
+
 	public static Image loadImage(String imageName, ImageStyleClass style) {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
 			Image image = Image.getInstance(imageURL);
-			
+
 			image.setAlignment(style.getAlign().getValue());
 			if (style.getHeight() != null) {
 				image.scaleAbsoluteHeight(style.getHeight());
@@ -304,7 +329,7 @@ public class DocumentHelper {
 			if (style.getWidth() != null) {
 				image.scaleAbsoluteWidth(style.getWidth());
 			}
-			
+
 			return image;
 		} catch (BadElementException e) {
 			e.printStackTrace();
@@ -323,13 +348,15 @@ public class DocumentHelper {
 		return linebreak;
 	}
 
-	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers, List<PdfPCell> cells) {
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers,
+			List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;
 	}
 
-	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers,
+			List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;

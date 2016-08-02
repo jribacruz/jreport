@@ -21,10 +21,10 @@ public class TableDataStyleClass extends TextStyleClass {
 
 	private Color borderColor = Color.BLACK;
 	private Float borderWidth = 0.5f;
-	private Float borderTopWidth = 0.5f;
-	private Float borderLeftWidth = 0.5f;
-	private Float borderRightWidth = 0.5f;
-	private Float borderBottomWidth = 0.5f;
+	private Float borderTopWidth = null;
+	private Float borderLeftWidth = null;
+	private Float borderRightWidth = null;
+	private Float borderBottomWidth = null;
 	private int colspan = 1;
 	private Color backgroundCellColor = Color.WHITE;
 
@@ -196,7 +196,7 @@ public class TableDataStyleClass extends TextStyleClass {
 	public void setVerticalAlignment(String verticalAlignment) {
 		if (verticalAlignment != null) {
 			try {
-				this.verticalAlignment = TextAlign.valueOf(verticalAlignment.trim()).getValue();
+				this.verticalAlignment = TextAlign.valueOf(verticalAlignment.trim().toUpperCase()).getValue();
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException("Elemento inválido para vertical-alignment, valor: " + verticalAlignment);
 			}
@@ -206,7 +206,7 @@ public class TableDataStyleClass extends TextStyleClass {
 	public void setHorizontalAlignment(String horizontalAlignment) {
 		if (horizontalAlignment != null) {
 			try {
-				this.horizontalAlignment = TextAlign.valueOf(horizontalAlignment.trim()).getValue();
+				this.horizontalAlignment = TextAlign.valueOf(horizontalAlignment.trim().toUpperCase()).getValue();
 			} catch (NumberFormatException e) {
 				throw new NumberFormatException("Elemento inválido para horizontal-alignment, valor: " + horizontalAlignment);
 			}
