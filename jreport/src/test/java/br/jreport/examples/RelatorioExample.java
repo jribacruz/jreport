@@ -29,31 +29,40 @@ public class RelatorioExample extends SimpleReport {
 	private static final long serialVersionUID = 1L;
 	private List<CategoriaPagamentoModel> model;
 	private Map<String, BigDecimal> total6Meses = new HashMap<String, BigDecimal>();
-	
+
 	static Random random = new Random();
-	
+	String style1 = "text-align: center; background-color:#8FBFD3";
+	String style2 = "background-color:#849BC3";
+	String style3 = "colspan:3;background-color:#8FBFD3; text-align:center";
+	String style4 = "colspan:3; font-weight: bold; border-top-width:0; border-left-width:0; text-align: center;";
+	String style5 = "colspan:3;background-color:#849BC3; text-align:center";
+
+	TableHeader[] headerJanJun = { th("Categoria de Pagamento", style4), th("JAN", style1), th("FEV", style1), th("MAR", style1),
+			th("ABR", style1), th("MAI", style1), th("JUN", style1) };
+	TableHeader[] headerJulDez = { th("Categoria de Pagamento", style4), th("JUL", style1), th("AGO", style1), th("SET", style1),
+			th("OUT", style1), th("NOV", style1), th("DEZ", style1) };
+	TableHeader[] totalMes = { th("Categoria de Pagamento", style4), th("Total Mes", style1), th("", "border-width: 0; colspan:5") };
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// INICIO CRIANDO MODEL, Normalmente é feito na consulta SQL
 		List<CategoriaPagamentoModel> model = new ArrayList<CategoriaPagamentoModel>();
 
-		CategoriaPagamentoModel model1 = new CategoriaPagamentoModel("ACP - Anuidade", criaMap());
-		CategoriaPagamentoModel model2 = new CategoriaPagamentoModel("ACP MEMBRO - ANUIDADE", criaMap());
-		CategoriaPagamentoModel model3 = new CategoriaPagamentoModel("ALUGUÉIS DE SALAS E AUDITÓRIOS P/EVENTOS",
-				criaMap());
+		CategoriaPagamentoModel model1 = new CategoriaPagamentoModel("ANUIDADE1", criaMap());
+		CategoriaPagamentoModel model2 = new CategoriaPagamentoModel("ANUIDADE2", criaMap());
+		CategoriaPagamentoModel model3 = new CategoriaPagamentoModel("ALUGUÉIS SALAS E AUDITÓRIOS P/EVENTOS", criaMap());
 		CategoriaPagamentoModel model4 = new CategoriaPagamentoModel("CANCELADOS", criaMap());
-		CategoriaPagamentoModel model5 = new CategoriaPagamentoModel("COMISSÃO BOA VISTA", criaMap());
-		CategoriaPagamentoModel model6 = new CategoriaPagamentoModel("CONTRIBUIÇÃO/DOAÇÃO", criaMap());
-		CategoriaPagamentoModel model7 = new CategoriaPagamentoModel("CURSO ACP", criaMap());
-		CategoriaPagamentoModel model8 = new CategoriaPagamentoModel("DEPÓSITO NÃO IDENTIFICADO", criaMap());
-		CategoriaPagamentoModel model9 = new CategoriaPagamentoModel("MENSALIDADE ACP", criaMap());
+		CategoriaPagamentoModel model5 = new CategoriaPagamentoModel("COMISSÃO", criaMap());
+		CategoriaPagamentoModel model6 = new CategoriaPagamentoModel("DOAÇÃO", criaMap());
+		CategoriaPagamentoModel model7 = new CategoriaPagamentoModel("CURSOS", criaMap());
+		CategoriaPagamentoModel model8 = new CategoriaPagamentoModel("DEPÓSITOS", criaMap());
+		CategoriaPagamentoModel model9 = new CategoriaPagamentoModel("MENSALIDADE", criaMap());
 		CategoriaPagamentoModel model10 = new CategoriaPagamentoModel("OUTRAS RECEITAS", criaMap());
-		CategoriaPagamentoModel model11 = new CategoriaPagamentoModel("PATROCÍNIOS DIVERSOS", criaMap());
-		CategoriaPagamentoModel model12 = new CategoriaPagamentoModel("PROPAGANDA E PUBLICIDADE REVISTA", criaMap());
-		CategoriaPagamentoModel model13 = new CategoriaPagamentoModel("RECUPERAÇÃO DE DESPESAS - ACP", criaMap());
+		CategoriaPagamentoModel model11 = new CategoriaPagamentoModel("DIVERSOS", criaMap());
+		CategoriaPagamentoModel model12 = new CategoriaPagamentoModel("PROPAGANDA", criaMap());
+		CategoriaPagamentoModel model13 = new CategoriaPagamentoModel("RECUPERAÇÃO DE DESPESAS", criaMap());
 		CategoriaPagamentoModel model14 = new CategoriaPagamentoModel("RENDIMENTO APLICAÇÃO", criaMap());
-		CategoriaPagamentoModel model15 = new CategoriaPagamentoModel("SÓCIO ESPECIAL", criaMap());
-		CategoriaPagamentoModel model16 = new CategoriaPagamentoModel("SÓCIO INSTITUCIONAL", criaMap());
+		CategoriaPagamentoModel model15 = new CategoriaPagamentoModel("SÓCIO1", criaMap());
+		CategoriaPagamentoModel model16 = new CategoriaPagamentoModel("SÓCIO2", criaMap());
 		model.add(model1);
 		model.add(model2);
 		model.add(model3);
@@ -76,22 +85,22 @@ public class RelatorioExample extends SimpleReport {
 	}
 
 	private static HashMap<String, BigDecimal> criaMap() {
-		long LOWER_RANGE = 0; //assign lower range value
-		 long UPPER_RANGE = 1000000; //assign upper range value
-		 
+		long LOWER_RANGE = 0; // assign lower range value
+		long UPPER_RANGE = 1000000; // assign upper range value
+
 		HashMap<String, BigDecimal> totalMeses = new HashMap<String, BigDecimal>();
-		totalMeses.put("JAN", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("FEV", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("MAR", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("ABR", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("MAI", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("JUN", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("JUL", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("AGO", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("SET", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("OUT", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("NOV", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
-		totalMeses.put("DEZ", BigDecimal.valueOf(LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("JAN", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("FEV", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("MAR", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("ABR", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("MAI", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("JUN", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("JUL", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("AGO", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("SET", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("OUT", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("NOV", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
+		totalMeses.put("DEZ", BigDecimal.valueOf(LOWER_RANGE + (long) (random.nextDouble() * (UPPER_RANGE - LOWER_RANGE)), 2));
 		return totalMeses;
 	}
 	// FIM - CRIANDO MODEL, Normalmente é feito na consulta SQL
@@ -115,106 +124,56 @@ public class RelatorioExample extends SimpleReport {
 
 	@Override
 	protected void detail(Detail d) {
-		TableHeader[] headerJanJun = {
-				th("Categoria de Pagamento",
-						"colspan:3; font-weight: bold; border-top-width:0; border-left-width:0; text-align: center;"),
-				th("JAN", "text-align: center; background-color:#8FBFD3"),
-				th("FEV", "text-align: center; background-color:#8FBFD3"),
-				th("MAR", "text-align: center; background-color:#8FBFD3"),
-				th("ABR", "text-align: center; background-color:#8FBFD3"),
-				th("MAI", "text-align: center; background-color:#8FBFD3"),
-				th("JUN", "text-align: center; background-color:#8FBFD3") };
-		d.addDataTable().addHeader(headerJanJun)
-				.addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
-
-					@Override
-					public void body(CategoriaPagamentoModel model) {
-						addCell(model.getCategoria(), "colspan:3;background-color:#8FBFD3; text-align:center");
-						addCell("R$ " + model.getMeses().get("JAN"));
-						addCell("R$ " + model.getMeses().get("FEV"));
-						addCell("R$ " + model.getMeses().get("MAR"));
-						addCell("R$ " + model.getMeses().get("ABR"));
-						addCell("R$ " + model.getMeses().get("MAI"));
-						addCell("R$ " + model.getMeses().get("JUN"));
-						somarTotal("JAN",  model.getMeses().get("JAN"));
-						somarTotal("FEV",  model.getMeses().get("FEV"));
-						somarTotal("MAR",  model.getMeses().get("MAR"));
-						somarTotal("ABR",  model.getMeses().get("ABR"));
-						somarTotal("MAI",  model.getMeses().get("MAI"));
-						somarTotal("JUN",  model.getMeses().get("JUN"));
-
-					}
-				}).addCell("TOTAL", "colspan:3;background-color:#849BC3; text-align:center")
-				.addCell("RS "+total6Meses.get("JAN").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("FEV").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("MAR").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("ABR").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("MAI").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("JUN").toString(), "background-color:#849BC3")
-				.build();
-
-		TableHeader[] headerJulDez = {
-				th("Categoria de Pagamento",
-						"colspan:3; font-weight: bold; border-top-width:0; border-left-width:0; text-align: center;"),
-				th("JUL", "text-align: center; background-color:#8FBFD3"),
-				th("AGO", "text-align: center; background-color:#8FBFD3"),
-				th("SET", "text-align: center; background-color:#8FBFD3"),
-				th("OUT", "text-align: center; background-color:#8FBFD3"),
-				th("NOV", "text-align: center; background-color:#8FBFD3"),
-				th("DEZ", "text-align: center; background-color:#8FBFD3") };
-		total6Meses = new HashMap<String, BigDecimal>();
-		d.addDataTable().addHeader(headerJulDez)
-				.addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
-
-					@Override
-					public void body(CategoriaPagamentoModel model) {
-						addCell(model.getCategoria(), "colspan:3;background-color:#8FBFD3; text-align:center");
-						addCell("R$ " + model.getMeses().get("JUL"));
-						addCell("R$ " + model.getMeses().get("AGO"));
-						addCell("R$ " + model.getMeses().get("SET"));
-						addCell("R$ " + model.getMeses().get("OUT"));
-						addCell("R$ " + model.getMeses().get("NOV"));
-						addCell("R$ " + model.getMeses().get("DEZ"));
-						somarTotal("JUL",  model.getMeses().get("JUL"));
-						somarTotal("AGO",  model.getMeses().get("AGO"));
-						somarTotal("SET",  model.getMeses().get("SET"));
-						somarTotal("OUT",  model.getMeses().get("OUT"));
-						somarTotal("NOV",  model.getMeses().get("NOV"));
-						somarTotal("DEZ",  model.getMeses().get("DEZ"));
-
-					}
-				}).addCell("TOTAL", "colspan:3;background-color:#849BC3; text-align:center")
-				.addCell("RS "+total6Meses.get("JUL").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("AGO").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("SET").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("OUT").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("NOV").toString(), "background-color:#849BC3")
-				.addCell("RS "+total6Meses.get("DEZ").toString(), "background-color:#849BC3")
-				.build();
-		
-		TableHeader[] totalMes = {
-				th("Categoria de Pagamento",
-						"colspan:3; font-weight: bold; border-top-width:0; border-left-width:0; text-align: center;"),
-				th("Total Mes", "text-align: center; background-color:#8FBFD3"),
-				th("", "border-width: 0; colspan:5")};
-		d.addDataTable().addHeader(totalMes)
-		.addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
-			
+		d.addDataTable().addHeader(headerJanJun).addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
 			@Override
 			public void body(CategoriaPagamentoModel model) {
-				addCell(model.getCategoria(), "colspan:3;background-color:#8FBFD3; text-align:center");
-				addCell("R$ " + model.getTotalMeses().get(model.getCategoria()), "background-color:#849BC3");
+				addCell(model.getCategoria(), style3);
+				addCell("R$ " + somarTotal("JAN", model.getMeses().get("JAN")));
+				addCell("R$ " + somarTotal("FEV", model.getMeses().get("FEV")));
+				addCell("R$ " + somarTotal("MAR", model.getMeses().get("MAR")));
+				addCell("R$ " + somarTotal("ABR", model.getMeses().get("ABR")));
+				addCell("R$ " + somarTotal("MAI", model.getMeses().get("MAI")));
+				addCell("R$ " + somarTotal("JUN", model.getMeses().get("JUN")));
+			}
+		}).addCell("TOTAL", style5).addCell("RS " + total6Meses.get("JAN").toString(), style2)
+				.addCell("RS " + total6Meses.get("FEV").toString(), style2).addCell("RS " + total6Meses.get("MAR").toString(), style2)
+				.addCell("RS " + total6Meses.get("ABR").toString(), style2).addCell("RS " + total6Meses.get("MAI").toString(), style2)
+				.addCell("RS " + total6Meses.get("JUN").toString(), style2).build();
+
+		total6Meses = new HashMap<String, BigDecimal>();
+		d.addDataTable().addHeader(headerJulDez).addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
+			@Override
+			public void body(CategoriaPagamentoModel model) {
+				addCell(model.getCategoria(), style3);
+				addCell("R$ " + somarTotal("JUL", model.getMeses().get("JUL")));
+				addCell("R$ " + somarTotal("AGO", model.getMeses().get("AGO")));
+				addCell("R$ " + somarTotal("SET", model.getMeses().get("SET")));
+				addCell("R$ " + somarTotal("OUT", model.getMeses().get("OUT")));
+				addCell("R$ " + somarTotal("NOV", model.getMeses().get("NOV")));
+				addCell("R$ " + somarTotal("DEZ", model.getMeses().get("DEZ")));
+			}
+		}).addCell("TOTAL", style5).addCell("RS " + total6Meses.get("JUL").toString(), style2)
+				.addCell("RS " + total6Meses.get("AGO").toString(), style2).addCell("RS " + total6Meses.get("SET").toString(), style2)
+				.addCell("RS " + total6Meses.get("OUT").toString(), style2).addCell("RS " + total6Meses.get("NOV").toString(), style2)
+				.addCell("RS " + total6Meses.get("DEZ").toString(), style2).build();
+
+		d.addDataTable().addHeader(totalMes).addDataTableBody(model, new DataTableBodyModel<CategoriaPagamentoModel>() {
+			@Override
+			public void body(CategoriaPagamentoModel model) {
+				addCell(model.getCategoria(), style3);
+				addCell("R$ " + model.getTotalMeses().get(model.getCategoria()), style2);
 				addCell("", "border-width: 0; colspan:5");
 			}
 		}).build();
 	}
-	
-	public void somarTotal(String key, BigDecimal valor) {
+
+	public BigDecimal somarTotal(String key, BigDecimal valor) {
 		if (total6Meses.containsKey(key)) {
 			total6Meses.put(key, total6Meses.get(key).add(valor));
 		} else {
 			total6Meses.put(key, valor);
 		}
+		return valor;
 	}
 
 	@Override
