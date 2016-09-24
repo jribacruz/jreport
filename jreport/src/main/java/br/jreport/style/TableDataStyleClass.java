@@ -66,7 +66,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		this.borderColor = borderColor;
 	}
 
-	public void setWidth(String width) {
+	private void setWidth(String width) {
 		if (width != null) {
 			try {
 				this.width = Float.valueOf(width.trim());
@@ -76,13 +76,13 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBackgroundCellColor(String backgroundCellColor) {
+	private void setBackgroundCellColor(String backgroundCellColor) {
 		if (backgroundCellColor != null) {
 			if (backgroundCellColor.trim().startsWith("#")) {
 				this.backgroundCellColor = Color.decode(backgroundCellColor.trim().toUpperCase());
 			} else {
 				try {
-					Field field = Color.class.getField(backgroundCellColor.trim().toLowerCase());
+					Field field = Color.class.getField(backgroundCellColor.trim().toUpperCase());
 					this.backgroundCellColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
@@ -101,19 +101,19 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setColspan(String colspan) {
+	private void setColspan(String colspan) {
 		if (colspan != null) {
 			this.colspan = Integer.valueOf(colspan.trim());
 		}
 	}
 
-	public void setBorderColor(String borderColor) {
+	private void setBorderColor(String borderColor) {
 		if (borderColor != null) {
 			if (borderColor.trim().startsWith("#")) {
 				this.borderColor = Color.decode(borderColor.trim().toUpperCase());
 			} else {
 				try {
-					Field field = Color.class.getField(borderColor.trim().toLowerCase());
+					Field field = Color.class.getField(borderColor.trim().toUpperCase());
 					this.borderColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
@@ -132,7 +132,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorderWidth(String borderWidth) {
+	private void setBorderWidth(String borderWidth) {
 		if (borderWidth != null) {
 			try {
 				this.borderWidth = Float.valueOf(borderWidth.trim());
@@ -142,7 +142,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorderTopWidth(String borderTopWidth) {
+	private void setBorderTopWidth(String borderTopWidth) {
 		if (borderTopWidth != null) {
 			try {
 				this.borderTopWidth = Float.valueOf(borderTopWidth.trim());
@@ -152,7 +152,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorderLeftWidth(String borderLeftWidth) {
+	private void setBorderLeftWidth(String borderLeftWidth) {
 		if (borderLeftWidth != null) {
 			try {
 				this.borderLeftWidth = Float.valueOf(borderLeftWidth.trim());
@@ -162,7 +162,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorderRightWidth(String borderRightWidth) {
+	private void setBorderRightWidth(String borderRightWidth) {
 		if (borderRightWidth != null) {
 			try {
 				this.borderRightWidth = Float.valueOf(borderRightWidth.trim());
@@ -172,7 +172,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setBorderBottomWidth(String borderBottomWidth) {
+	private void setBorderBottomWidth(String borderBottomWidth) {
 		if (borderBottomWidth != null) {
 			try {
 				this.borderBottomWidth = Float.valueOf(borderBottomWidth.trim());
@@ -193,7 +193,7 @@ public class TableDataStyleClass extends TextStyleClass {
 	// }
 	// }
 
-	public void setVerticalAlignment(String verticalAlignment) {
+	private void setVerticalAlignment(String verticalAlignment) {
 		if (verticalAlignment != null) {
 			try {
 				this.verticalAlignment = TextAlign.valueOf(verticalAlignment.trim().toUpperCase()).getValue();
@@ -203,7 +203,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setHorizontalAlignment(String horizontalAlignment) {
+	private void setHorizontalAlignment(String horizontalAlignment) {
 		if (horizontalAlignment != null) {
 			try {
 				this.horizontalAlignment = TextAlign.valueOf(horizontalAlignment.trim().toUpperCase()).getValue();
@@ -213,7 +213,7 @@ public class TableDataStyleClass extends TextStyleClass {
 		}
 	}
 
-	public void setHeight(String height) {
+	private void setHeight(String height) {
 		if (height != null) {
 			try {
 				this.height = Float.valueOf(height.trim());
