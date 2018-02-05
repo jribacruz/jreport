@@ -2,6 +2,7 @@ package br.jreport.jfreechart;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -107,18 +108,16 @@ public class BarChartDemo1 extends ApplicationFrame {
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
-//		BarRenderer renderer = (BarRenderer) plot.getRenderer();
-//		renderer.setDrawBarOutline(false);
-//		renderer.setBarPainter(new StandardBarPainter());
-		
-//		// set up gradient paints for series...
-//		GradientPaint gp0 = new GradientPaint(1.0f, 1.0f, Color.blue, 1.0f, 1.0f, Color.blue);
-//		GradientPaint gp1 = new GradientPaint(1.0f, 1.0f, Color.green, 1.0f, 1.0f, Color.green);
-//		GradientPaint gp2 = new GradientPaint(1.0f, 1.0f, Color.red, 1.0f, 1.0f, Color.red);
-
-//		renderer.setSeriesPaint(0, gp0);
-//		renderer.setSeriesPaint(1, gp1);
-//		renderer.setSeriesPaint(2, gp2);
+		BarRenderer renderer = (BarRenderer) plot.getRenderer();
+		renderer.setDrawBarOutline(false);
+		renderer.setBarPainter(new StandardBarPainter());
+		// set up gradient paints for series...
+		GradientPaint gp0 = new GradientPaint(1.0f, 1.0f, Color.blue, 1.0f, 1.0f, Color.blue);
+		GradientPaint gp1 = new GradientPaint(1.0f, 1.0f, Color.green, 1.0f, 1.0f, Color.green);
+		GradientPaint gp2 = new GradientPaint(1.0f, 1.0f, Color.red, 1.0f, 1.0f, Color.red);
+		renderer.setSeriesPaint(0, gp0);
+		renderer.setSeriesPaint(1, gp1);
+		renderer.setSeriesPaint(2, gp2);
 		
 		CategoryAxis domainAxis = plot.getDomainAxis();
 		domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));

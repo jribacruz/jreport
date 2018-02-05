@@ -1,8 +1,10 @@
 package br.jreport.template;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -11,6 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.lowagie.text.BadElementException;
@@ -39,6 +42,8 @@ public class ChartLine extends JReportElement {
 	private Document document;
 
 	private PlotOrientation orientacao = PlotOrientation.VERTICAL;
+
+	private String[] colors;
 
 	public ChartLine(Document document) {
 		this.document = document;
@@ -101,12 +106,45 @@ public class ChartLine extends JReportElement {
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
+		LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+		if (colors != null) {
+			for (int i = 0; i < colors.length; i++) {
+				GradientPaint gradient = new GradientPaint(1.0f, 1.0f, pickColor(colors[i]), 1.0f, 1.0f, pickColor(colors[i]));
+				renderer.setSeriesPaint(i, gradient);
+			}
+		}
+	}
+
+	private Color pickColor(String color) {
+		if (color.trim().startsWith("#")) {
+			return Color.decode(color.trim().toUpperCase());
+		} else {
+			try {
+				Field field = java.awt.Color.class.getField(color.trim().toUpperCase());
+				return (Color) field.get(null);
+			} catch (NoSuchFieldException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return Color.BLUE;
 	}
 
 	public ChartLine addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;
+		return this;
+	}
+	
+
+	public ChartLine addLineColor(String colors[]) {
+		this.colors = colors;
 		return this;
 	}
 

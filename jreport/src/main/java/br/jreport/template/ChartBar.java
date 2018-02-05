@@ -1,8 +1,10 @@
 package br.jreport.template;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -37,6 +39,8 @@ public class ChartBar extends JReportElement {
 	private int width = 300;
 
 	private int height = 300;
+
+	private String[] colors;
 
 	private Document document;
 
@@ -94,8 +98,6 @@ public class ChartBar extends JReportElement {
 	 */
 	private void configStyleChart(JFreeChart chart) {
 		chart.setBackgroundPaint(Color.white);
-		// TODO tamanho fonte
-		// chart.getTitle().setFont(font);
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.white);
 		plot.setDomainGridlinePaint(Color.black);
@@ -108,12 +110,45 @@ public class ChartBar extends JReportElement {
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
 		renderer.setDrawBarOutline(false);
 		renderer.setBarPainter(new StandardBarPainter());
+		renderer.setShadowVisible(false);
+
+		if (colors != null) {
+			for (int i = 0; i < colors.length; i++) {
+				GradientPaint gradient = new GradientPaint(1.0f, 1.0f, pickColor(colors[i]), 1.0f, 1.0f, pickColor(colors[i]));
+				renderer.setSeriesPaint(i, gradient);
+			}
+		}
+	}
+
+	private Color pickColor(String color) {
+		if (color.trim().startsWith("#")) {
+			return Color.decode(color.trim().toUpperCase());
+		} else {
+			try {
+				Field field = java.awt.Color.class.getField(color.trim().toUpperCase());
+				return (Color) field.get(null);
+			} catch (NoSuchFieldException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return Color.BLUE;
 	}
 
 	public ChartBar addLabel(String title, String textX, String textY) {
 		this.title = title;
 		this.eixoX = textX;
 		this.eixoY = textY;
+		return this;
+	}
+
+	public ChartBar addBarColor(String colors[]) {
+		this.colors = colors;
 		return this;
 	}
 

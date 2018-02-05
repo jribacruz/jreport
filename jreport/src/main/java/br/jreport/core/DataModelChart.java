@@ -1,10 +1,14 @@
 package br.jreport.core;
 
+import java.awt.Color;
+
 public abstract class DataModelChart {
 
 	private Double value;
 
 	private String categoria;
+
+	private Color color;
 
 	public DataModelChart(Double value, String categoria) {
 		super();
@@ -27,4 +31,13 @@ public abstract class DataModelChart {
 	public void setValue(Double value) {
 		this.value = value;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 }
