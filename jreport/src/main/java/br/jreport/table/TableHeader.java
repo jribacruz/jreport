@@ -1,13 +1,12 @@
 package br.jreport.table;
 
-import br.jreport.enums.ColorJReport;
-import br.jreport.style.TableHeaderStyleClass;
+import br.jreport.style.defined.DetaultTableHeaderStyleClass;
 
 public class TableHeader {
 
 	private String nome;
 
-	private TableHeaderStyleClass style = new TableHeaderStyleClass();
+	private DetaultTableHeaderStyleClass style = new DetaultTableHeaderStyleClass();
 
 	/**
 	 * @param nome:
@@ -26,81 +25,16 @@ public class TableHeader {
 	 * @author Nota: Espaçamento padrão 1f header
 	 * 
 	 **/
-	public TableHeader(String nome, TableHeaderStyleClass style) {
+	public TableHeader(String nome, DetaultTableHeaderStyleClass style) {
 		super();
 		this.nome = nome;
 		this.style = style;
 	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * 
-	 **/
-	@Deprecated
-	public TableHeader(String nome, float width) {
+	
+	public TableHeader(String nome, String style) {
 		super();
 		this.nome = nome;
-		style.setWidthHeaderTable(width);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * 
-	 **/
-	@Deprecated
-	public TableHeader(String nome, float width, int colspan) {
-		super();
-		this.nome = nome;
-		style.setWidthHeaderTable(width);
-		style.setColspan(colspan);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * 
-	 * @param backgroundTableColor
-	 *            Cor de fundo do header
-	 * 
-	 **/
-	@Deprecated
-	public TableHeader(String nome, float width, int colspan, ColorJReport backgroundTableColor) {
-		super();
-		this.nome = nome;
-		style.setWidthHeaderTable(width);
-		style.setColspan(colspan);
-		style.setBackgroundTableColor(backgroundTableColor);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * 
-	 * @param backgroundTableColor
-	 *            Cor de fundo do header
-	 * 
-	 **/
-	@Deprecated
-	public TableHeader(String nome, float width, int colspan, ColorJReport backgroundTableColor, ColorJReport borderTableColor) {
-		super();
-		this.nome = nome;
-		style.setWidthHeaderTable(width);
-		style.setColspan(colspan);
-		style.setBackgroundTableColor(backgroundTableColor);
-		style.setBorderColor(borderTableColor);
+		this.style = new DetaultTableHeaderStyleClass(style);
 	}
 
 	public String getNome() {
@@ -111,11 +45,11 @@ public class TableHeader {
 		this.nome = nome;
 	}
 
-	public TableHeaderStyleClass getStyle() {
+	public DetaultTableHeaderStyleClass getStyle() {
 		return style;
 	}
 
-	public void setStyle(TableHeaderStyleClass style) {
+	public void setStyle(DetaultTableHeaderStyleClass style) {
 		this.style = style;
 	}
 

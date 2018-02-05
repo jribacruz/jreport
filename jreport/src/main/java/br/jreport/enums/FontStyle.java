@@ -1,7 +1,7 @@
 package br.jreport.enums;
 
 public enum FontStyle {
-	NORMAL(0), BOLD(1), ITALIC(2);
+	NORMAL(0), BOLD(1), ITALIC(2), BOLDITALIC(3);
 
 	private int value;
 

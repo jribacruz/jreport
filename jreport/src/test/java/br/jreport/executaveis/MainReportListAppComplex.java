@@ -1,15 +1,11 @@
 package br.jreport.executaveis;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 import br.jreport.ComplexReportListTableHeaderSuport;
 import br.jreport.model.ModelTest;
@@ -41,7 +37,7 @@ public class MainReportListAppComplex {
 		report.generate("target/");
 		
 		ByteArrayInputStream byteArrayzip = report.generateMultiplePdf_ZipFile();
-		FileUtils.writeByteArrayToFile(new File("target/relatorioCompletoZip.zip"), IOUtils.toByteArray(byteArrayzip),true);
+//		FileUtils.writeByteArrayToFile(new File("target/relatorioCompletoZip.zip"), IOUtils.toByteArray(byteArrayzip),true);
 		
 		
 		//Utilizando LinkedHashMap. a key é usada para dar nomes aos relatorios caso seja gerado o arquivo zip
@@ -52,7 +48,7 @@ public class MainReportListAppComplex {
 		
 		ComplexReportListTableHeaderSuport report2 = new ComplexReportListTableHeaderSuport(linkedhashmap);
 		ByteArrayInputStream b = report2.generateMultiplePdf_ZipFile();
-		FileUtils.writeByteArrayToFile(new File("target/relatoriocompletoLinked.zip"), IOUtils.toByteArray(b),true);
+//		FileUtils.writeByteArrayToFile(new File("target/relatoriocompletoLinked.zip"), IOUtils.toByteArray(b),true);
 		report2.generateMultiplePdf_ZipFile("target/");
 		report2.generate("target/relatoriocompleto.pdf");
 		

@@ -1,100 +1,85 @@
 package br.jreport.template;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.lowagie.text.Paragraph;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.pdf.PdfPCell;
 
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.TableDataStyleClass;
-import br.jreport.table.DataTableBodyModel;
 import br.jreport.table.TableHeader;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
-public class DataTable {
+public class DataTable extends JReportElement {
 
-	private String[] headersString;
+	private Document document;
 
-	private TableHeader[] headersObject;
+	private DataTableBody child;
 
-	private List<PdfPCell> cells = new ArrayList<PdfPCell>();
-
-	private List modelList;
-
-	private DataTableBodyModel dtbody;
-
-	public DataTable addHeader(String[] headers) {
-		this.headersString = headers;
-		return this;
+	public DataTable(Document document) {
+		this.document = document;
 	}
 
-	public DataTable addHeader(TableHeader[] headers) {
-		this.headersObject = headers;
-		return this;
+	public DataTableBody addHeader(Integer headers) {
+		child = new DataTableBody(headers, this);
+		return child;
 	}
 
-	public DataTable addCell(String text) {
-		TableDataStyleClass style = new TableDataStyleClass();
-		Paragraph paragraph = DocumentHelper.createText(text, style);
-		addCellToTable(paragraph, style);
-		return this;
+	public DataTableBody addHeader(String[] headers) {
+		child = new DataTableBody(headers, this);
+		return child;
 	}
 
-	public DataTable addCell(String text, TableDataStyleClass style) {
-		Paragraph paragraph = DocumentHelper.createText(text, style);
-		addCellToTable(paragraph, style);
-		return this;
+	public DataTableBody addHeader(TableHeader[] headers) {
+		child = new DataTableBody(headers, this);
+		return child;
 	}
-
-	public DataTable addDataTableBody(List modelList, DataTableBodyModel dtbody) {
-		this.modelList = modelList;
-		this.dtbody = dtbody;
-		for (int i = 0; i < modelList.size(); i++) {
-			dtbody.body(modelList.get(i));
+	
+	@Override
+	protected Element buildElement() {
+		Element elemento = null;
+		try {
+			if (child.getHeadersObject() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersObject(), child.getCells()).getPdfPTable();
+			} else if (child.getHeadersString() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersString(), child.getCells()).getPdfPTable();
+			} else if (child.getHeadersColspan() != null) {
+				elemento = DocumentHelper.createDataTable(child.getHeadersColspan(), child.getCells()).getPdfPTable();
+			} else {
+				throw new Exception("Defina o Header");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		cells.addAll(dtbody.getCells());
-		return this;
+		clear();
+		return elemento;
 	}
 
-	private void addCellToTable(Paragraph p, TableDataStyleClass styleClass) {
-		cells.add(DocumentHelper.createPdfPCell(p, styleClass));
+	public void build() {
+		try {
+			if (child.getHeadersObject() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(child.getHeadersObject(), child.getCells()).getPdfPTable());
+			} else if (child.getHeadersString() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(child.getHeadersString(), child.getCells()).getPdfPTable());
+			} else if (child.getHeadersColspan() != null) {
+				DocumentHelper.add(document, DocumentHelper.createDataTable(child.getHeadersColspan(), child.getCells()).getPdfPTable());
+			} else {
+				throw new Exception("Defina o Header");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		clear();
 	}
 
-	public String[] getHeadersString() {
-		return headersString;
-	}
-
-	public void setHeadersString(String[] headersString) {
-		this.headersString = headersString;
-	}
-
-	public TableHeader[] getHeadersObject() {
-		return headersObject;
-	}
-
-	public void setHeadersObject(TableHeader[] headersObject) {
-		this.headersObject = headersObject;
-	}
-
-	protected List<PdfPCell> getCells() {
-		return cells;
-	}
-
-	public List getModelList() {
-		return modelList;
-	}
-
-	public void setModelList(List modelList) {
-		this.modelList = modelList;
-	}
-
-	public DataTableBodyModel getDtbody() {
-		return dtbody;
-	}
-
-	public void setDtbody(DataTableBodyModel dtbody) {
-		this.dtbody = dtbody;
+	/**
+	 * 
+	 */
+	private void clear() {
+		child.setCells(new ArrayList<PdfPCell>());
+		child.setHeadersString(null);
+		child.setHeadersObject(null);
+		child.setHeadersColspan(null);
+		child.setModelList(null);
 	}
 
 }

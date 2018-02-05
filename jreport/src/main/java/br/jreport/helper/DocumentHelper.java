@@ -22,18 +22,16 @@ import com.lowagie.text.pdf.draw.LineSeparator;
 
 import br.jreport.core.DataModelReport;
 import br.jreport.enums.TextDecoration;
-import br.jreport.style.DefaultTextStyleClass;
+import br.jreport.style.ImageStyleClass;
 import br.jreport.style.TableDataStyleClass;
 import br.jreport.style.TextStyleClass;
+import br.jreport.style.defined.DefaultTextStyleClass;
+import br.jreport.style.defined.DetaultColspanLineStyleClass;
 import br.jreport.table.TableConstructor;
 import br.jreport.table.TableHeader;
 
 public class DocumentHelper {
 
-	/**
-	 * 
-	 * @return
-	 */
 	public static Chunk newLine() {
 		return Chunk.NEWLINE;
 	}
@@ -48,18 +46,15 @@ public class DocumentHelper {
 		Font f = new Font(Font.HELVETICA);
 		f.setSize(styleClass.getFontSize());
 		f.setStyle(styleClass.getFontStyle().getValue());
-		f.setColor(styleClass.getFontColor());
+		f.setColor(styleClass.getColor());
 
 		Chunk chunk = new Chunk(text, f);
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
 			chunk.setUnderline(styleClass.getTextDecoration().getThick(), styleClass.getTextDecoration().getY());
 		}
-		if (styleClass.getBackgroudColor() != null) {
-			chunk.setBackground(styleClass.getBackgroudColor());
-		}
 		Paragraph p = new Paragraph(chunk);
-		p.setFirstLineIndent(styleClass.getFirstLineIndent());
-		p.setIndentationLeft(styleClass.getIndentationLeft());
+		p.setFirstLineIndent(styleClass.getTextIndent());
+		p.setIndentationLeft(styleClass.getMarginLeft());
 		p.setAlignment(styleClass.getTextAlign().getValue());
 
 		return p;
@@ -67,20 +62,29 @@ public class DocumentHelper {
 
 	public static void createPdfPCell(Paragraph p, TableDataStyleClass styleClass, PdfPTable pdfPTable) {
 		PdfPCell cell = new PdfPCell();
-		// Não funciona com texto;
-		if (styleClass.getFixedHeight() != null) {
-			cell.setFixedHeight(styleClass.getFixedHeight());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBorderWidth(0);
-		} else {
-			cell.addElement(p);
-			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
-			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
-			cell.setBorder(styleClass.getBorder().getBorder());
-			cell.setBorderWidth(styleClass.getBorderWidth());
-			cell.setBorderColor(styleClass.getBorderColor().getColor());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+		cell.addElement(p);
+		if (styleClass.getHeight() != null) {
+			cell.setFixedHeight(styleClass.getHeight());
+		}
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+
+		cell.setBorderWidth(styleClass.getBorderWidth());
+
+		if (styleClass.getBorderBottomWidth() != null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth() != null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth() != null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth() != null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
 		}
 
 		pdfPTable.addCell(cell);
@@ -89,21 +93,74 @@ public class DocumentHelper {
 
 	public static PdfPCell createPdfPCell(Paragraph p, TableDataStyleClass styleClass) {
 		PdfPCell cell = new PdfPCell();
-		// Não funciona com texto;
-		if (styleClass.getFixedHeight() != null) {
-			cell.setFixedHeight(styleClass.getFixedHeight());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBorderWidth(0);
-		} else {
-			cell.addElement(p);
-			cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
-			cell.setVerticalAlignment(styleClass.getVerticalAlignment());
-			cell.setBorder(styleClass.getBorder().getBorder());
-			cell.setBorderWidth(styleClass.getBorderWidth());
-			cell.setBorderColor(styleClass.getBorderColor().getColor());
-			cell.setColspan(styleClass.getColspan());
-			cell.setBackgroundColor(styleClass.getBackgroundTableColor().getColor());
+		cell.addElement(p);
+		if (styleClass.getHeight() != null) {
+			cell.setFixedHeight(styleClass.getHeight());
 		}
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+		cell.setBorderWidth(styleClass.getBorderWidth());
+
+		if (styleClass.getBorderBottomWidth() != null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth() != null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth() != null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth() != null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		}
+
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+		return cell;
+	}
+
+	public static PdfPCell addElementCellToTable(Element p) {
+		PdfPCell cell = new PdfPCell();
+		cell.addElement(p);
+
+		cell.setBorderWidthBottom(0);
+		cell.setBorderWidthLeft(0);
+		cell.setBorderWidthRight(0);
+		cell.setBorderWidthTop(0);
+
+		return cell;
+	}
+
+	public static PdfPCell addElementCellToTable(Element p, DetaultColspanLineStyleClass styleClass) {
+		PdfPCell cell = new PdfPCell();
+		cell.addElement(p);
+
+		if (styleClass.getHeight() != null) {
+			cell.setFixedHeight(styleClass.getHeight());
+		}
+		cell.setHorizontalAlignment(styleClass.getHorizontalAlignment());
+		cell.setVerticalAlignment(styleClass.getVerticalAlignment());
+
+		cell.setBorderWidth(styleClass.getBorderWidth());
+
+		if (styleClass.getBorderBottomWidth() != null) {
+			cell.setBorderWidthBottom(styleClass.getBorderBottomWidth());
+		}
+		if (styleClass.getBorderLeftWidth() != null) {
+			cell.setBorderWidthLeft(styleClass.getBorderLeftWidth());
+		}
+		if (styleClass.getBorderRightWidth() != null) {
+			cell.setBorderWidthRight(styleClass.getBorderRightWidth());
+		}
+		if (styleClass.getBorderTopWidth() != null) {
+			cell.setBorderWidthTop(styleClass.getBorderTopWidth());
+		}
+
+		cell.setBorderColor(styleClass.getBorderColor());
+		cell.setColspan(styleClass.getColspan());
+		cell.setBackgroundColor(styleClass.getBackgroundCellColor());
+
 		return cell;
 	}
 
@@ -223,10 +280,42 @@ public class DocumentHelper {
 		return setupText(text, styleClass);
 	}
 
+	public static Image loadImage(Image image) {
+		ImageStyleClass style = new ImageStyleClass();
+		image.setAlignment(style.getAlign().getValue());
+		return null;
+	}
+
 	public static Image loadImage(String imageName) {
 		try {
 			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
 			Image image = Image.getInstance(imageURL);
+			ImageStyleClass style = new ImageStyleClass();
+			image.setAlignment(style.getAlign().getValue());
+			return image;
+		} catch (BadElementException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static Image loadImage(String imageName, ImageStyleClass style) {
+		try {
+			URL imageURL = DocumentHelper.class.getClassLoader().getResource(imageName);
+			Image image = Image.getInstance(imageURL);
+
+			image.setAlignment(style.getAlign().getValue());
+			if (style.getHeight() != null) {
+				image.scaleAbsoluteHeight(style.getHeight());
+			}
+			if (style.getWidth() != null) {
+				image.scaleAbsoluteWidth(style.getWidth());
+			}
+
 			return image;
 		} catch (BadElementException e) {
 			e.printStackTrace();
@@ -252,6 +341,12 @@ public class DocumentHelper {
 	}
 
 	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
+		TableConstructor<T> table = new TableConstructor<T>(headers);
+		table.addBody(cells);
+		return table;
+	}
+
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(int headers, List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;

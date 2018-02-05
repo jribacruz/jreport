@@ -17,11 +17,10 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.jreport.enums.ColorJReport;
 import br.jreport.enums.PageOrientation;
 import br.jreport.helper.DocumentHelper;
-import br.jreport.style.DefaultTextTitleStyleClass;
-import br.jreport.style.TableHeaderStyleClass;
+import br.jreport.style.defined.DefaultTextTitleStyleClass;
+import br.jreport.style.defined.DetaultTableHeaderStyleClass;
 import br.jreport.table.TableHeader;
 
 public abstract class SimpleReport extends PdfPageEventHelper implements Serializable {
@@ -50,40 +49,54 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	}
 
 	/**
-	 * This section appears only once at the beginning of the report.
+	 *
+	 * Será mostrado apenas na primeira página do relatório <br>
+	 * <b>Exemplo:
+	 * 
+	 * <pre>
+	 *  t.addBrasao().addTitle("Relatório de Pontos").build();
+	 * </pre>
+	 * 
+	 * </b>
 	 */
-	protected abstract void title();
+	protected abstract void title(Title t);
 
 	/**
-	 * This section appears at the beginning of each page in the generated
-	 * document.
+	 * Será mostrado apenas a partir da segunda página do relatório <br>
+	 * <b>Exemplo:
+	 * 
+	 * <pre>
+	 * ph.addTitle("Resumo por Zona").build();
+	 * </pre>
+	 * 
+	 * </b>
 	 */
-	protected abstract void pageHeader();
+	protected abstract void pageHeader(PageHeader ph);
 
 	/**
 	 * This section is repeated for each line of data supplied by the report's
 	 * data source. The detail section can be made of multiple bands.
 	 */
-	protected abstract void detail();
+	protected abstract void detail(Detail d);
 
 	/**
 	 * This section appears at the bottom of each page.
 	 */
-	protected abstract void pageFooter();
+	protected abstract void pageFooter(PageFooter pf);
 
 	/**
 	 * This section appears only once at the end of the report.
 	 */
-	protected abstract void summary();
+	protected abstract void summary(Summary s);
 
 	public void generate(OutputStream outputStream) {
 		try {
 			this.pdfWriter = PdfWriter.getInstance(document, outputStream);
 			document.open();
 			pdfWriter.setPageEvent(this);
-			this.title();
+			this.title(new Title(getDocument()));
 			addNewLine();
-			this.detail();
+			this.detail(new Detail(getDocument()));
 			document.close();
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -96,9 +109,9 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 			this.pdfWriter = PdfWriter.getInstance(document, outputStream);
 			document.open();
 			pdfWriter.setPageEvent(this);
-			this.title();
+			this.title(new Title(getDocument()));
 			addNewLine();
-			this.detail();
+			this.detail(new Detail(getDocument()));
 			document.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (DocumentException e) {
@@ -111,6 +124,14 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		return document;
 	}
 
+	/**
+	 * Adiciona uma nova página
+	 * <pre>
+	 * 	protected void detail(Detail d) {
+	 *	   addNewPage();
+     *	}
+	 * </pre>
+	 */
 	protected void addNewPage() {
 		DocumentHelper.newPage(document);
 	}
@@ -119,44 +140,23 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 		DocumentHelper.add(document, DocumentHelper.newLine());
 	}
 
-	protected void addTitle(Title title) {
-		for (Element element : title.getElements()) {
-			DocumentHelper.add(document, element);
-		}
-	}
-
-	protected void addComponent(Component componente) {
-		for (Element element : componente.getElements()) {
-			DocumentHelper.add(document, element);
-		}
-	}
-
-	protected void addDataTable(DataTable dataTable) {
-		if (dataTable.getHeadersObject() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersObject(), dataTable.getCells()).getPdfPTable());
-		} else if (dataTable.getHeadersString() != null) {
-			DocumentHelper.add(document, DocumentHelper.createDataTable(dataTable.getHeadersString(), dataTable.getCells()).getPdfPTable());
-
-		}
-	}
-
 	@Override
 	public void onStartPage(PdfWriter writer, Document document) {
 		pagenumber++;
 		if (this.document.isOpen()) {
-			pageHeader();
+			pageHeader(new PageHeader(getDocument()));
 		}
 	}
 
 	@Override
 	public void onEndPage(PdfWriter writer, Document document) {
 		this.document = document;
-		pageFooter();
+		pageFooter(new PageFooter(getDocument()));
 		Font font = new Font(Font.HELVETICA, 8f);
 		font.setColor(Color.DARK_GRAY);
 		float xRight = document.right();
 		float xLeft = document.left() + document.leftMargin();
-		float y = document.bottom();
+		float y = document.bottom()-15;
 		String now = new SimpleDateFormat("dd/MM/yyyy HH:ss").format(new Date());
 
 		ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase(String.format("%d", pagenumber), font),
@@ -181,7 +181,7 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 *            Estilo para o datatable
 	 * 
 	 **/
-	protected static TableHeader th(String nome, TableHeaderStyleClass style) {
+	protected static TableHeader th(String nome, DetaultTableHeaderStyleClass style) {
 		return new TableHeader(nome, style);
 	}
 
@@ -189,55 +189,11 @@ public abstract class SimpleReport extends PdfPageEventHelper implements Seriali
 	 * @param nome:
 	 *            Nome da coluna no header
 	 * @param width:
-	 *            Espaçamento que a coluna do header
+	 *            Estilo em string
 	 * 
 	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width) {
-		return new TableHeader(nome, width);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan) {
-		return new TableHeader(nome, width, colspan);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * @param backgroundTableColor
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, ColorJReport backgroundTableColor) {
-		return new TableHeader(nome, width, colspan, backgroundTableColor);
-	}
-
-	/**
-	 * @param nome:
-	 *            Nome da coluna no header
-	 * @param width:
-	 *            Espaçamento que a coluna do header
-	 * @param colspan
-	 * @param backgroundTableColor
-	 * @param borderTableColor
-	 * 
-	 **/
-	@Deprecated
-	protected static TableHeader th(String nome, float width, int colspan, ColorJReport backgroundTableColor,
-			ColorJReport borderTableColor) {
-		return new TableHeader(nome, width, colspan, backgroundTableColor, borderTableColor);
+	protected static TableHeader th(String nome, String style) {
+		return new TableHeader(nome, style);
 	}
 
 }
