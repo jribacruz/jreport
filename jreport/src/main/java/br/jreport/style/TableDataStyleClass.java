@@ -82,7 +82,7 @@ public class TableDataStyleClass extends TextStyleClass {
 				this.backgroundCellColor = Color.decode(backgroundCellColor.trim().toUpperCase());
 			} else {
 				try {
-					Field field = Color.class.getField(backgroundCellColor.trim().toUpperCase());
+					Field field = java.awt.Color.class.getField(backgroundCellColor.trim().toUpperCase());
 					this.backgroundCellColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
@@ -113,7 +113,7 @@ public class TableDataStyleClass extends TextStyleClass {
 				this.borderColor = Color.decode(borderColor.trim().toUpperCase());
 			} else {
 				try {
-					Field field = Color.class.getField(borderColor.trim().toUpperCase());
+					Field field = java.awt.Color.class.getField(borderColor.trim().toUpperCase());
 					this.borderColor = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block

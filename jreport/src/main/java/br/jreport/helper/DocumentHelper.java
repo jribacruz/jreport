@@ -32,10 +32,6 @@ import br.jreport.table.TableHeader;
 
 public class DocumentHelper {
 
-	/**
-	 * 
-	 * @return
-	 */
 	public static Chunk newLine() {
 		return Chunk.NEWLINE;
 	}
@@ -56,16 +52,6 @@ public class DocumentHelper {
 		if (styleClass.getTextDecoration() != TextDecoration.NONE) {
 			chunk.setUnderline(styleClass.getTextDecoration().getThick(), styleClass.getTextDecoration().getY());
 		}
-		// @formatter:off
-		// if (styleClass.getBackgroudColor() != null) {
-		// chunk.setBackground(styleClass.getBackgroudColor());
-		// (TODO implementação para background color de texto deve passar também
-		// o tamanho do retangulo
-		// para não ficar estranho, como atualmente fica)
-		// chunk.setBackground(color, extraLeft, extraBottom, extraRight,
-		// extraTop)
-		// }@
-		// formatter:on
 		Paragraph p = new Paragraph(chunk);
 		p.setFirstLineIndent(styleClass.getTextIndent());
 		p.setIndentationLeft(styleClass.getMarginLeft());
@@ -348,15 +334,13 @@ public class DocumentHelper {
 		return linebreak;
 	}
 
-	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers,
-			List<PdfPCell> cells) {
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(TableHeader[] headers, List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;
 	}
 
-	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers,
-			List<PdfPCell> cells) {
+	public static <T extends DataModelReport> TableConstructor<T> createDataTable(String[] headers, List<PdfPCell> cells) {
 		TableConstructor<T> table = new TableConstructor<T>(headers);
 		table.addBody(cells);
 		return table;

@@ -57,7 +57,7 @@ public class ChartLine extends JReportElement {
 			ImageStyleClass style = new ImageStyleClass();
 			image.setAlignment(style.getAlign().getValue());
 		} catch (IOException e) {
-			System.err.println("Error creando grafico.");
+			System.err.println("Error criando grafico.");
 		} catch (BadElementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class ChartLine extends JReportElement {
 			ImageStyleClass style = new ImageStyleClass();
 			image.setAlignment(style.getAlign().getValue());
 		} catch (IOException e) {
-			System.err.println("Error creando grafico.");
+			System.err.println("Error criando grafico.");
 		} catch (BadElementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

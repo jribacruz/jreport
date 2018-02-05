@@ -132,7 +132,7 @@ public class TextStyleClass {
 				this.color = Color.decode(fontColor.trim().toUpperCase());
 			} else {
 				try {
-					Field field = Color.class.getField(fontColor.trim().toLowerCase());
+					Field field = java.awt.Color.class.getField(fontColor.trim().toLowerCase());
 					this.color = (Color) field.get(null);
 				} catch (NoSuchFieldException e) {
 					// TODO Auto-generated catch block
