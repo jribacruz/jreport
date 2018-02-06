@@ -153,7 +153,7 @@ public class ChartLine extends JReportElement {
 		return this;
 	}
 
-	public ChartLine addDataSet(List<DataModelChartLine> list) {
+	public ChartLine addDataSet(List<? extends DataModelChartLine> list) {
 		for (DataModelChartLine dataModelChartBar : list) {
 			dataset.setValue(dataModelChartBar.getValue(), dataModelChartBar.getSerie(), dataModelChartBar.getCategoria());
 		}

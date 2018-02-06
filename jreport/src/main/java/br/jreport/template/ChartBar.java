@@ -157,7 +157,7 @@ public class ChartBar extends JReportElement {
 		return this;
 	}
 
-	public ChartBar addDataSet(List<DataModelChartBar> list) {
+	public ChartBar addDataSet(List<? extends DataModelChartBar> list) {
 		for (DataModelChartBar dataModelChartBar : list) {
 			dataset.setValue(dataModelChartBar.getValue(), dataModelChartBar.getSerie(), dataModelChartBar.getCategoria());
 		}

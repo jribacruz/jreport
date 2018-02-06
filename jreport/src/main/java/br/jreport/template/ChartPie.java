@@ -114,7 +114,7 @@ public class ChartPie extends JReportElement {
 		return this;
 	}
 	
-	public ChartPie addDataSet(List<DataModelChartPie> list) {
+	public ChartPie addDataSet(List<? extends DataModelChartPie> list) {
 		for (DataModelChartPie dataModelChartBar : list) {
 			dataset.setValue(dataModelChartBar.getCategoria(), dataModelChartBar.getValue());
 		}
